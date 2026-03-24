@@ -4,6 +4,8 @@
 *.log
 *.apk
 *.keystore
+*.pyc
+__pycache__/
 
 # Flutter / Dart
 app/.dart_tool/
