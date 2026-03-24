@@ -1,0 +1,1 @@
+-- Remote seed data is created by migrations and scripted auth setup.

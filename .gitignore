@@ -1,0 +1,25 @@
+.DS_Store
+.env
+.env.*
+*.log
+*.apk
+*.keystore
+
+# Flutter / Dart
+app/.dart_tool/
+app/.flutter-plugins
+app/.flutter-plugins-dependencies
+app/.pub/
+app/.pub-cache/
+app/build/
+app/coverage/
+
+# Supabase local temp state
+supabase/.temp/
+
+# IDE files
+.idea/
+.vscode/
+
+# Optional local/generated media outside app assets
+Tracker_Icon_Generation.mp4
