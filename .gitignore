@@ -6,6 +6,7 @@
 *.keystore
 *.pyc
 __pycache__/
+!apk/*.apk
 
 # Flutter / Dart
 app/.dart_tool/
