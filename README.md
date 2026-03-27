@@ -12,6 +12,14 @@
   <a href="apk/tracker-v1.0.0+10.apk"><strong>Download Latest APK</strong></a>
 </p>
 
+## UI Preview
+
+Opening screen reference used for the app direction:
+
+<p align="center">
+  <img src="docs/screenshots/opening-screen-reference.png" alt="Tracker opening screen reference" width="320" />
+</p>
+
 ## Latest Release
 
 Current tester build: `v1.0.0+10`
@@ -142,6 +150,31 @@ This creates a versioned APK inside:
 ```text
 app/build/releases/
 ```
+
+### 3. Install on a device with one script
+
+From the workspace root:
+
+```bash
+./scripts/install_tracker.sh android
+```
+
+or
+
+```bash
+./scripts/install_tracker.sh ios-sim
+```
+
+or
+
+```bash
+./scripts/install_tracker.sh ios-device
+```
+
+What each mode does:
+- `android`: installs the newest APK in `apk/` to a connected Android phone
+- `ios-sim`: installs the built app to the currently booted iPhone simulator
+- `ios-device`: opens Xcode workspace and shows the real iPhone install steps
 
 ## Install on iPhone
 
