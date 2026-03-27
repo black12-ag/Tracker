@@ -12,6 +12,18 @@
   <a href="apk/tracker-v1.0.0+10.apk"><strong>Download Latest APK</strong></a>
 </p>
 
+## Latest Release
+
+Current tester build: `v1.0.0+10`
+
+Highlights in this release:
+- premium logo-first splash animation
+- smarter sales and purchase flows
+- smart customer balance tracking with due dates
+- owner/staff business workspace with reports, accounts, and inventory
+- iPhone build fixes and synced CocoaPods workspace
+- improved README and packaged tester APK in the repo
+
 ## Overview
 
 `Tracker` is a mobile business app built for real small-business daily operations.
@@ -131,6 +143,28 @@ This creates a versioned APK inside:
 app/build/releases/
 ```
 
+## Install on iPhone
+
+To test on an iPhone, use Xcode instead of the Android APK:
+
+1. Open [Runner.xcworkspace](app/ios/Runner.xcworkspace) in Xcode.
+2. Connect your iPhone to the Mac.
+3. In Xcode, select the `Runner` target.
+4. Open `Signing & Capabilities` and choose your Apple Team.
+5. Select your iPhone as the run target.
+6. Press `Run`.
+
+Important:
+- open the `.xcworkspace`, not the `.xcodeproj`
+- if you see a CocoaPods sandbox mismatch, run `pod install` inside `app/ios`
+- if the app icon or name looks cached, delete the old app from the phone and install again
+
+The latest verified iPhone simulator build is created from the same codebase in:
+
+```text
+app/build/ios/iphonesimulator/Runner.app
+```
+
 ## Backend
 
 The app is connected to Supabase for:
@@ -150,7 +184,15 @@ When the device is offline, the app keeps changes locally and syncs them later.
 - `Owner` can access finance, reports, accounts, expenses, loans, and staff management.
 - `Staff` can access shared operational data without owner-only money controls.
 - Revenue, overdue balances, and profit summaries are backend-driven.
+- Android testers should use the APK in the `apk/` folder.
+- iPhone testers should install through Xcode with the workspace above.
 - The repository is kept private for controlled project access.
+
+## Suggested GitHub Description
+
+If you want to paste a short repo description on GitHub, use:
+
+`Professional Flutter + Supabase business tracker for inventory, sales, accounts, reports, loans, and profit.`
 
 ## Contact
 
