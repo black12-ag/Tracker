@@ -8,33 +8,19 @@ final dashboardBundleProvider = FutureProvider<DashboardBundle>((ref) async {
     throw StateError('No signed-in user found.');
   }
 
-  final today = DateTime.now();
-  final productBundle = await ref
-      .watch(productRepositoryProvider)
-      .fetchBundle(owner: profile.isOwner);
-  final todayProductionUnits = await ref
-      .watch(productionRepositoryProvider)
-      .fetchTotalProducedOn(today);
-  final todaySalesUnits = await ref
-      .watch(salesRepositoryProvider)
-      .fetchTotalSoldOn(today);
-  final productionEntries = await ref
-      .watch(productionRepositoryProvider)
-      .fetchRecentEntries(limit: 5);
-  final salesDispatches = await ref
-      .watch(salesRepositoryProvider)
-      .fetchRecentDispatches(owner: profile.isOwner, limit: 5);
-  final financeSummary = profile.isOwner
-      ? await ref.watch(financeRepositoryProvider).fetchSummary()
-      : null;
+  final bundle = await ref.watch(trackerRepositoryProvider).fetchHomeBundle(
+        owner: profile.isOwner,
+      );
 
   return DashboardBundle(
-    productName: productBundle.productName,
-    inventory: productBundle.sizes,
-    todayProductionUnits: todayProductionUnits,
-    todaySalesUnits: todaySalesUnits,
-    recentProduction: productionEntries,
-    recentSales: salesDispatches,
-    financeSummary: financeSummary,
+    summary: Map<String, dynamic>.from(bundle['summary'] as Map? ?? const {}),
+    recentSales: ((bundle['recent_sales'] as List?) ?? const [])
+        .whereType<Map>()
+        .map((item) => Map<String, dynamic>.from(item))
+        .toList(),
+    recentPurchases: ((bundle['recent_purchases'] as List?) ?? const [])
+        .whereType<Map>()
+        .map((item) => Map<String, dynamic>.from(item))
+        .toList(),
   );
 });

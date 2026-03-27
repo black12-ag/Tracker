@@ -1,24 +1,55 @@
-import 'package:liquid_soap_tracker/features/finance/models/finance_summary.dart';
-import 'package:liquid_soap_tracker/features/product_setup/models/product_setup_bundle.dart';
-import 'package:liquid_soap_tracker/features/production/models/production_entry_model.dart';
-import 'package:liquid_soap_tracker/features/sales/models/sales_dispatch_model.dart';
-
 class DashboardBundle {
   const DashboardBundle({
-    required this.productName,
-    required this.inventory,
-    required this.todayProductionUnits,
-    required this.todaySalesUnits,
-    required this.recentProduction,
+    required this.summary,
     required this.recentSales,
-    this.financeSummary,
+    required this.recentPurchases,
   });
 
-  final String productName;
-  final List<ProductSizeSetting> inventory;
-  final int todayProductionUnits;
-  final int todaySalesUnits;
-  final List<ProductionEntryModel> recentProduction;
-  final List<SalesDispatchModel> recentSales;
-  final FinanceSummary? financeSummary;
+  final Map<String, dynamic> summary;
+  final List<Map<String, dynamic>> recentSales;
+  final List<Map<String, dynamic>> recentPurchases;
+
+  double get totalStockUnits =>
+      (summary['total_stock_units'] as num?)?.toDouble() ?? 0;
+
+  double get totalAssets => (summary['total_assets'] as num?)?.toDouble() ?? 0;
+
+  double get totalInBanks =>
+      (summary['total_in_banks'] as num?)?.toDouble() ?? 0;
+
+  double get collectibleLoans =>
+      (summary['loan_records_collectible'] as num?)?.toDouble() ?? 0;
+
+  double get payableLoans =>
+      (summary['loan_records_payable'] as num?)?.toDouble() ?? 0;
+
+  double get netWorth => (summary['net_worth'] as num?)?.toDouble() ?? 0;
+
+  double get profitMargin =>
+      (summary['profit_margin'] as num?)?.toDouble() ?? 0;
+
+  double get revenue => (summary['revenue'] as num?)?.toDouble() ?? 0;
+
+  double get collectedMoney =>
+      (summary['collected_money'] as num?)?.toDouble() ?? 0;
+
+  double get estimatedProfit =>
+      (summary['estimated_profit'] as num?)?.toDouble() ?? 0;
+
+  double get netProfit => (summary['net_profit'] as num?)?.toDouble() ?? 0;
+
+  double get overdueBalanceTotal =>
+      (summary['overdue_balance_total'] as num?)?.toDouble() ?? 0;
+
+  int get inventoryItemsCount =>
+      (summary['inventory_items_count'] as num?)?.toInt() ?? 0;
+
+  int get totalSalesOrders =>
+      (summary['total_sales_orders'] as num?)?.toInt() ?? 0;
+
+  int get totalPurchaseOrders =>
+      (summary['total_purchase_orders'] as num?)?.toInt() ?? 0;
+
+  int get overdueOrdersCount =>
+      (summary['overdue_orders_count'] as num?)?.toInt() ?? 0;
 }

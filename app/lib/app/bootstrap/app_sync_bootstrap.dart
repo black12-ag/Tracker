@@ -25,6 +25,18 @@ class _AppSyncBootstrapState extends ConsumerState<AppSyncBootstrap>
   Future<void> _syncAndRefresh() async {
     await ref.read(offlineSyncServiceProvider).refreshPendingCount();
     await ref.read(offlineSyncServiceProvider).syncPendingActions();
+    final profile = await ref.read(currentProfileProvider.future);
+    if (profile != null) {
+      final notifications = ref.read(trackerNotificationsServiceProvider);
+      await notifications.syncOverdueBalanceNotifications(
+            profile: profile,
+            repository: ref.read(trackerRepositoryProvider),
+          );
+      final pendingTarget = await notifications.consumePendingTarget();
+      if (pendingTarget != null) {
+        ref.read(notificationTargetProvider.notifier).state = pendingTarget;
+      }
+    }
     _refreshAppData();
   }
 

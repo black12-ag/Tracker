@@ -4,14 +4,11 @@ import 'package:liquid_soap_tracker/app/theme/app_colors.dart';
 import 'package:liquid_soap_tracker/core/config/app_identity.dart';
 import 'package:liquid_soap_tracker/core/offline/services/offline_error_detector.dart';
 import 'package:liquid_soap_tracker/core/providers/core_providers.dart';
-import 'package:liquid_soap_tracker/core/ui/buttons/ghost_button.dart';
 import 'package:liquid_soap_tracker/core/ui/cards/app_surface_card.dart';
 import 'package:liquid_soap_tracker/features/auth/controller/auth_controller.dart';
 import 'package:liquid_soap_tracker/features/auth/widgets/buttons/login_submit_button.dart';
 import 'package:liquid_soap_tracker/features/auth/widgets/fields/login_email_field.dart';
 import 'package:liquid_soap_tracker/features/auth/widgets/fields/login_password_field.dart';
-import 'package:liquid_soap_tracker/features/auth/widgets/fields/signup_confirm_password_field.dart';
-import 'package:liquid_soap_tracker/features/auth/widgets/fields/signup_display_name_field.dart';
 import 'package:liquid_soap_tracker/features/auth/widgets/sections/auth_contact_footer.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
@@ -22,27 +19,20 @@ class LoginPage extends ConsumerStatefulWidget {
 }
 
 class _LoginPageState extends ConsumerState<LoginPage> {
-  late final TextEditingController _displayNameController;
   late final TextEditingController _emailController;
   late final TextEditingController _passwordController;
-  late final TextEditingController _confirmPasswordController;
-  bool _isSignup = false;
 
   @override
   void initState() {
     super.initState();
-    _displayNameController = TextEditingController();
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
-    _confirmPasswordController = TextEditingController();
   }
 
   @override
   void dispose() {
-    _displayNameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
-    _confirmPasswordController.dispose();
     super.dispose();
   }
 
@@ -55,9 +45,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     if (message.contains('invalid login credentials')) {
       return 'Wrong login details or password. Please try again.';
     }
-    if (message.contains('user already registered')) {
-      return 'This email already has an account. Login instead.';
-    }
     if (message.contains('password')) {
       return 'Please check your password and try again.';
     }
@@ -66,7 +53,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   }
 
   Future<void> _submit() async {
-    final displayName = _displayNameController.text.trim();
     final identifier = _emailController.text.trim();
     final password = _passwordController.text.trim();
 
@@ -79,52 +65,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       return;
     }
 
-    if (_isSignup) {
-      if (displayName.isEmpty) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(const SnackBar(content: Text('Your name is required.')));
-        return;
-      }
-
-      if (password.length < 8) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Password must be at least 8 characters long.'),
-          ),
-        );
-        return;
-      }
-
-      if (password != _confirmPasswordController.text.trim()) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Passwords do not match.')),
-        );
-        return;
-      }
-
-      if (!identifier.contains('@')) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Use an email address when creating a new account.'),
-          ),
-        );
-        return;
-      }
-    }
-
     ref.read(authSubmitLoadingProvider.notifier).state = true;
     try {
-      if (_isSignup) {
-        await ref
-            .read(authRepositoryProvider)
-            .signUp(
-              displayName: displayName,
-              email: identifier,
-              password: password,
-            );
-      }
-
       await ref
           .read(authRepositoryProvider)
           .signIn(identifier: identifier, password: password);
@@ -180,13 +122,13 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   ),
                   const SizedBox(height: 18),
                   Text(
-                    'Welcome',
+                    'Welcome Back',
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.displayLarge,
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    'Sign in to track production, sales, stock, and money.',
+                    'Sign in to manage sales, purchased items, inventory, accounts, and reports.',
                     textAlign: TextAlign.center,
                     style: Theme.of(
                       context,
@@ -200,48 +142,19 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 child: AutofillGroup(
                   child: Column(
                     children: [
-                      if (_isSignup) ...[
-                        SignupDisplayNameField(
-                          controller: _displayNameController,
-                        ),
-                        const SizedBox(height: 16),
-                      ],
                       LoginEmailField(
                         controller: _emailController,
-                        label: _isSignup
-                            ? 'Email address'
-                            : 'Email or phone number',
-                        hintText: _isSignup
-                            ? 'name@company.com'
-                            : 'name@company.com or 092 2380260',
+                        label: 'Email or phone number',
+                        hintText: 'name@company.com or 092 2380260',
                       ),
                       const SizedBox(height: 16),
                       LoginPasswordField(controller: _passwordController),
-                      if (_isSignup) ...[
-                        const SizedBox(height: 16),
-                        SignupConfirmPasswordField(
-                          controller: _confirmPasswordController,
-                        ),
-                      ],
                       const SizedBox(height: 24),
                       LoginSubmitButton(
                         onPressed: _submit,
                         isBusy: isBusy,
-                        label: _isSignup
-                            ? 'Create account'
-                            : 'Login',
-                        icon: _isSignup
-                            ? Icons.person_add_alt_1_rounded
-                            : Icons.arrow_forward,
-                      ),
-                      const SizedBox(height: 12),
-                      GhostButton(
-                        label: _isSignup
-                            ? 'Back to login'
-                            : 'Create new account',
-                        onPressed: () {
-                          setState(() => _isSignup = !_isSignup);
-                        },
+                        label: 'Login',
+                        icon: Icons.arrow_forward,
                       ),
                     ],
                   ),
@@ -249,9 +162,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
               ),
               const SizedBox(height: 24),
               Text(
-                _isSignup
-                    ? 'New accounts get shared access for product, production, and sales.'
-                    : 'The owner can use the business phone number. Other users sign in with email.',
+                'The owner can use the business phone number. Staff sign in with their phone or email and password.',
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodyMedium,
               ),

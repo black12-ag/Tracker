@@ -7,9 +7,16 @@ class AuthContactFooter extends StatelessWidget {
   const AuthContactFooter({super.key});
 
   Future<void> _openTelegram(BuildContext context) async {
-    final uri = Uri.parse(AppIdentity.contactTelegramUrl);
+    final appUri = Uri.parse(
+      'tg://resolve?domain=${AppIdentity.contactTelegramHandle.replaceFirst('@', '')}',
+    );
+    final webUri = Uri.parse(AppIdentity.contactTelegramUrl);
     try {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
+      if (await canLaunchUrl(appUri)) {
+        await launchUrl(appUri, mode: LaunchMode.externalApplication);
+      } else {
+        await launchUrl(webUri, mode: LaunchMode.externalApplication);
+      }
     } catch (_) {
       if (!context.mounted) {
         return;
@@ -23,7 +30,7 @@ class AuthContactFooter extends StatelessWidget {
   Future<void> _openPhone(BuildContext context) async {
     final uri = Uri(scheme: 'tel', path: AppIdentity.contactPhone);
     try {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
+      await launchUrl(uri, mode: LaunchMode.platformDefault);
     } catch (_) {
       await Clipboard.setData(
         const ClipboardData(text: AppIdentity.contactPhone),

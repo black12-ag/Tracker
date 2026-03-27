@@ -3,7 +3,7 @@ import 'package:liquid_soap_tracker/app/bootstrap/app_bootstrap.dart';
 import 'package:liquid_soap_tracker/app/bootstrap/app_sync_bootstrap.dart';
 import 'package:liquid_soap_tracker/app/theme/app_theme.dart';
 import 'package:liquid_soap_tracker/core/config/app_identity.dart';
-import 'package:liquid_soap_tracker/features/splash/page/video_splash_screen.dart';
+import 'package:liquid_soap_tracker/features/splash/page/animated_splash_screen.dart';
 
 class LiquidSoapTrackerApp extends StatelessWidget {
   const LiquidSoapTrackerApp({super.key});
@@ -14,7 +14,7 @@ class LiquidSoapTrackerApp extends StatelessWidget {
       title: AppIdentity.appName,
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light(),
-      home: const VideoSplashScreen(
+      home: const AnimatedSplashScreen(
         child: AppSyncBootstrap(child: AppBootstrap()),
       ),
     );

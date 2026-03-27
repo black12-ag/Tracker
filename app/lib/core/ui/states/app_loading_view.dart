@@ -29,13 +29,13 @@ class AppLoadingView extends StatelessWidget {
                 ),
                 const SizedBox(height: 12),
                 const SizedBox(
-                  width: 20,
-                  height: 20,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2.2,
-                    color: AppColors.oliveDark,
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2.2,
+                      color: AppColors.navy,
+                    ),
                   ),
-                ),
                 const SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -89,7 +89,7 @@ class AppLoadingView extends StatelessWidget {
                             height: 18,
                             child: CircularProgressIndicator(
                               strokeWidth: 2.2,
-                              color: AppColors.oliveDark,
+                              color: AppColors.navy,
                             ),
                           ),
                           const SizedBox(width: 12),

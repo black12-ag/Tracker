@@ -5,42 +5,44 @@
 <h1 align="center">Tracker</h1>
 
 <p align="center">
-  A simple Flutter + Supabase business tracker for product, production, sales, stock, loans, revenue, and profit.
+  A professional Flutter + Supabase business tracker for inventory, sales, purchases, accounts, loans, reports, revenue, and profit.
 </p>
 
 <p align="center">
-  <a href="apk/tracker-v1.0.0+5.apk"><strong>Download Latest APK</strong></a>
+  <a href="apk/tracker-v1.0.0+10.apk"><strong>Download Latest APK</strong></a>
 </p>
 
 ## Overview
 
-`Tracker` is a lightweight mobile app built for a small real business workflow.
+`Tracker` is a mobile business app built for real small-business daily operations.
 
 It is designed for:
-- one main product
-- simple pack sizes
-- fast production and sales entry
-- owner-only money access
-- offline support with sync when internet comes back
+- inventory and stock tracking
+- sales and purchase order flows
+- partner and customer management
+- owner and staff access control
+- account balances, transfers, loans, and expenses
+- backend-driven revenue, overdue balances, and profit summaries
+- offline-friendly use with sync when internet comes back
 
 ## Features
 
-- Product setup with image upload
-- Custom pack sizes with liters, stock alert, and optional price
-- Production tracking
-- Sales tracking
-- Customer balances and payment tracking
-- Revenue and profit visibility for the owner
+- Premium animated splash screen
+- Inventory items with image upload
+- Sales order and purchase order flows
+- Partners, employees, loans, expenses, receive, shipment, and reports
+- Smart customer balance tracking with due dates and reminder status
+- Revenue, account totals, overdue balances, and profit visibility for the owner
 - Owner phone alias login support
 - Offline queue and auto-sync
 - Supabase backend with Auth, Postgres, and Storage
-- Video splash screen on first app open
+- Local device notifications for overdue balances and pending actions
 
 ## Download
 
 The latest tester APK is in this repository:
 
-- [tracker-v1.0.0+5.apk](apk/tracker-v1.0.0+5.apk)
+- [tracker-v1.0.0+10.apk](apk/tracker-v1.0.0+10.apk)
 
 ## Tech Stack
 
@@ -52,44 +54,46 @@ The latest tester APK is in this repository:
 - Shared Preferences
 - Flutter Secure Storage
 - Image Picker
-- Video Player
+- Flutter Local Notifications
 
 ## App Flow
 
 ```mermaid
 flowchart TD
-    A["Open App"] --> B["Video Splash (first launch only)"]
-    B --> C["Login / Signup"]
+    A["Cold Open"] --> B["Premium Logo Splash"]
+    B --> C["Login"]
     C --> D["Home"]
 
-    D --> E["Product"]
-    D --> F["Production"]
-    D --> G["Sales"]
-    D --> H["Money (Owner only)"]
+    D --> E["Sales"]
+    D --> F["Purchased"]
+    D --> G["Inventory"]
+    D --> H["Account"]
+    D --> I["Drawer Modules"]
 
-    E --> I["Save product data"]
-    E --> J["Upload image to Supabase Storage"]
-    E --> K["Add custom size"]
+    I --> J["Partners"]
+    I --> K["Employees"]
+    I --> L["Loan Records"]
+    I --> M["Expenses"]
+    I --> N["Receive / Shipment"]
+    I --> O["Reports"]
+    I --> P["Profile / Settings"]
 
-    F --> L["Create production entry"]
-    L --> M["Stock updates"]
+    E --> Q["Sales Orders + Customer Balances"]
+    F --> R["Purchase Orders"]
+    G --> S["Items + Images + Stock"]
+    H --> T["Cash / Bank Accounts + Transfers"]
 
-    G --> N["Create sales dispatch"]
-    N --> O["Customer + quantity saved"]
-    N --> P["Owner can attach money data"]
-
-    H --> Q["Add money to sale"]
-    H --> R["Record payment"]
-    H --> S["See balances, revenue, and profit"]
-
-    I --> T["Supabase Postgres"]
-    J --> U["Supabase Storage"]
-    K --> T
-    L --> T
-    N --> T
-    Q --> T
-    R --> T
-    S --> T
+    Q --> U["Supabase Postgres"]
+    R --> U
+    S --> U
+    T --> U
+    J --> U
+    K --> U
+    L --> U
+    M --> U
+    N --> U
+    O --> U
+    S --> V["Supabase Storage"]
 ```
 
 ## Project Structure
@@ -97,7 +101,7 @@ flowchart TD
 ```text
 tracker/
 ├── app/                # Flutter app
-├── apk/                # Downloadable tester APK
+├── apk/                # Downloadable tester APKs
 ├── scripts/            # Build and verification scripts
 ├── supabase/           # Database config and migrations
 └── ui/                 # Design references
@@ -133,16 +137,19 @@ The app is connected to Supabase for:
 
 - authentication
 - database storage
-- product image storage
+- inventory image storage
 - logs and activity data
+- account and report calculations
+- smart customer balance tracking
 
 When the device is online, the app saves to Supabase first.
 When the device is offline, the app keeps changes locally and syncs them later.
 
 ## Notes
 
-- `Money` is owner-only.
-- Other users can still access shared product, production, and sales data.
+- `Owner` can access finance, reports, accounts, expenses, loans, and staff management.
+- `Staff` can access shared operational data without owner-only money controls.
+- Revenue, overdue balances, and profit summaries are backend-driven.
 - The repository is kept private for controlled project access.
 
 ## Contact

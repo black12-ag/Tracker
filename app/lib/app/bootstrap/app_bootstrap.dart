@@ -28,9 +28,9 @@ class AppBootstrap extends ConsumerWidget {
 
         if (!profile.isActive) {
           return AppErrorView(
-            title: 'Account not approved',
+            title: 'Account inactive',
             message:
-                'This account is not allowed to use the tracker yet. Ask the owner to approve it.',
+                'This account is not active right now. Ask the owner to reactivate it.',
             actionLabel: 'Sign Out',
             onPressed: () {
               ref.read(authRepositoryProvider).signOut();

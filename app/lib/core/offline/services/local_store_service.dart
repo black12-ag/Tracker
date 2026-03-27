@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/services.dart';
 import 'package:liquid_soap_tracker/core/offline/models/offline_sync_action.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
@@ -10,6 +11,17 @@ class LocalStoreService {
   static const String financeSummaryKey = 'cached_finance_summary';
   static const String financeRecordsKey = 'cached_finance_records';
   static const String expenseEntriesKey = 'cached_expense_entries';
+  static const String homeBundleOwnerKey = 'cached_home_bundle_owner';
+  static const String homeBundleStaffKey = 'cached_home_bundle_staff';
+  static const String partnersKey = 'cached_partners';
+  static const String inventoryItemsKey = 'cached_inventory_items';
+  static const String salesOrdersKey = 'cached_sales_orders';
+  static const String purchaseOrdersKey = 'cached_purchase_orders';
+  static const String accountSummaryKey = 'cached_account_summary';
+  static const String loanRecordsKey = 'cached_loan_records';
+  static const String salesBalanceAlertsKey = 'cached_sales_balance_alerts';
+  static const String employeesKey = 'cached_employees';
+  static const String reportsKey = 'cached_reports';
   static const String queueKey = 'offline_sync_queue';
   static const String lastSyncKey = 'last_sync_at';
 
@@ -22,8 +34,25 @@ class LocalStoreService {
 
   static const FlutterSecureStorage _storage = FlutterSecureStorage();
 
+  Future<void> _safeWrite({
+    required String key,
+    required String value,
+  }) async {
+    try {
+      await _storage.write(key: key, value: value);
+    } on PlatformException catch (error) {
+      final message = '${error.code} ${error.message}'.toLowerCase();
+      if (message.contains('-25299') || message.contains('already exists')) {
+        await _storage.delete(key: key);
+        await _storage.write(key: key, value: value);
+        return;
+      }
+      rethrow;
+    }
+  }
+
   Future<void> writeMap(String key, Map<String, dynamic> value) async {
-    await _storage.write(key: key, value: jsonEncode(value));
+    await _safeWrite(key: key, value: jsonEncode(value));
   }
 
   Future<Map<String, dynamic>?> readMap(String key) async {
@@ -36,7 +65,7 @@ class LocalStoreService {
   }
 
   Future<void> writeList(String key, List<Map<String, dynamic>> value) async {
-    await _storage.write(key: key, value: jsonEncode(value));
+    await _safeWrite(key: key, value: jsonEncode(value));
   }
 
   Future<List<Map<String, dynamic>>> readList(String key) async {
@@ -70,7 +99,7 @@ class LocalStoreService {
   }
 
   Future<void> setLastSyncAt(DateTime value) async {
-    await _storage.write(key: lastSyncKey, value: value.toIso8601String());
+    await _safeWrite(key: lastSyncKey, value: value.toIso8601String());
   }
 
   Future<DateTime?> getLastSyncAt() async {
@@ -86,6 +115,17 @@ class LocalStoreService {
       financeSummaryKey,
       financeRecordsKey,
       expenseEntriesKey,
+      homeBundleOwnerKey,
+      homeBundleStaffKey,
+      partnersKey,
+      inventoryItemsKey,
+      salesOrdersKey,
+      purchaseOrdersKey,
+      accountSummaryKey,
+      loanRecordsKey,
+      salesBalanceAlertsKey,
+      employeesKey,
+      reportsKey,
       queueKey,
       lastSyncKey,
       productBundleKey(true),

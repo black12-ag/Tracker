@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:liquid_soap_tracker/app/theme/app_colors.dart';
-import 'package:liquid_soap_tracker/core/config/app_identity.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
@@ -11,44 +10,77 @@ class SplashPage extends StatelessWidget {
       body: DecoratedBox(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [AppColors.cream, AppColors.background],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color(0xFF0B1E43),
+              AppColors.navyDark,
+              AppColors.navy,
+            ],
           ),
         ),
         child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
+          child: Stack(
+            alignment: Alignment.center,
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(26),
-                child: Image.asset(
-                  'assets/images/app_icon.png',
-                  width: 84,
-                  height: 84,
-                  fit: BoxFit.cover,
+              Container(
+                width: 190,
+                height: 190,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: Colors.white.withValues(alpha: 0.12),
+                    width: 2,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.mint.withValues(alpha: 0.12),
+                      blurRadius: 30,
+                      spreadRadius: 8,
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(height: 20),
-              Text(
-                AppIdentity.appName.toUpperCase(),
-                style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                  letterSpacing: 3,
-                  color: AppColors.oliveDark,
+              Container(
+                width: 100,
+                height: 100,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  image: const DecorationImage(
+                    image: AssetImage('assets/images/app_icon.png'),
+                    fit: BoxFit.cover,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.white.withValues(alpha: 0.16),
+                      blurRadius: 20,
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(height: 14),
-              Text(
-                AppIdentity.appName,
-                style: Theme.of(context).textTheme.headlineMedium,
+              Positioned(
+                bottom: -84,
+                child: Column(
+                  children: [
+                    Text(
+                      'Preparing your workspace',
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            color: Colors.white.withValues(alpha: 0.86),
+                            fontWeight: FontWeight.w600,
+                          ),
+                    ),
+                    const SizedBox(height: 18),
+                    const SizedBox(
+                      width: 26,
+                      height: 26,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2.4,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              const SizedBox(height: 10),
-              Text(
-                'Preparing your workspace...',
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-              const SizedBox(height: 24),
-              const CircularProgressIndicator(color: AppColors.oliveDark),
             ],
           ),
         ),

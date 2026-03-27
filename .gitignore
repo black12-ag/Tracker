@@ -24,5 +24,13 @@ supabase/.temp/
 .idea/
 .vscode/
 
+# Local Codex/tooling folders
+.agents/
+.codex/
+plugins/
+
 # Optional local/generated media outside app assets
 Tracker_Icon_Generation.mp4
+
+# Local Codex plugin secrets
+plugins/tracker-supabase-mcp/.mcp.local.json

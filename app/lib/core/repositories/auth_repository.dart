@@ -73,4 +73,8 @@ class AuthRepository {
     await _client.auth.signOut();
     await _localStoreService.clearAllCachedData();
   }
+
+  Future<void> updatePassword(String password) async {
+    await _client.auth.updateUser(UserAttributes(password: password));
+  }
 }
