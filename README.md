@@ -14,6 +14,12 @@
 
 ## UI Preview
 
+Cross-platform Tracker showcase:
+
+<p align="center">
+  <img src="docs/screenshots/tracker-ui-showcase.png" alt="Tracker cross-platform UI showcase" width="860" />
+</p>
+
 Opening screen reference used for the app direction:
 
 <p align="center">
