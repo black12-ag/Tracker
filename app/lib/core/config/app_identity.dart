@@ -3,13 +3,13 @@ class AppIdentity {
 
   static const String appName = 'Tracker';
 
-  static const String ownerCanonicalEmail = 'muay01111@gmail.com';
-  static const String ownerPhoneLocal = '0922380260';
-  static const String ownerPhoneIntl = '251922380260';
+  static const String ownerCanonicalEmail = '';
+  static const String ownerPhoneLocal = '';
+  static const String ownerPhoneIntl = '';
 
-  static const String contactTelegramHandle = '@muay011';
-  static const String contactTelegramUrl = 'https://t.me/muay011';
-  static const String contactPhone = '0907806267';
+  static const String contactTelegramHandle = '';
+  static const String contactTelegramUrl = '';
+  static const String contactPhone = '';
 
   static const String splashSeenKey = 'hasShown3DSplash';
 
