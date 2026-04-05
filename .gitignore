@@ -24,6 +24,9 @@ supabase/.temp/
 .idea/
 .vscode/
 
+# Keep-alive cron log
+scripts/wake.log
+
 # Local Codex/tooling folders
 .agents/
 .codex/

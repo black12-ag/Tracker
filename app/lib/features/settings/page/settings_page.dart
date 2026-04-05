@@ -135,7 +135,60 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
               children: [
                 Text('Session', style: Theme.of(context).textTheme.titleLarge),
                 const SizedBox(height: 12),
-                Text(widget.profile.email),
+                Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 22,
+                      backgroundColor: AppColors.navy,
+                      child: Text(
+                        (widget.profile.displayName.isNotEmpty
+                                ? widget.profile.displayName[0]
+                                : '?')
+                            .toUpperCase(),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 14),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.profile.displayName,
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                          Text(
+                            widget.profile.email,
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
+                          const SizedBox(height: 2),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 2,
+                            ),
+                            decoration: BoxDecoration(
+                              color: widget.profile.isOwner
+                                  ? AppColors.navy
+                                  : AppColors.oliveDark,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Text(
+                              widget.profile.isOwner ? 'Owner' : 'Staff',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .labelSmall
+                                  ?.copyWith(color: Colors.white),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
                 const SizedBox(height: 16),
                 OutlinedButton(
                   onPressed: _logout,

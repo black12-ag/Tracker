@@ -169,9 +169,12 @@ class FinanceRepository {
           .order('sold_at', ascending: false)
           .limit(25);
 
+      final dispatchIds =
+          dispatchRows.map<String>((row) => row['id'] as String).toList();
       final financeRows = await _client
           .from('sale_finance')
-          .select('dispatch_id');
+          .select('dispatch_id')
+          .inFilter('dispatch_id', dispatchIds);
       final financedDispatchIds = financeRows
           .map<String>((row) => row['dispatch_id'] as String)
           .toSet();

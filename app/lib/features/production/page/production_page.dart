@@ -67,7 +67,7 @@ class _ProductionPageState extends ConsumerState<ProductionPage> {
 
     setState(() => _isSaving = true);
     try {
-      await ref
+      final result = await ref
           .read(productionRepositoryProvider)
           .createEntry(
             producedOn: _selectedDate,
@@ -94,9 +94,7 @@ class _ProductionPageState extends ConsumerState<ProductionPage> {
       }
 
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Production saved. Offline changes will sync later.'),
-        ),
+        SnackBar(content: Text(result.message)),
       );
     } catch (error) {
       if (!mounted) {

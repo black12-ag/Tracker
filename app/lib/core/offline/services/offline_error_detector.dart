@@ -7,6 +7,11 @@ class OfflineErrorDetector {
         message.contains('network is unreachable') ||
         message.contains('connection refused') ||
         message.contains('timeout') ||
-        message.contains('clientexception');
+        message.contains('clientexception') ||
+        message.contains('handshake') ||
+        message.contains('certificate') ||
+        message.contains('503') ||
+        message.contains('project is paused') ||
+        message.contains('service unavailable');
   }
 }

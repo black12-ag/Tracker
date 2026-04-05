@@ -218,7 +218,7 @@ class _SummaryTab extends StatelessWidget {
         Wrap(
           spacing: 12,
           runSpacing: 12,
-          children: data.entries.take(8).map((entry) {
+          children: data.entries.map((entry) {
             return SizedBox(
               width: (MediaQuery.of(context).size.width - 56) / 2,
               child: AppSurfaceCard(

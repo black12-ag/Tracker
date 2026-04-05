@@ -52,15 +52,33 @@ class ProductionRepository {
   }
 
   Future<int> fetchTotalProducedOn(DateTime date) async {
-    final rows = await _client
-        .from('production_entries')
-        .select('quantity_units')
-        .eq('produced_on', date.toIso8601String().split('T').first);
+    try {
+      final rows = await _client
+          .from('production_entries')
+          .select('quantity_units')
+          .eq('produced_on', date.toIso8601String().split('T').first);
 
-    return rows.fold<int>(
-      0,
-      (sum, row) => sum + (row['quantity_units'] as int? ?? 0),
-    );
+      return rows.fold<int>(
+        0,
+        (sum, row) => sum + (row['quantity_units'] as int? ?? 0),
+      );
+    } catch (error) {
+      if (!OfflineErrorDetector.isLikelyOffline(error)) {
+        rethrow;
+      }
+      final cached = await _localStoreService.readList(
+        LocalStoreService.productionEntriesKey,
+      );
+      return cached
+          .map(ProductionEntryModel.fromMap)
+          .where(
+            (entry) =>
+                entry.producedOn.year == date.year &&
+                entry.producedOn.month == date.month &&
+                entry.producedOn.day == date.day,
+          )
+          .fold<int>(0, (sum, entry) => sum + entry.quantityUnits);
+    }
   }
 
   Future<void> createEntryOnline({

@@ -212,6 +212,35 @@ The app is connected to Supabase for:
 When the device is online, the app saves to Supabase first.
 When the device is offline, the app keeps changes locally and syncs them later.
 
+## Supabase Keep-Alive (Free Tier)
+
+Free Supabase projects pause after **7 days of inactivity**. This repo includes an automated keep-alive system that pings the project every 3 days.
+
+### Option A — GitHub Actions (recommended)
+
+1. Go to **Settings → Secrets → Actions** in your GitHub repo.
+2. Add a secret named `SUPABASE_ACCESS_TOKEN` with your [personal access token](https://supabase.com/dashboard/account/tokens).
+3. The workflow at `.github/workflows/keep-supabase-alive.yml` runs every 3 days automatically.
+4. You can also trigger it manually from the **Actions** tab.
+
+### Option B — Local cron
+
+```bash
+export SUPABASE_ACCESS_TOKEN="sbp_..."
+# Add to crontab (runs every 3 days at 08:00):
+crontab -e
+# Paste: 0 8 */3 * * cd /path/to/tracker && /usr/bin/python3 scripts/wake_supabase.py >> scripts/wake.log 2>&1
+```
+
+### Restoring a paused project manually
+
+```bash
+export SUPABASE_ACCESS_TOKEN="sbp_..."
+python3 scripts/wake_supabase.py
+```
+
+If the restore fails with a "maximum limits" error, you need to pause one of your other active free projects first in the [Supabase Dashboard](https://supabase.com/dashboard).
+
 ## Notes
 
 - `Owner` can access finance, reports, accounts, expenses, loans, and staff management.

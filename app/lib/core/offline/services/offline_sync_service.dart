@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:liquid_soap_tracker/core/offline/services/offline_error_detector.dart';
 import 'package:liquid_soap_tracker/core/models/sync_write_result.dart';
 import 'package:liquid_soap_tracker/core/offline/models/offline_sync_action.dart';
 import 'package:liquid_soap_tracker/core/offline/services/connectivity_service.dart';
@@ -184,8 +185,10 @@ class OfflineSyncService {
             break;
         }
         syncedCount += 1;
-      } catch (_) {
-        remaining.add(action);
+      } catch (e) {
+        if (OfflineErrorDetector.isLikelyOffline(e)) {
+          remaining.add(action);
+        }
       }
     }
 
