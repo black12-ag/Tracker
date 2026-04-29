@@ -8,6 +8,7 @@ import 'package:liquid_soap_tracker/core/ui/cards/app_surface_card.dart';
 import 'package:liquid_soap_tracker/core/ui/fields/app_text_field.dart';
 import 'package:liquid_soap_tracker/core/ui/layout/reference_page_scaffold.dart';
 import 'package:liquid_soap_tracker/core/ui/states/reference_page_skeleton.dart';
+import 'package:liquid_soap_tracker/core/utils/app_errors.dart';
 
 class EmployeesPage extends ConsumerStatefulWidget {
   const EmployeesPage({
@@ -47,7 +48,7 @@ class _EmployeesPageState extends ConsumerState<EmployeesPage> {
       }
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text(error.toString())));
+      ).showSnackBar(SnackBar(content: Text(AppErrors.humanize(error))));
     } finally {
       if (mounted) {
         setState(() => _isLoading = false);
@@ -174,7 +175,7 @@ class _AddEmployeeDialogState extends ConsumerState<_AddEmployeeDialog> {
       }
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text(error.toString())));
+      ).showSnackBar(SnackBar(content: Text(AppErrors.humanize(error))));
     } finally {
       if (mounted) {
         setState(() => _isSaving = false);

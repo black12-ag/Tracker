@@ -8,6 +8,7 @@ import 'package:liquid_soap_tracker/core/ui/cards/app_surface_card.dart';
 import 'package:liquid_soap_tracker/core/ui/fields/app_text_field.dart';
 import 'package:liquid_soap_tracker/core/ui/layout/reference_page_scaffold.dart';
 import 'package:liquid_soap_tracker/core/ui/states/reference_page_skeleton.dart';
+import 'package:liquid_soap_tracker/core/utils/app_errors.dart';
 import 'package:liquid_soap_tracker/core/utils/formatters.dart';
 import 'package:liquid_soap_tracker/features/account/widgets/add_account_dialog.dart';
 
@@ -58,7 +59,7 @@ class _AccountPageState extends ConsumerState<AccountPage> {
       }
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text(error.toString())));
+      ).showSnackBar(SnackBar(content: Text(AppErrors.humanize(error))));
     } finally {
       if (mounted) {
         setState(() => _isLoading = false);
@@ -127,29 +128,14 @@ class _AccountPageState extends ConsumerState<AccountPage> {
         title: 'Account',
         onMenuPressed: widget.onMenuPressed,
         showBottomNavigation: false,
-        child: AppSurfaceCard(
-          color: AppColors.mintSoft,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                widget.profile.displayName,
-                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                      color: AppColors.navy,
-                    ),
-              ),
-              const SizedBox(height: 8),
-              Text(widget.profile.email),
-              if (widget.profile.phone != null) ...[
-                const SizedBox(height: 4),
-                Text(widget.profile.phone!),
-              ],
-              const SizedBox(height: 14),
-              Text(
-                'Account balances and bank actions are hidden for staff.',
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-            ],
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 32),
+            child: Text(
+              'This section is for the owner only.',
+              style: Theme.of(context).textTheme.bodyMedium,
+              textAlign: TextAlign.center,
+            ),
           ),
         ),
       );
@@ -326,7 +312,7 @@ class _AddAccountDialogState extends ConsumerState<_AddAccountDialog> {
       }
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text(error.toString())));
+      ).showSnackBar(SnackBar(content: Text(AppErrors.humanize(error))));
     } finally {
       if (mounted) {
         setState(() => _isSaving = false);
@@ -479,7 +465,7 @@ class _TransferDialogState extends ConsumerState<_TransferDialog> {
       }
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text(error.toString())));
+      ).showSnackBar(SnackBar(content: Text(AppErrors.humanize(error))));
     } finally {
       if (mounted) {
         setState(() => _isSaving = false);

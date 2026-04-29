@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:liquid_soap_tracker/app/theme/app_colors.dart';
 
 class AppTextField extends StatelessWidget {
   const AppTextField({
@@ -18,6 +19,7 @@ class AppTextField extends StatelessWidget {
     this.enableSuggestions = true,
     this.textInputAction,
     this.suffixIcon,
+    this.errorText,
   });
 
   final TextEditingController? controller;
@@ -35,9 +37,11 @@ class AppTextField extends StatelessWidget {
   final bool enableSuggestions;
   final TextInputAction? textInputAction;
   final Widget? suffixIcon;
+  final String? errorText;
 
   @override
   Widget build(BuildContext context) {
+    final hasError = errorText != null && errorText!.isNotEmpty;
     return TextFormField(
       controller: controller,
       autofillHints: autofillHints,
@@ -55,6 +59,22 @@ class AppTextField extends StatelessWidget {
         hintText: hintText,
         prefixIcon: prefixIcon == null ? null : Icon(prefixIcon),
         suffixIcon: suffixIcon,
+        errorText: errorText,
+        errorMaxLines: 2,
+        errorBorder: hasError
+            ? OutlineInputBorder(
+                borderRadius: BorderRadius.circular(24),
+                borderSide:
+                    const BorderSide(color: AppColors.danger, width: 1.4),
+              )
+            : null,
+        focusedErrorBorder: hasError
+            ? OutlineInputBorder(
+                borderRadius: BorderRadius.circular(24),
+                borderSide:
+                    const BorderSide(color: AppColors.danger, width: 1.4),
+              )
+            : null,
       ),
     );
   }

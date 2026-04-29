@@ -1,0 +1,143 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-04-29T00:00:00Z",
+  "title": "Design System: Tracker",
+  "extensions": {
+    "colorMeta": {
+      "navy":             { "role": "primary",   "displayName": "Deep Institutional Navy", "canonical": "oklch(27% 0.09 250)", "tonalRamp": ["#061A38","#0A2650","#0F2F5D","#123D79","#1A5299","#2E6FBA","#5B96D6","#A3C4ED"] },
+      "navy-dark":        { "role": "primary",   "displayName": "Navy Ink",                "canonical": "oklch(22% 0.09 250)", "tonalRamp": ["#040F1F","#081832","#0F2F5D","#123D79","#1A5299","#2E6FBA","#5B96D6","#A3C4ED"] },
+      "blue-accent":      { "role": "secondary", "displayName": "Direct Action Blue",      "canonical": "oklch(50% 0.22 265)", "tonalRamp": ["#0A3A8A","#0F52BF","#1664D9","#1877F2","#3B8EF4","#74AEFF","#AECEFF","#DDE9FF"] },
+      "blue-accent-dark": { "role": "secondary", "displayName": "Action Blue Deep",        "canonical": "oklch(46% 0.22 265)", "tonalRamp": ["#0A3A8A","#0F52BF","#1664D9","#1877F2","#3B8EF4","#74AEFF","#AECEFF","#DDE9FF"] },
+      "mint":             { "role": "tertiary",  "displayName": "Mint Positive",           "canonical": "oklch(71% 0.15 155)", "tonalRamp": ["#0E5C3A","#157A4E","#1A9A63","#12B76A","#56C58A","#8FDCB1","#BFEDD5","#EAF8F1"] },
+      "charcoal":         { "role": "neutral",   "displayName": "Charcoal",                "canonical": "oklch(14% 0.015 255)", "tonalRamp": ["#060A0F","#101828","#1D2939","#344054","#475467","#667085","#98A2B3","#D0D5DD"] },
+      "warm-gray":        { "role": "neutral",   "displayName": "Warm Gray",               "canonical": "oklch(49% 0.02 255)", "tonalRamp": ["#1D2939","#344054","#475467","#667085","#98A2B3","#D0D5DD","#E4E7EC","#F2F4F7"] },
+      "background":       { "role": "neutral",   "displayName": "Background Blue-White",   "canonical": "oklch(96% 0.01 265)", "tonalRamp": ["#C5D4F0","#D4E1F7","#DCE6F8","#E8F0FF","#EFF5FF","#F4F7FF","#F9FBFF","#FFFFFF"] },
+      "surface":          { "role": "neutral",   "displayName": "Pure Surface",            "canonical": "oklch(100% 0 0)",     "tonalRamp": ["#D0D5DD","#E4E7EC","#F2F4F7","#F9FAFB","#FCFCFD","#FFFFFF","#FFFFFF","#FFFFFF"] },
+      "line":             { "role": "neutral",   "displayName": "Line Blue",               "canonical": "oklch(89% 0.025 265)", "tonalRamp": ["#98A2B3","#C0CEDE","#D0DCEE","#DCE6F8","#E8F0FF","#EEF4FF","#F4F7FF","#FAFBFF"] },
+      "success":          { "role": "semantic",  "displayName": "Success",                 "canonical": "oklch(67% 0.18 155)", "tonalRamp": ["#054F31","#087443","#0E9F64","#12B76A","#32D583","#6CE9A6","#A6F4C5","#ECFDF3"] },
+      "warning":          { "role": "semantic",  "displayName": "Warning",                 "canonical": "oklch(73% 0.17 60)",  "tonalRamp": ["#93370D","#B54708","#DC6803","#F79009","#FDB022","#FEC84B","#FEDF89","#FFFAEB"] },
+      "danger":           { "role": "semantic",  "displayName": "Danger",                  "canonical": "oklch(56% 0.21 25)",  "tonalRamp": ["#7A271A","#912018","#B42318","#D92D20","#F04438","#F97066","#FDA29B","#FEE4E2"] }
+    },
+    "typographyMeta": {
+      "display":  { "displayName": "Display",         "purpose": "Large financial totals; the number the owner opened the app to see." },
+      "headline": { "displayName": "Headline",         "purpose": "Screen-level headings and secondary metric values inside cards." },
+      "title":    { "displayName": "Title",            "purpose": "Transaction names, customer names, list item headings." },
+      "body":     { "displayName": "Body",             "purpose": "Form input text and expanded descriptions." },
+      "label":    { "displayName": "Label / Caption",  "purpose": "Metric card labels, nav bar labels, chip text, metadata." }
+    },
+    "shadows": [
+      {
+        "name": "card-ambient",
+        "value": "0 8px 18px rgba(24, 119, 242, 0.06)",
+        "purpose": "Applied to AppSurfaceCard and AppMetricCard. Blue-tinted lift that feels native to the brand palette, not generic Material gray."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-standard",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "purpose": "State transitions on buttons and interactive cards."
+      },
+      {
+        "name": "ease-out-fast",
+        "value": "cubic-bezier(0, 0, 0.2, 1)",
+        "purpose": "Sheet and dialog enter transitions. Snappy exit, smooth arrival."
+      }
+    ],
+    "breakpoints": []
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The main action on any screen. Navy fill, white text, fully-rounded ends. Used once per screen.",
+      "html": "<button class=\"ds-btn-primary\"><span>Save Order</span></button>",
+      "css": ".ds-btn-primary { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; height: 56px; padding: 0 24px; background: #123D79; color: #ffffff; border: none; border-radius: 28px; font-family: 'Manrope', system-ui, sans-serif; font-size: 16px; font-weight: 800; letter-spacing: -0.01em; cursor: pointer; transition: background 0.15s cubic-bezier(0,0,0.2,1); } .ds-btn-primary:hover { background: #0F2F5D; } .ds-btn-primary:focus-visible { outline: 2px solid #123D79; outline-offset: 3px; } .ds-btn-primary:active { background: #0F2F5D; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Supporting actions. Pale-gold fill with action-blue text. Same shape as primary.",
+      "html": "<button class=\"ds-btn-secondary\"><span>View Details</span></button>",
+      "css": ".ds-btn-secondary { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; height: 56px; padding: 0 24px; background: #E8F0FF; color: #1664D9; border: none; border-radius: 28px; font-family: 'Work Sans', system-ui, sans-serif; font-size: 16px; font-weight: 700; cursor: pointer; transition: background 0.15s; } .ds-btn-secondary:hover { background: #DCE6F8; } .ds-btn-secondary:focus-visible { outline: 2px solid #1877F2; outline-offset: 3px; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Cancel, back, and tertiary actions. Transparent with navy text and a Line Blue border.",
+      "html": "<button class=\"ds-btn-ghost\"><span>Cancel</span></button>",
+      "css": ".ds-btn-ghost { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; height: 56px; padding: 0 24px; background: transparent; color: #123D79; border: 1.5px solid rgba(220, 230, 248, 0.7); border-radius: 28px; font-family: 'Work Sans', system-ui, sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; transition: border-color 0.15s, background 0.15s; } .ds-btn-ghost:hover { background: #F4F7FF; border-color: #DCE6F8; } .ds-btn-ghost:focus-visible { outline: 2px solid #123D79; outline-offset: 3px; }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input-default",
+      "description": "Pill-shaped field (24px radius). White fill, Line Blue border at rest, navy border on focus.",
+      "html": "<div class=\"ds-input-wrap\"><label class=\"ds-input-label\" for=\"ds-field\">Amount</label><input class=\"ds-input\" id=\"ds-field\" type=\"text\" placeholder=\"0.00\" /></div>",
+      "css": ".ds-input-wrap { display: flex; flex-direction: column; gap: 6px; } .ds-input-label { font-family: 'Work Sans', system-ui, sans-serif; font-size: 14px; font-weight: 600; color: #667085; } .ds-input { height: 52px; padding: 0 20px; background: #ffffff; color: #101828; border: 1.5px solid rgba(220, 230, 248, 0.35); border-radius: 24px; font-family: 'Work Sans', system-ui, sans-serif; font-size: 16px; font-weight: 500; outline: none; transition: border-color 0.15s; } .ds-input::placeholder { color: rgba(102, 112, 133, 0.75); } .ds-input:focus { border: 1.4px solid #123D79; } .ds-input:focus-visible { border: 1.4px solid #123D79; }"
+    },
+    {
+      "name": "Surface Card",
+      "kind": "card",
+      "refersTo": "card-surface",
+      "description": "The primary grouping container. White fill, 28px radius, Line Blue border, blue-tinted ambient shadow.",
+      "html": "<div class=\"ds-card-surface\"><p class=\"ds-card-title\">Inventory Summary</p><p class=\"ds-card-body\">42 items in stock across 6 categories.</p></div>",
+      "css": ".ds-card-surface { width: 100%; padding: 20px; background: #ffffff; border-radius: 28px; border: 1px solid rgba(220, 230, 248, 0.9); box-shadow: 0 8px 18px rgba(24, 119, 242, 0.06); } .ds-card-title { font-family: 'Work Sans', system-ui, sans-serif; font-size: 18px; font-weight: 700; color: #101828; margin-bottom: 8px; } .ds-card-body { font-family: 'Work Sans', system-ui, sans-serif; font-size: 14px; font-weight: 500; color: #667085; }"
+    },
+    {
+      "name": "Metric Card",
+      "kind": "card",
+      "refersTo": "card-metric",
+      "description": "Financial summary tile. Label above, Manrope headline value below in the metric's accent color.",
+      "html": "<div class=\"ds-metric-card\"><span class=\"ds-metric-label\">Total Revenue</span><span class=\"ds-metric-value\" style=\"color:#56C58A\">KES 84,200</span><span class=\"ds-metric-sub\">This month</span></div>",
+      "css": ".ds-metric-card { padding: 18px; background: #ffffff; border-radius: 26px; border: 1px solid rgba(220, 230, 248, 0.95); box-shadow: 0 8px 18px rgba(24, 119, 242, 0.05); display: flex; flex-direction: column; cursor: pointer; transition: box-shadow 0.15s; } .ds-metric-card:hover { box-shadow: 0 12px 24px rgba(24, 119, 242, 0.10); } .ds-metric-label { font-family: 'Work Sans', system-ui, sans-serif; font-size: 12px; font-weight: 700; color: #667085; letter-spacing: 0.01em; margin-bottom: 10px; } .ds-metric-value { font-family: 'Manrope', system-ui, sans-serif; font-size: 22px; font-weight: 700; line-height: 1.2; } .ds-metric-sub { font-family: 'Work Sans', system-ui, sans-serif; font-size: 12px; font-weight: 500; color: #667085; margin-top: 8px; }"
+    },
+    {
+      "name": "Navigation Bar Item",
+      "kind": "nav",
+      "refersTo": null,
+      "description": "Bottom nav tab. Active state: navy icon + navy label. Inactive: warm-gray. Navy 12% opacity indicator pill behind active icon.",
+      "html": "<nav class=\"ds-nav-bar\"><div class=\"ds-nav-item ds-nav-active\"><svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M3 12L12 3L21 12V21H15V15H9V21H3V12Z\" fill=\"#123D79\"/></svg><span class=\"ds-nav-label ds-nav-label-active\">Home</span></div><div class=\"ds-nav-item\"><svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M20 7H4C2.9 7 2 7.9 2 9V19C2 20.1 2.9 21 4 21H20C21.1 21 22 20.1 22 19V9C22 7.9 21.1 7 20 7ZM20 19H4V9H20V19ZM16 1H8V3H16V1Z\" fill=\"#667085\"/></svg><span class=\"ds-nav-label\">Sales</span></div><div class=\"ds-nav-item\"><svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 19 20.1 19 19V5C19 3.9 20.1 3 19 3ZM17 13H13V17H11V13H7V11H11V7H13V11H17V13Z\" fill=\"#667085\"/></svg><span class=\"ds-nav-label\">Stock</span></div></nav>",
+      "css": ".ds-nav-bar { display: flex; background: #ffffff; padding: 8px 0 4px; gap: 0; } .ds-nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px 4px; cursor: pointer; position: relative; } .ds-nav-active::before { content: ''; position: absolute; top: 4px; width: 64px; height: 32px; background: rgba(18, 61, 121, 0.12); border-radius: 16px; } .ds-nav-label { font-family: 'Work Sans', system-ui, sans-serif; font-size: 12px; font-weight: 700; color: #667085; } .ds-nav-label-active { color: #123D79; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Trusted Ledger",
+    "overview": "Tracker is built for the shop owner who has been keeping a paper ledger for years and finally doesn't have to. Every screen is a ledger page: precise, sequential, purposeful. The interface doesn't ask to be noticed. It holds information cleanly, hands it back quickly, and gets out of the way.\n\nThe color strategy is Restrained. Navy anchors trust and authority on key actions. The blue accent (#1877F2) carries interactive affordance. Mint marks positive financial states. Everything else is surface: white, the faintest blue-tinted background (#F4F7FF), and a warm-gray hierarchy that lets numbers breathe.\n\nThe physical scene: a shop owner checks their phone at the counter between customers, bright ambient light, one hand on the device, one eye on the door. The UI must be readable at a glance, operable with a thumb, and never require a second look to understand what a number means.",
+    "keyCharacteristics": [
+      "Light-first: high contrast, no decorative darkness",
+      "Numbers as primary typographic element, labels secondary",
+      "Generous corner radii (28px) with crisp, structured interior hierarchy",
+      "Flat elevation by default; one consistent shadow vocabulary for raised surfaces",
+      "Navy for authority, blue-accent for action, mint for positive flow"
+    ],
+    "rules": [
+      { "name": "The Mint Rule", "body": "Mint appears only when money moves in: received payments, profit, credit balances, income rows. Never used as a general accent.", "section": "colors" },
+      { "name": "The One Authority Rule", "body": "Navy is the single voice of authority. It appears on primary buttons, active states, and focus rings. Never use navy and the blue accent on the same element.", "section": "colors" },
+      { "name": "The Number-First Rule", "body": "Financial values always render at Manrope headline weight. The font switch signals to the eye that this is a quantity, not prose.", "section": "typography" },
+      { "name": "The Label Hierarchy Rule", "body": "Labels sit below their values at 12px/Work Sans 700. Never reverse this.", "section": "typography" },
+      { "name": "The Flat-By-Default Rule", "body": "Elevation is earned, not assigned. Dialogs, bottom sheets, and cards receive the Card Ambient shadow. Navigation bars, list rows, and section headers do not.", "section": "elevation" },
+      { "name": "The Pill Input Rule", "body": "Input fields use 24px radius. Cards and buttons use 28px. The 4px distinction signals recessed vs. raised. Never make inputs 28px.", "section": "components" }
+    ],
+    "dos": [
+      "Do use Manrope 800 for every financial value, regardless of size.",
+      "Do keep cards flat-surfaced (white, no gradient fills). Structure comes from border and subtle shadow.",
+      "Do use mint exclusively for positive financial states: received payments, income totals, profit figures.",
+      "Do maintain 48dp minimum touch targets on all interactive elements.",
+      "Do use Line Blue (#DCE6F8) for every divider and card border.",
+      "Do show sync state explicitly so the user always knows their data is saved."
+    ],
+    "donts": [
+      "Don't design anything that resembles generic ERP or SAP: no grey table overload, no zebra striping on every row.",
+      "Don't use spreadsheet-style flat layouts with no typographic weight contrast.",
+      "Don't cluster multiple primary actions on one screen. Each screen has one primary button.",
+      "Don't use gradient fills on cards, buttons, or backgrounds.",
+      "Don't use side-stripe borders (border-left as a colored accent).",
+      "Don't use gradient text. Financial values are solid-color Manrope 800.",
+      "Don't use the danger color (#F04438) anywhere except errors, negative amounts, and destructive confirmations."
+    ]
+  }
+}

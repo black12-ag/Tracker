@@ -79,14 +79,14 @@ class AppPageScaffold extends ConsumerWidget {
                   decoration: BoxDecoration(
                     color: !isOnline
                         ? AppColors.warning.withValues(alpha: 0.14)
-                        : AppColors.olive.withValues(alpha: 0.10),
+                        : AppColors.accentBlue.withValues(alpha: 0.10),
                     borderRadius: BorderRadius.circular(18),
                   ),
                   child: Row(
                     children: [
                       Icon(
                         !isOnline ? Icons.wifi_off_rounded : Icons.sync_rounded,
-                        color: !isOnline ? AppColors.warning : AppColors.olive,
+                        color: !isOnline ? AppColors.warning : AppColors.accentBlue,
                       ),
                       const SizedBox(width: 10),
                       Expanded(

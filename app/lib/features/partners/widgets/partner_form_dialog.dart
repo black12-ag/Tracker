@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:liquid_soap_tracker/core/providers/core_providers.dart';
+import 'package:liquid_soap_tracker/core/utils/app_errors.dart';
 import 'package:liquid_soap_tracker/core/ui/buttons/primary_button.dart';
 import 'package:liquid_soap_tracker/core/ui/fields/app_text_field.dart';
 
@@ -72,7 +73,7 @@ class _PartnerFormDialogState extends ConsumerState<PartnerFormDialog> {
 
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text(error.toString())));
+      ).showSnackBar(SnackBar(content: Text(AppErrors.humanize(error))));
     } finally {
       if (mounted) {
         setState(() => _isSaving = false);

@@ -6,6 +6,7 @@ import 'package:liquid_soap_tracker/core/providers/core_providers.dart';
 import 'package:liquid_soap_tracker/core/ui/layout/app_page_scaffold.dart';
 import 'package:liquid_soap_tracker/core/ui/states/app_error_view.dart';
 import 'package:liquid_soap_tracker/core/ui/states/app_loading_view.dart';
+import 'package:liquid_soap_tracker/core/utils/app_errors.dart';
 import 'package:liquid_soap_tracker/core/utils/app_uuid.dart';
 import 'package:liquid_soap_tracker/features/dashboard/controller/dashboard_controller.dart';
 import 'package:liquid_soap_tracker/features/product_setup/controller/product_setup_controller.dart';
@@ -119,7 +120,7 @@ class _ProductSetupPageState extends ConsumerState<ProductSetupPage> {
 
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text(error.toString())));
+      ).showSnackBar(SnackBar(content: Text(AppErrors.humanize(error))));
     } finally {
       if (mounted) {
         setState(() => _isUploadingImage = false);
@@ -252,7 +253,7 @@ class _ProductSetupPageState extends ConsumerState<ProductSetupPage> {
 
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text(error.toString())));
+      ).showSnackBar(SnackBar(content: Text(AppErrors.humanize(error))));
     } finally {
       if (mounted) {
         setState(() => _isSaving = false);
@@ -310,7 +311,7 @@ class _ProductSetupPageState extends ConsumerState<ProductSetupPage> {
       error: (error, stackTrace) => Scaffold(
         body: AppErrorView(
           title: 'Product unavailable',
-          message: error.toString(),
+          message: AppErrors.humanize(error),
           actionLabel: 'Reload',
           onPressed: () => ref.invalidate(productSetupBundleProvider),
         ),

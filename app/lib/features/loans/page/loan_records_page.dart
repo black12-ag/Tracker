@@ -8,6 +8,7 @@ import 'package:liquid_soap_tracker/core/ui/cards/app_surface_card.dart';
 import 'package:liquid_soap_tracker/core/ui/fields/app_text_field.dart';
 import 'package:liquid_soap_tracker/core/ui/layout/reference_page_scaffold.dart';
 import 'package:liquid_soap_tracker/core/ui/states/reference_page_skeleton.dart';
+import 'package:liquid_soap_tracker/core/utils/app_errors.dart';
 import 'package:liquid_soap_tracker/core/utils/formatters.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -27,6 +28,7 @@ class LoanRecordsPage extends ConsumerStatefulWidget {
 
 class _LoanRecordsPageState extends ConsumerState<LoanRecordsPage> {
   bool _isLoading = true;
+  bool _isSettling = false;
   List<Map<String, dynamic>> _alerts = const [];
   List<Map<String, dynamic>> _loans = const [];
   List<Map<String, dynamic>> _partners = const [];
@@ -61,7 +63,7 @@ class _LoanRecordsPageState extends ConsumerState<LoanRecordsPage> {
       }
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text(error.toString())));
+      ).showSnackBar(SnackBar(content: Text(AppErrors.humanize(error))));
     } finally {
       if (mounted) {
         setState(() => _isLoading = false);
@@ -114,7 +116,7 @@ class _LoanRecordsPageState extends ConsumerState<LoanRecordsPage> {
       }
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text(error.toString())));
+      ).showSnackBar(SnackBar(content: Text(AppErrors.humanize(error))));
     }
   }
 
@@ -492,7 +494,7 @@ class _RecordSalesPaymentDialogState
       }
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text(error.toString())));
+      ).showSnackBar(SnackBar(content: Text(AppErrors.humanize(error))));
     } finally {
       if (mounted) {
         setState(() => _isSaving = false);
@@ -657,7 +659,7 @@ class _AddLoanDialogState extends ConsumerState<_AddLoanDialog> {
       }
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text(error.toString())));
+      ).showSnackBar(SnackBar(content: Text(AppErrors.humanize(error))));
     } finally {
       if (mounted) {
         setState(() => _isSaving = false);

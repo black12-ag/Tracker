@@ -6,6 +6,7 @@ import 'package:liquid_soap_tracker/core/ui/cards/app_surface_card.dart';
 import 'package:liquid_soap_tracker/core/ui/layout/app_page_scaffold.dart';
 import 'package:liquid_soap_tracker/core/ui/states/app_loading_view.dart';
 import 'package:liquid_soap_tracker/core/ui/widgets/app_section_title.dart';
+import 'package:liquid_soap_tracker/core/utils/app_errors.dart';
 import 'package:liquid_soap_tracker/core/utils/display_cleaner.dart';
 import 'package:liquid_soap_tracker/core/utils/formatters.dart';
 import 'package:liquid_soap_tracker/features/dashboard/controller/dashboard_controller.dart';
@@ -103,7 +104,7 @@ class _ProductionPageState extends ConsumerState<ProductionPage> {
 
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text(error.toString())));
+      ).showSnackBar(SnackBar(content: Text(AppErrors.humanize(error))));
     } finally {
       if (mounted) {
         setState(() => _isSaving = false);
@@ -190,7 +191,7 @@ class _ProductionPageState extends ConsumerState<ProductionPage> {
                       loading: () => const AppLoadingView(
                         message: 'Loading production history...',
                       ),
-                      error: (error, stackTrace) => Text(error.toString()),
+                      error: (error, stackTrace) => Text(AppErrors.humanize(error)),
                     ),
                   ],
                 ),
@@ -202,7 +203,7 @@ class _ProductionPageState extends ConsumerState<ProductionPage> {
           height: 220,
           child: AppLoadingView(message: 'Loading production setup...'),
         ),
-        error: (error, stackTrace) => Text(error.toString()),
+        error: (error, stackTrace) => Text(AppErrors.humanize(error)),
       ),
     );
   }

@@ -7,6 +7,7 @@ import 'package:liquid_soap_tracker/core/ui/buttons/primary_button.dart';
 import 'package:liquid_soap_tracker/core/ui/cards/app_surface_card.dart';
 import 'package:liquid_soap_tracker/core/ui/fields/app_text_field.dart';
 import 'package:liquid_soap_tracker/core/ui/layout/reference_page_scaffold.dart';
+import 'package:liquid_soap_tracker/core/utils/app_errors.dart';
 
 class SettingsPage extends ConsumerStatefulWidget {
   const SettingsPage({
@@ -75,7 +76,7 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
       }
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text(error.toString())));
+      ).showSnackBar(SnackBar(content: Text(AppErrors.humanize(error))));
     } finally {
       if (mounted) {
         setState(() => _isSaving = false);
@@ -173,7 +174,7 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                             decoration: BoxDecoration(
                               color: widget.profile.isOwner
                                   ? AppColors.navy
-                                  : AppColors.oliveDark,
+                                  : AppColors.accentBlueDark,
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Text(

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:liquid_soap_tracker/app/theme/app_colors.dart';
@@ -7,6 +9,7 @@ import 'package:liquid_soap_tracker/core/ui/cards/app_surface_card.dart';
 import 'package:liquid_soap_tracker/core/ui/fields/app_text_field.dart';
 import 'package:liquid_soap_tracker/core/ui/layout/reference_page_scaffold.dart';
 import 'package:liquid_soap_tracker/core/ui/states/reference_page_skeleton.dart';
+import 'package:liquid_soap_tracker/core/utils/app_errors.dart';
 import 'package:liquid_soap_tracker/core/utils/formatters.dart';
 import 'package:liquid_soap_tracker/features/sales/page/sales_order_page.dart';
 
@@ -26,6 +29,7 @@ class SalesPage extends ConsumerStatefulWidget {
 
 class _SalesPageState extends ConsumerState<SalesPage> {
   final TextEditingController _searchController = TextEditingController();
+  Timer? _debounce;
   bool _isLoading = true;
   List<Map<String, dynamic>> _orders = const [];
 
@@ -37,8 +41,14 @@ class _SalesPageState extends ConsumerState<SalesPage> {
 
   @override
   void dispose() {
+    _debounce?.cancel();
     _searchController.dispose();
     super.dispose();
+  }
+
+  void _onSearchChanged(String _) {
+    _debounce?.cancel();
+    _debounce = Timer(const Duration(milliseconds: 400), _load);
   }
 
   Future<void> _load() async {
@@ -57,7 +67,7 @@ class _SalesPageState extends ConsumerState<SalesPage> {
       }
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text(error.toString())));
+      ).showSnackBar(SnackBar(content: Text(AppErrors.humanize(error))));
     } finally {
       if (mounted) {
         setState(() => _isLoading = false);
@@ -147,7 +157,7 @@ class _SalesPageState extends ConsumerState<SalesPage> {
             label: 'Search sales',
             hintText: 'Search by order or customer',
             prefixIcon: Icons.search_rounded,
-            onChanged: (_) => _load(),
+            onChanged: _onSearchChanged,
           ),
           const SizedBox(height: 16),
           if (_isLoading)

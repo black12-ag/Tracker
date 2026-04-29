@@ -7,6 +7,7 @@ import 'package:liquid_soap_tracker/core/ui/buttons/primary_button.dart';
 import 'package:liquid_soap_tracker/core/ui/cards/app_surface_card.dart';
 import 'package:liquid_soap_tracker/core/ui/fields/app_text_field.dart';
 import 'package:liquid_soap_tracker/core/ui/states/reference_page_skeleton.dart';
+import 'package:liquid_soap_tracker/core/utils/app_errors.dart';
 import 'package:liquid_soap_tracker/core/utils/formatters.dart';
 import 'package:liquid_soap_tracker/features/account/widgets/add_account_dialog.dart';
 import 'package:liquid_soap_tracker/features/inventory/page/inventory_item_page.dart';
@@ -88,7 +89,7 @@ class _PurchaseOrderPageState extends ConsumerState<PurchaseOrderPage> {
       }
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text(error.toString())));
+      ).showSnackBar(SnackBar(content: Text(AppErrors.humanize(error))));
     } finally {
       if (mounted) {
         setState(() => _isLoading = false);
@@ -324,7 +325,7 @@ class _PurchaseOrderPageState extends ConsumerState<PurchaseOrderPage> {
       }
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text(error.toString())));
+      ).showSnackBar(SnackBar(content: Text(AppErrors.humanize(error))));
     } finally {
       if (mounted) {
         setState(() => _isSaving = false);

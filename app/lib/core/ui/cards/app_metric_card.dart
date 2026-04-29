@@ -19,7 +19,7 @@ class AppMetricCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = accentColor ?? AppColors.olive;
+    final color = accentColor ?? AppColors.accentBlue;
     final card = Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -27,7 +27,7 @@ class AppMetricCard extends StatelessWidget {
         border: Border.all(color: AppColors.line.withValues(alpha: 0.95)),
         boxShadow: [
           BoxShadow(
-            color: AppColors.olive.withValues(alpha: 0.05),
+            color: AppColors.accentBlue.withValues(alpha: 0.05),
             blurRadius: 18,
             offset: const Offset(0, 8),
           ),

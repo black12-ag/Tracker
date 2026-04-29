@@ -117,7 +117,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     AppIdentity.appName.toUpperCase(),
                     style: Theme.of(context).textTheme.labelMedium?.copyWith(
                       letterSpacing: 3,
-                      color: AppColors.oliveDark,
+                      color: AppColors.accentBlueDark,
                     ),
                   ),
                   const SizedBox(height: 18),

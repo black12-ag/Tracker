@@ -6,6 +6,7 @@ import 'package:liquid_soap_tracker/core/providers/core_providers.dart';
 import 'package:liquid_soap_tracker/core/ui/cards/app_surface_card.dart';
 import 'package:liquid_soap_tracker/core/ui/layout/reference_page_scaffold.dart';
 import 'package:liquid_soap_tracker/core/ui/states/reference_page_skeleton.dart';
+import 'package:liquid_soap_tracker/core/utils/app_errors.dart';
 import 'package:liquid_soap_tracker/core/utils/formatters.dart';
 
 class ReportsPage extends ConsumerStatefulWidget {
@@ -55,7 +56,7 @@ class _ReportsPageState extends ConsumerState<ReportsPage>
       }
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text(error.toString())));
+      ).showSnackBar(SnackBar(content: Text(AppErrors.humanize(error))));
     } finally {
       if (mounted) {
         setState(() => _isLoading = false);
@@ -69,10 +70,14 @@ class _ReportsPageState extends ConsumerState<ReportsPage>
       return ReferencePageScaffold(
         title: 'Reports',
         onMenuPressed: widget.onMenuPressed,
-        child: AppSurfaceCard(
-          child: Text(
-            'Reports are available only for the owner account.',
-            style: Theme.of(context).textTheme.bodyMedium,
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 32),
+            child: Text(
+              'This section is for the owner only.',
+              style: Theme.of(context).textTheme.bodyMedium,
+              textAlign: TextAlign.center,
+            ),
           ),
         ),
       );

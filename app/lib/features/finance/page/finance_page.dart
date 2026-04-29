@@ -6,6 +6,7 @@ import 'package:liquid_soap_tracker/core/ui/cards/app_surface_card.dart';
 import 'package:liquid_soap_tracker/core/ui/layout/app_page_scaffold.dart';
 import 'package:liquid_soap_tracker/core/ui/states/app_loading_view.dart';
 import 'package:liquid_soap_tracker/core/ui/widgets/app_section_title.dart';
+import 'package:liquid_soap_tracker/core/utils/app_errors.dart';
 import 'package:liquid_soap_tracker/core/utils/display_cleaner.dart';
 import 'package:liquid_soap_tracker/core/utils/formatters.dart';
 import 'package:liquid_soap_tracker/features/dashboard/controller/dashboard_controller.dart';
@@ -95,6 +96,34 @@ class _FinancePageState extends ConsumerState<FinancePage> {
       return;
     }
 
+    final customerName = DisplayCleaner.customerName(dispatch.customer.name);
+    final totalFormatted = AppFormatters.currency(totalAmount);
+    final initialFormatted = AppFormatters.currency(initialPaid);
+
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Attach finance?'),
+        content: Text(
+          'Sale for $customerName\n'
+          '${dispatch!.sizeLabel} × ${dispatch.quantityUnits} units\n'
+          'Total: $totalFormatted'
+          '${initialPaid > 0 ? '\nPaid now: $initialFormatted' : ''}',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text('Cancel'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: const Text('Confirm'),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true || !mounted) return;
+
     setState(() => _isAttaching = true);
     try {
       final result = await ref
@@ -118,24 +147,16 @@ class _FinancePageState extends ConsumerState<FinancePage> {
       _initialPaidController.clear();
       _loanLabelController.clear();
 
-      if (!mounted) {
-        return;
-      }
-
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(result.message)));
+      if (!mounted) return;
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(result.message)));
     } catch (error) {
-      if (!mounted) {
-        return;
-      }
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(error.toString())));
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(AppErrors.humanize(error))),
+      );
     } finally {
-      if (mounted) {
-        setState(() => _isAttaching = false);
-      }
+      if (mounted) setState(() => _isAttaching = false);
     }
   }
 
@@ -151,7 +172,7 @@ class _FinancePageState extends ConsumerState<FinancePage> {
     if (record == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Choose a loan to record payment against.'),
+          content: Text('Choose a customer balance to record payment against.'),
         ),
       );
       return;
@@ -174,6 +195,33 @@ class _FinancePageState extends ConsumerState<FinancePage> {
       return;
     }
 
+    final customerName = DisplayCleaner.customerName(record.customerName);
+    final amountFormatted = AppFormatters.currency(amount);
+    final balanceAfter =
+        AppFormatters.currency(record.balanceAmount - amount);
+
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Record payment?'),
+        content: Text(
+          'Payment of $amountFormatted from $customerName.\n'
+          'Remaining balance after: $balanceAfter.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text('Cancel'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: const Text('Confirm'),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true || !mounted) return;
+
     setState(() => _isRecordingPayment = true);
     try {
       final result = await ref
@@ -194,24 +242,16 @@ class _FinancePageState extends ConsumerState<FinancePage> {
       _paymentAmountController.clear();
       _paymentNoteController.clear();
 
-      if (!mounted) {
-        return;
-      }
-
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(result.message)));
+      if (!mounted) return;
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(result.message)));
     } catch (error) {
-      if (!mounted) {
-        return;
-      }
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(error.toString())));
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(AppErrors.humanize(error))),
+      );
     } finally {
-      if (mounted) {
-        setState(() => _isRecordingPayment = false);
-      }
+      if (mounted) setState(() => _isRecordingPayment = false);
     }
   }
 
@@ -233,7 +273,7 @@ class _FinancePageState extends ConsumerState<FinancePage> {
               height: 220,
               child: AppLoadingView(message: 'Loading finance summary...'),
             ),
-            error: (error, stackTrace) => Text(error.toString()),
+            error: (error, _) => Text(AppErrors.humanize(error)),
           ),
           const SizedBox(height: 18),
           AppSurfaceCard(
@@ -280,28 +320,29 @@ class _FinancePageState extends ConsumerState<FinancePage> {
                                 ),
                               )
                               .toList(),
-                          onChanged: (value) {
-                            setState(() => _selectedPendingDispatchId = value);
-                          },
+                          onChanged: (value) =>
+                              setState(() => _selectedPendingDispatchId = value),
                         ),
                         const SizedBox(height: 12),
                         ListTile(
                           contentPadding: EdgeInsets.zero,
                           title: Text(
-                            DisplayCleaner.customerName(selected.customer.name),
+                            DisplayCleaner.customerName(
+                                selected.customer.name),
                           ),
                           subtitle: Text(
                             '${selected.sizeLabel} • ${selected.quantityUnits} units • ${AppFormatters.date(selected.soldAt)}',
                           ),
                         ),
                         const SizedBox(height: 12),
-                        FinanceUnitPriceField(controller: _unitPriceController),
+                        FinanceUnitPriceField(
+                            controller: _unitPriceController),
                         const SizedBox(height: 12),
                         FinanceInitialPaidField(
-                          controller: _initialPaidController,
-                        ),
+                            controller: _initialPaidController),
                         const SizedBox(height: 12),
-                        FinanceLoanLabelField(controller: _loanLabelController),
+                        FinanceLoanLabelField(
+                            controller: _loanLabelController),
                         const SizedBox(height: 16),
                         Text(
                           'Default cost per liter: ${AppFormatters.currency(defaultCostPerLiter)}',
@@ -321,7 +362,7 @@ class _FinancePageState extends ConsumerState<FinancePage> {
                   loading: () => const AppLoadingView(
                     message: 'Loading pending dispatches...',
                   ),
-                  error: (error, stackTrace) => Text(error.toString()),
+                  error: (error, _) => Text(AppErrors.humanize(error)),
                 ),
               ],
             ),
@@ -351,8 +392,8 @@ class _FinancePageState extends ConsumerState<FinancePage> {
 
                     _selectedFinanceId =
                         openRecords.any((item) => item.id == _selectedFinanceId)
-                        ? _selectedFinanceId
-                        : openRecords.first.id;
+                            ? _selectedFinanceId
+                            : openRecords.first.id;
                     final selected = openRecords.firstWhere(
                       (item) => item.id == _selectedFinanceId,
                     );
@@ -377,9 +418,8 @@ class _FinancePageState extends ConsumerState<FinancePage> {
                                 ),
                               )
                               .toList(),
-                          onChanged: (value) {
-                            setState(() => _selectedFinanceId = value);
-                          },
+                          onChanged: (value) =>
+                              setState(() => _selectedFinanceId = value),
                         ),
                         const SizedBox(height: 12),
                         ListTile(
@@ -393,8 +433,7 @@ class _FinancePageState extends ConsumerState<FinancePage> {
                         ),
                         const SizedBox(height: 12),
                         PaymentAmountField(
-                          controller: _paymentAmountController,
-                        ),
+                            controller: _paymentAmountController),
                         const SizedBox(height: 12),
                         PaymentNoteField(controller: _paymentNoteController),
                         const SizedBox(height: 12),
@@ -408,7 +447,7 @@ class _FinancePageState extends ConsumerState<FinancePage> {
                   loading: () => const AppLoadingView(
                     message: 'Loading finance records...',
                   ),
-                  error: (error, stackTrace) => Text(error.toString()),
+                  error: (error, _) => Text(AppErrors.humanize(error)),
                 ),
               ],
             ),
@@ -417,7 +456,7 @@ class _FinancePageState extends ConsumerState<FinancePage> {
           recordsAsync.when(
             data: (records) => FinanceRecordsSection(records: records),
             loading: () => const SizedBox.shrink(),
-            error: (error, stackTrace) => Text(error.toString()),
+            error: (error, _) => Text(AppErrors.humanize(error)),
           ),
         ],
       ),

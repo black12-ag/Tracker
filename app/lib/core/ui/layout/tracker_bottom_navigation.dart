@@ -38,7 +38,7 @@ class TrackerBottomNavigation extends ConsumerWidget {
         NavigationDestination(
           icon: Icon(Icons.shopping_bag_outlined),
           selectedIcon: Icon(Icons.shopping_bag_rounded),
-          label: 'Purchased',
+          label: 'Purchases',
         ),
         NavigationDestination(
           icon: Icon(Icons.inventory_2_outlined),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:liquid_soap_tracker/core/models/app_profile.dart';
+import 'package:liquid_soap_tracker/core/utils/app_errors.dart';
 import 'package:liquid_soap_tracker/core/ui/layout/reference_page_scaffold.dart';
 import 'package:liquid_soap_tracker/core/ui/states/app_error_view.dart';
 import 'package:liquid_soap_tracker/core/ui/states/reference_page_skeleton.dart';
@@ -77,7 +78,7 @@ class DashboardPage extends ConsumerWidget {
       error: (error, stackTrace) => Scaffold(
         body: AppErrorView(
           title: 'Home unavailable',
-          message: error.toString(),
+          message: AppErrors.humanize(error),
           actionLabel: 'Reload',
           onPressed: () => ref.invalidate(dashboardBundleProvider),
         ),

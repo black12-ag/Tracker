@@ -18,7 +18,7 @@ class SecondaryButton extends StatelessWidget {
     return FilledButton.tonal(
       style: FilledButton.styleFrom(
         backgroundColor: AppColors.paleGold,
-        foregroundColor: AppColors.oliveDark,
+        foregroundColor: AppColors.accentBlueDark,
         minimumSize: const Size.fromHeight(56),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
         textStyle: Theme.of(context).textTheme.titleMedium,
