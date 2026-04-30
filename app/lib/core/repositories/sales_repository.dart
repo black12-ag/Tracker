@@ -17,10 +17,11 @@ class DispatchSyncResult {
 }
 
 class SalesRepository {
-  SalesRepository(this._client, this._localStoreService);
+  SalesRepository(this._client, this._localStoreService, this._workspaceId);
 
   final SupabaseClient _client;
   final LocalStoreService _localStoreService;
+  final String _workspaceId;
 
   double _asDouble(Object? value) => (value as num?)?.toDouble() ?? 0;
 
@@ -188,6 +189,7 @@ class SalesRepository {
           'quantity_units': quantityUnits,
           'notes': notes?.trim().isEmpty ?? true ? null : notes?.trim(),
           'created_by': userId,
+          'workspace_id': _workspaceId,
         })
         .select()
         .single();
@@ -386,7 +388,7 @@ class SalesRepository {
 
     final inserted = await _client
         .from('customers')
-        .insert({'name': name, 'phone': phone?.isEmpty ?? true ? null : phone})
+        .insert({'name': name, 'phone': phone?.isEmpty ?? true ? null : phone, 'workspace_id': _workspaceId})
         .select()
         .single();
 
@@ -548,6 +550,7 @@ class SalesRepository {
                     ? 'Customer loan'
                     : loanLabel?.trim())
               : null,
+          'workspace_id': _workspaceId,
         })
         .select()
         .single();
@@ -558,6 +561,7 @@ class SalesRepository {
         'amount': initialPaid,
         'payment_date': DateTime.now().toIso8601String().split('T').first,
         'note': 'Initial payment',
+        'workspace_id': _workspaceId,
       });
     }
 

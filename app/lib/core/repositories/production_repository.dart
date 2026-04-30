@@ -6,10 +6,11 @@ import 'package:liquid_soap_tracker/features/production/models/production_entry_
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ProductionRepository {
-  ProductionRepository(this._client, this._localStoreService);
+  ProductionRepository(this._client, this._localStoreService, this._workspaceId);
 
   final SupabaseClient _client;
   final LocalStoreService _localStoreService;
+  final String _workspaceId;
 
   double _asDouble(Object? value) => (value as num?)?.toDouble() ?? 0;
 
@@ -94,6 +95,7 @@ class ProductionRepository {
       'quantity_units': quantityUnits,
       'notes': notes?.trim().isEmpty ?? true ? null : notes?.trim(),
       'created_by': createdBy,
+      'workspace_id': _workspaceId,
     });
   }
 

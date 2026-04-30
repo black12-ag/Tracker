@@ -10,10 +10,11 @@ import 'package:liquid_soap_tracker/features/sales/models/sales_dispatch_model.d
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class FinanceRepository {
-  FinanceRepository(this._client, this._localStoreService);
+  FinanceRepository(this._client, this._localStoreService, this._workspaceId);
 
   final SupabaseClient _client;
   final LocalStoreService _localStoreService;
+  final String _workspaceId;
 
   double _asDouble(Object? value) => (value as num?)?.toDouble() ?? 0;
 
@@ -239,6 +240,7 @@ class FinanceRepository {
                     ? 'Customer loan'
                     : loanLabel?.trim())
               : null,
+          'workspace_id': _workspaceId,
         })
         .select()
         .single();
@@ -249,6 +251,7 @@ class FinanceRepository {
         'amount': initialPaid,
         'payment_date': DateTime.now().toIso8601String().split('T').first,
         'note': 'Initial payment',
+        'workspace_id': _workspaceId,
       });
     }
     return finance['id'] as String;
@@ -319,6 +322,7 @@ class FinanceRepository {
       'amount': amount,
       'payment_date': DateTime.now().toIso8601String().split('T').first,
       'note': note?.trim().isEmpty ?? true ? null : note?.trim(),
+      'workspace_id': _workspaceId,
     });
   }
 
@@ -335,6 +339,7 @@ class FinanceRepository {
       'expense_date': expenseDate.toIso8601String().split('T').first,
       'note': note?.trim().isEmpty ?? true ? null : note?.trim(),
       'created_by': createdBy,
+      'workspace_id': _workspaceId,
     });
   }
 

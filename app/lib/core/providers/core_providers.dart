@@ -36,40 +36,50 @@ final authRepositoryProvider = Provider<AuthRepository>(
   ),
 );
 
-final productRepositoryProvider = Provider<ProductRepository>(
-  (ref) => ProductRepository(
+final productRepositoryProvider = Provider<ProductRepository>((ref) {
+  final profile = ref.watch(currentProfileProvider).valueOrNull;
+  return ProductRepository(
     ref.watch(supabaseClientProvider),
     ref.watch(localStoreServiceProvider),
-  ),
-);
+    profile?.workspaceId ?? '',
+  );
+});
 
-final productionRepositoryProvider = Provider<ProductionRepository>(
-  (ref) => ProductionRepository(
+final productionRepositoryProvider = Provider<ProductionRepository>((ref) {
+  final profile = ref.watch(currentProfileProvider).valueOrNull;
+  return ProductionRepository(
     ref.watch(supabaseClientProvider),
     ref.watch(localStoreServiceProvider),
-  ),
-);
+    profile?.workspaceId ?? '',
+  );
+});
 
-final salesRepositoryProvider = Provider<SalesRepository>(
-  (ref) => SalesRepository(
+final salesRepositoryProvider = Provider<SalesRepository>((ref) {
+  final profile = ref.watch(currentProfileProvider).valueOrNull;
+  return SalesRepository(
     ref.watch(supabaseClientProvider),
     ref.watch(localStoreServiceProvider),
-  ),
-);
+    profile?.workspaceId ?? '',
+  );
+});
 
-final financeRepositoryProvider = Provider<FinanceRepository>(
-  (ref) => FinanceRepository(
+final financeRepositoryProvider = Provider<FinanceRepository>((ref) {
+  final profile = ref.watch(currentProfileProvider).valueOrNull;
+  return FinanceRepository(
     ref.watch(supabaseClientProvider),
     ref.watch(localStoreServiceProvider),
-  ),
-);
+    profile?.workspaceId ?? '',
+  );
+});
 
-final trackerRepositoryProvider = Provider<TrackerRepository>(
-  (ref) => TrackerRepository(
+final trackerRepositoryProvider = Provider<TrackerRepository>((ref) {
+  final profile = ref.watch(currentProfileProvider).valueOrNull;
+  return TrackerRepository(
     ref.watch(supabaseClientProvider),
     ref.watch(localStoreServiceProvider),
-  ),
-);
+    profile?.workspaceId ?? '',
+  );
+});
 
 final offlineSyncServiceProvider = Provider<OfflineSyncService>(
   (ref) => OfflineSyncService(

@@ -4,10 +4,11 @@ import 'package:liquid_soap_tracker/core/offline/services/offline_error_detector
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class TrackerRepository {
-  TrackerRepository(this._client, this._localStoreService);
+  TrackerRepository(this._client, this._localStoreService, this._workspaceId);
 
   final SupabaseClient _client;
   final LocalStoreService _localStoreService;
+  final String _workspaceId;
 
   Future<Map<String, dynamic>> fetchHomeBundle({
     required bool owner,
@@ -129,6 +130,7 @@ class TrackerRepository {
           'partner_type': partnerType,
           'note': _nullIfBlank(note),
           'created_by': createdBy,
+          'workspace_id': _workspaceId,
         })
         .select()
         .single();
@@ -235,7 +237,7 @@ class TrackerRepository {
     if (itemId == null) {
       final response = await _client
           .from('inventory_items')
-          .insert({...payload, 'created_by': createdBy})
+          .insert({...payload, 'created_by': createdBy, 'workspace_id': _workspaceId})
           .select()
           .single();
       itemRow = Map<String, dynamic>.from(response);
@@ -338,6 +340,7 @@ class TrackerRepository {
           'paid_amount': 0,
           'account_id': _nullIfBlank(accountId),
           'created_by': createdBy,
+          'workspace_id': _workspaceId,
         })
         .select()
         .single();
@@ -351,6 +354,7 @@ class TrackerRepository {
           'quantity': item['quantity'],
           'unit_price': item['unit_price'],
           'unit_cost_snapshot': item['unit_cost_snapshot'] ?? 0,
+          'workspace_id': _workspaceId,
         };
       }).toList(),
     );
@@ -455,6 +459,7 @@ class TrackerRepository {
           'paid_amount': paidAmount,
           'account_id': _nullIfBlank(accountId),
           'created_by': createdBy,
+          'workspace_id': _workspaceId,
         })
         .select()
         .single();
@@ -467,6 +472,7 @@ class TrackerRepository {
           'item_id': item['item_id'],
           'quantity': item['quantity'],
           'unit_price': item['unit_price'],
+          'workspace_id': _workspaceId,
         };
       }).toList(),
     );
@@ -519,6 +525,7 @@ class TrackerRepository {
           'account_type': accountType,
           'opening_balance': openingBalance,
           'created_by': createdBy,
+          'workspace_id': _workspaceId,
         })
         .select()
         .single();
@@ -543,6 +550,7 @@ class TrackerRepository {
           'transfer_date': transferDate.toIso8601String().split('T').first,
           'note': _nullIfBlank(note),
           'created_by': createdBy,
+          'workspace_id': _workspaceId,
         })
         .select()
         .single();
@@ -647,6 +655,7 @@ class TrackerRepository {
           'account_id': _nullIfBlank(accountId),
           'note': _nullIfBlank(note),
           'created_by': createdBy,
+          'workspace_id': _workspaceId,
         })
         .select()
         .single();
@@ -696,6 +705,7 @@ class TrackerRepository {
           'account_id': _nullIfBlank(accountId),
           'note': _nullIfBlank(note),
           'created_by': createdBy,
+          'workspace_id': _workspaceId,
         })
         .select()
         .single();
@@ -835,6 +845,7 @@ class TrackerRepository {
       'movement_date': movementDate.toIso8601String().split('T').first,
       'note': _nullIfBlank(note),
       'created_by': createdBy,
+      'workspace_id': _workspaceId,
     });
   }
 
@@ -913,6 +924,7 @@ class TrackerRepository {
         'storage_path': path,
         'sort_order': existingImages.length + index,
         'created_by': createdBy,
+        'workspace_id': _workspaceId,
       });
     }
 
