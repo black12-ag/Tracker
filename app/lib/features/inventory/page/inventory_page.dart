@@ -6,9 +6,9 @@ import 'package:liquid_soap_tracker/core/providers/core_providers.dart';
 import 'package:liquid_soap_tracker/core/ui/cards/app_surface_card.dart';
 import 'package:liquid_soap_tracker/core/ui/fields/app_text_field.dart';
 import 'package:liquid_soap_tracker/core/ui/layout/reference_page_scaffold.dart';
+import 'package:liquid_soap_tracker/core/ui/rows/inventory_row.dart';
 import 'package:liquid_soap_tracker/core/ui/states/reference_page_skeleton.dart';
 import 'package:liquid_soap_tracker/core/utils/app_errors.dart';
-import 'package:liquid_soap_tracker/core/utils/formatters.dart';
 import 'package:liquid_soap_tracker/features/inventory/page/inventory_item_page.dart';
 
 class InventoryPage extends ConsumerStatefulWidget {
@@ -108,53 +108,37 @@ class _InventoryPageState extends ConsumerState<InventoryPage> {
           else if (_items.isEmpty)
             Padding(
               padding: const EdgeInsets.only(top: 80),
-              child: Text(
-                'No inventory items found.',
-                style: Theme.of(context).textTheme.bodyMedium,
+              child: Column(
+                children: [
+                  Icon(Icons.inventory_2_outlined, size: 40, color: AppColors.warmGray),
+                  const SizedBox(height: 12),
+                  Text(
+                    'No inventory items found.',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ],
               ),
             )
           else
             AppSurfaceCard(
               child: Column(
-                children: _items.map((item) {
-                  final imageUrl = item['image_url'] as String?;
-                  return ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    onTap: () => _openItem(item),
-                    leading: CircleAvatar(
-                      backgroundColor: AppColors.cream,
-                      backgroundImage: imageUrl == null
-                          ? null
-                          : NetworkImage(imageUrl),
-                      child: imageUrl == null
-                          ? const Icon(Icons.inventory_2_outlined)
-                          : null,
-                    ),
-                    title: Text(
-                      item['name'] as String? ?? 'Item',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    subtitle: Text(
-                      '${item['sku'] ?? 'SKU'} • Stock ${item['current_stock'] ?? 0}',
-                    ),
-                    trailing: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text(
-                          AppFormatters.currency(
-                            (item['selling_price'] as num?)?.toDouble() ?? 0,
-                          ),
-                          style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                                color: AppColors.navy,
-                              ),
-                        ),
-                        Text(
-                          item['unit_type'] as String? ?? '',
-                          style: Theme.of(context).textTheme.labelMedium,
-                        ),
-                      ],
-                    ),
+                children: _items.indexed.map((entry) {
+                  final index = entry.$1;
+                  final item = entry.$2;
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      InventoryRow(
+                        name: item['name'] as String? ?? '',
+                        sku: item['sku'] as String? ?? '',
+                        unitType: item['unit_type'] as String? ?? '',
+                        stockQty: (item['current_stock'] as num?)?.toInt() ?? 0,
+                        price: (item['selling_price'] as num?)?.toDouble() ?? 0,
+                        onTap: () => _openItem(item),
+                      ),
+                      if (index < _items.length - 1)
+                        const Divider(height: 1, color: AppColors.line, thickness: 0.8),
+                    ],
                   );
                 }).toList(),
               ),

@@ -25,131 +25,163 @@ class DashboardMetricsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cards = <Widget>[
-      AppMetricCard(
-        label: 'Items in stock',
-        value: bundle.totalStockUnits.toStringAsFixed(
-          bundle.totalStockUnits == bundle.totalStockUnits.roundToDouble() ? 0 : 1,
-        ),
-        subtitle: '${bundle.inventoryItemsCount} inventory items',
-        accentColor: AppColors.navy,
-        onTap: onOpenInventory,
-      ),
-      AppMetricCard(
-        label: 'Sales orders',
-        value: '${bundle.totalSalesOrders}',
-        subtitle: 'Open sales list',
-        accentColor: AppColors.navy,
-        onTap: onOpenSales,
-      ),
-      AppMetricCard(
-        label: 'Purchase orders',
-        value: '${bundle.totalPurchaseOrders}',
-        subtitle: 'Open purchased list',
-        accentColor: AppColors.mint,
-        onTap: onOpenPurchased,
-      ),
-      if (isOwner)
-        AppMetricCard(
-          label: 'Total assets',
-          value: AppFormatters.currency(bundle.totalAssets),
-          subtitle: 'Cash, banks, stock, and collectible loans',
-          accentColor: AppColors.mint,
-          onTap: onOpenAccounts,
-        ),
-      if (isOwner)
-        AppMetricCard(
-          label: 'Overdue balances',
-          value: '${bundle.overdueOrdersCount}',
-          subtitle: bundle.overdueOrdersCount == 0
-              ? 'No late customers right now'
-              : '${AppFormatters.currency(bundle.overdueBalanceTotal)} still overdue',
-          accentColor: AppColors.navy,
-          onTap: onOpenAccounts,
-        ),
-    ];
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        LayoutBuilder(
-          builder: (context, constraints) {
-            final itemWidth = (constraints.maxWidth - 12) / 2;
-            return Wrap(
-              spacing: 12,
-              runSpacing: 12,
-              children: [
-                for (final card in cards) SizedBox(width: itemWidth, child: card),
-              ],
-            );
-          },
+        // Top row: two most important metrics side-by-side
+        Row(
+          children: [
+            Expanded(
+              child: AppMetricCard(
+                label: 'Items in stock',
+                value: bundle.totalStockUnits.toStringAsFixed(
+                  bundle.totalStockUnits ==
+                          bundle.totalStockUnits.roundToDouble()
+                      ? 0
+                      : 1,
+                ),
+                subtitle: '${bundle.inventoryItemsCount} inventory items',
+                accentColor: AppColors.navy,
+                onTap: onOpenInventory,
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: AppMetricCard(
+                label: 'Sales orders',
+                value: '${bundle.totalSalesOrders}',
+                subtitle: 'Open sales list',
+                accentColor: AppColors.navy,
+                onTap: onOpenSales,
+              ),
+            ),
+          ],
         ),
+
+        // Owner-only financial strip
         if (isOwner) ...[
           const SizedBox(height: 16),
           AppSurfaceCard(
             color: AppColors.mintSoft,
-            child: Wrap(
-              spacing: 16,
-              runSpacing: 16,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  width: 120,
-                  child: _SummaryMiniTile(
-                    label: 'Cash in',
-                    value: AppFormatters.currency(bundle.collectedMoney),
+                // Revenue — largest, navy
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Revenue',
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelMedium
+                            ?.copyWith(color: AppColors.warmGray),
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        AppFormatters.currency(bundle.revenue),
+                        style: const TextStyle(
+                          fontFamily: 'Manrope',
+                          fontSize: 28,
+                          fontWeight: FontWeight.w800,
+                          color: AppColors.navy,
+                          height: 1.1,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                SizedBox(
-                  width: 120,
-                  child: _SummaryMiniTile(
-                    label: 'Revenue',
-                    value: AppFormatters.currency(bundle.revenue),
+                const SizedBox(width: 12),
+                // Profit — medium, mint
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Profit',
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelMedium
+                            ?.copyWith(color: AppColors.warmGray),
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        AppFormatters.currency(bundle.netProfit),
+                        style: const TextStyle(
+                          fontFamily: 'Manrope',
+                          fontSize: 22,
+                          fontWeight: FontWeight.w800,
+                          color: AppColors.mint,
+                          height: 1.1,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                SizedBox(
-                  width: 120,
-                  child: _SummaryMiniTile(
-                    label: 'Profit',
-                    value: AppFormatters.currency(bundle.netProfit),
-                  ),
-                ),
-                SizedBox(
-                  width: 120,
-                  child: _SummaryMiniTile(
-                    label: 'Overdue',
-                    value: bundle.overdueOrdersCount == 0
-                        ? '0'
-                        : AppFormatters.currency(bundle.overdueBalanceTotal),
+                const SizedBox(width: 12),
+                // Overdue — smallest, danger color
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Overdue',
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelMedium
+                            ?.copyWith(color: AppColors.warmGray),
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        bundle.overdueOrdersCount == 0
+                            ? '0'
+                            : AppFormatters.currency(bundle.overdueBalanceTotal),
+                        style: const TextStyle(
+                          fontFamily: 'Manrope',
+                          fontSize: 18,
+                          fontWeight: FontWeight.w800,
+                          color: AppColors.danger,
+                          height: 1.1,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
             ),
           ),
         ],
-      ],
-    );
-  }
-}
 
-class _SummaryMiniTile extends StatelessWidget {
-  const _SummaryMiniTile({required this.label, required this.value});
-
-  final String label;
-  final String value;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(label, style: Theme.of(context).textTheme.labelMedium),
-        const SizedBox(height: 8),
-        Text(
-          value,
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                color: AppColors.navy,
-                fontWeight: FontWeight.w800,
+        // Bottom row: purchase orders + overdue count
+        const SizedBox(height: 12),
+        Row(
+          children: [
+            Expanded(
+              child: AppMetricCard(
+                label: 'Purchase orders',
+                value: '${bundle.totalPurchaseOrders}',
+                subtitle: 'Open purchased list',
+                accentColor: AppColors.mint,
+                onTap: onOpenPurchased,
               ),
+            ),
+            if (isOwner) ...[
+              const SizedBox(width: 12),
+              Expanded(
+                child: AppMetricCard(
+                  label: 'Overdue balances',
+                  value: '${bundle.overdueOrdersCount}',
+                  subtitle: bundle.overdueOrdersCount == 0
+                      ? 'No late customers'
+                      : AppFormatters.currency(bundle.overdueBalanceTotal),
+                  accentColor: AppColors.navy,
+                  onTap: onOpenAccounts,
+                ),
+              ),
+            ] else
+              const Expanded(child: SizedBox.shrink()),
+          ],
         ),
       ],
     );

@@ -7,6 +7,7 @@ import 'package:liquid_soap_tracker/core/ui/buttons/primary_button.dart';
 import 'package:liquid_soap_tracker/core/ui/cards/app_surface_card.dart';
 import 'package:liquid_soap_tracker/core/ui/fields/app_text_field.dart';
 import 'package:liquid_soap_tracker/core/ui/layout/reference_page_scaffold.dart';
+import 'package:liquid_soap_tracker/core/ui/rows/employee_row.dart';
 import 'package:liquid_soap_tracker/core/ui/states/reference_page_skeleton.dart';
 import 'package:liquid_soap_tracker/core/utils/app_errors.dart';
 
@@ -85,32 +86,35 @@ class _EmployeesPageState extends ConsumerState<EmployeesPage> {
           : _employees.isEmpty
               ? Padding(
                   padding: const EdgeInsets.only(top: 80),
-                  child: Text(
-                    'No employees found.',
-                    style: Theme.of(context).textTheme.bodyMedium,
+                  child: Column(
+                    children: [
+                      Icon(Icons.badge_outlined, size: 40, color: AppColors.warmGray),
+                      const SizedBox(height: 12),
+                      Text(
+                        'No employees found.',
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ],
                   ),
                 )
               : AppSurfaceCard(
                   child: Column(
-                    children: _employees.map((employee) {
-                      return ListTile(
-                        contentPadding: EdgeInsets.zero,
-                        title: Text(
-                          employee['display_name'] as String? ?? 'Staff',
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                        subtitle: Text(
-                          [
-                            employee['phone'] as String? ?? '',
-                            employee['email'] as String? ?? '',
-                          ].where((value) => value.isNotEmpty).join(' • '),
-                        ),
-                        trailing: Text(
-                          (employee['is_active'] as bool? ?? false)
-                              ? 'Active'
-                              : 'Inactive',
-                          style: Theme.of(context).textTheme.labelMedium,
-                        ),
+                    children: _employees.indexed.map((entry) {
+                      final index = entry.$1;
+                      final employee = entry.$2;
+                      return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          EmployeeRow(
+                            displayName: employee['display_name'] as String? ?? '',
+                            phone: employee['phone'] as String? ?? '',
+                            email: employee['email'] as String? ?? '',
+                            isActive: employee['is_active'] as bool? ?? false,
+                            onTap: () {},
+                          ),
+                          if (index < _employees.length - 1)
+                            const Divider(height: 1, color: AppColors.line, thickness: 0.8),
+                        ],
                       );
                     }).toList(),
                   ),

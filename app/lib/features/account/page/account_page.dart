@@ -7,9 +7,9 @@ import 'package:liquid_soap_tracker/core/ui/buttons/primary_button.dart';
 import 'package:liquid_soap_tracker/core/ui/cards/app_surface_card.dart';
 import 'package:liquid_soap_tracker/core/ui/fields/app_text_field.dart';
 import 'package:liquid_soap_tracker/core/ui/layout/reference_page_scaffold.dart';
+import 'package:liquid_soap_tracker/core/ui/rows/account_row.dart';
 import 'package:liquid_soap_tracker/core/ui/states/reference_page_skeleton.dart';
 import 'package:liquid_soap_tracker/core/utils/app_errors.dart';
-import 'package:liquid_soap_tracker/core/utils/formatters.dart';
 import 'package:liquid_soap_tracker/features/account/widgets/add_account_dialog.dart';
 
 class AccountPage extends ConsumerStatefulWidget {
@@ -121,6 +121,20 @@ class _AccountPageState extends ConsumerState<AccountPage> {
     );
   }
 
+  String _formatBalance(double v) {
+    final absValue = v.abs();
+    String formatted;
+    if (absValue >= 1000) {
+      formatted = absValue.toStringAsFixed(0).replaceAllMapped(
+        RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+        (m) => '${m[1]},',
+      );
+    } else {
+      formatted = absValue.toStringAsFixed(0);
+    }
+    return v < 0 ? '-$formatted' : formatted;
+  }
+
   @override
   Widget build(BuildContext context) {
     if (!widget.profile.isOwner) {
@@ -169,22 +183,49 @@ class _AccountPageState extends ConsumerState<AccountPage> {
       child: Column(
         children: [
           AppSurfaceCard(
-            color: AppColors.mint,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Row(
               children: [
-                Text(
-                  'Total Balance',
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: Colors.white70,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'TOTAL BALANCE',
+                        style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                          fontSize: 10,
+                          letterSpacing: 0.6,
+                        ),
                       ),
+                      const SizedBox(height: 6),
+                      Text(
+                        _formatBalance(totalBalance),
+                        style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                          color: AppColors.navy,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                const SizedBox(height: 12),
-                Text(
-                  AppFormatters.currency(totalBalance),
-                  style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                        color: Colors.white,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      'ACCOUNTS',
+                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                        fontSize: 10,
+                        letterSpacing: 0.6,
                       ),
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      '${filteredAccounts.length}',
+                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                        color: AppColors.warmGray,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -206,32 +247,36 @@ class _AccountPageState extends ConsumerState<AccountPage> {
           else if (filteredAccounts.isEmpty)
             Padding(
               padding: const EdgeInsets.only(top: 80),
-              child: Text(
-                'No accounts found.',
-                style: Theme.of(context).textTheme.bodyMedium,
+              child: Column(
+                children: [
+                  Icon(Icons.account_balance_outlined, size: 40, color: AppColors.warmGray),
+                  const SizedBox(height: 12),
+                  Text(
+                    'No accounts found.',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ],
               ),
             )
           else
             AppSurfaceCard(
               child: Column(
-                children: filteredAccounts.map((account) {
-                  return ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    title: Text(
-                      account['account_name'] as String? ?? 'Account',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    subtitle: Text(
-                      [
-                        account['bank_name'] as String? ?? '',
-                        account['account_type'] as String? ?? '',
-                      ].where((value) => value.isNotEmpty).join(' • '),
-                    ),
-                    trailing: Text(
-                      AppFormatters.currency(
-                        (account['current_balance'] as num?)?.toDouble() ?? 0,
+                children: filteredAccounts.indexed.map((entry) {
+                  final index = entry.$1;
+                  final account = entry.$2;
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      AccountRow(
+                        accountName: account['account_name'] as String? ?? '',
+                        bankName: account['bank_name'] as String? ?? '',
+                        accountType: account['account_type'] as String? ?? '',
+                        balance: (account['current_balance'] as num?)?.toDouble() ?? 0,
+                        onTap: () {},
                       ),
-                    ),
+                      if (index < filteredAccounts.length - 1)
+                        const Divider(height: 1, color: AppColors.line, thickness: 0.8),
+                    ],
                   );
                 }).toList(),
               ),

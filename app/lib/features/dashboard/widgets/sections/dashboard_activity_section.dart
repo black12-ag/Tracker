@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:liquid_soap_tracker/app/theme/app_colors.dart';
 import 'package:liquid_soap_tracker/core/ui/cards/app_surface_card.dart';
+import 'package:liquid_soap_tracker/core/ui/rows/order_row.dart';
 import 'package:liquid_soap_tracker/core/utils/formatters.dart';
 
 class DashboardActivitySection extends StatelessWidget {
@@ -19,45 +20,39 @@ class DashboardActivitySection extends StatelessWidget {
       children: [
         _ActivityCard(
           title: 'Recent sales',
-          subtitle: 'Latest recorded sales orders',
           rows: recentSales,
-          type: _ActivityType.sales,
+          type: OrderRowType.sales,
         ),
         const SizedBox(height: 16),
         _ActivityCard(
-          title: 'Recent purchased',
-          subtitle: 'Latest recorded purchase orders',
+          title: 'Recent purchases',
           rows: recentPurchases,
-          type: _ActivityType.purchase,
+          type: OrderRowType.purchase,
         ),
       ],
     );
   }
 }
 
-enum _ActivityType { sales, purchase }
-
 class _ActivityCard extends StatelessWidget {
   const _ActivityCard({
     required this.title,
-    required this.subtitle,
     required this.rows,
     required this.type,
   });
 
   final String title;
-  final String subtitle;
   final List<Map<String, dynamic>> rows;
-  final _ActivityType type;
+  final OrderRowType type;
 
   Future<void> _showDetails(BuildContext context, Map<String, dynamic> row) {
     final partner = row['partners'] is Map
         ? Map<String, dynamic>.from(row['partners'] as Map)
         : const <String, dynamic>{};
-    final items = ((row[type == _ActivityType.sales
-                    ? 'sales_order_items'
-                    : 'purchase_order_items'] as List?) ??
-                const [])
+    final itemKey = type == OrderRowType.sales
+        ? 'sales_order_items'
+        : 'purchase_order_items';
+    final items = ((row[itemKey] as List?) ?? const [])
         .whereType<Map>()
         .map((item) => Map<String, dynamic>.from(item))
         .toList();
@@ -103,7 +98,8 @@ class _ActivityCard extends StatelessWidget {
                 const SizedBox(height: 8),
                 ...items.map((item) {
                   final product = item['inventory_items'] is Map
-                      ? Map<String, dynamic>.from(item['inventory_items'] as Map)
+                      ? Map<String, dynamic>.from(
+                          item['inventory_items'] as Map)
                       : const <String, dynamic>{};
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 8),
@@ -138,37 +134,47 @@ class _ActivityCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(title, style: Theme.of(context).textTheme.headlineMedium),
-          const SizedBox(height: 6),
-          Text(subtitle, style: Theme.of(context).textTheme.bodyMedium),
-          const SizedBox(height: 14),
+          const SizedBox(height: 12),
           if (rows.isEmpty)
             Text(
               'Nothing recorded yet.',
-              style: Theme.of(context).textTheme.bodyMedium,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium
+                  ?.copyWith(color: AppColors.warmGray),
             )
           else
-            ...rows.map((row) {
+            ...rows.asMap().entries.map((entry) {
+              final i = entry.key;
+              final row = entry.value;
               final partner = row['partners'] is Map
                   ? Map<String, dynamic>.from(row['partners'] as Map)
                   : const <String, dynamic>{};
-              return ListTile(
-                contentPadding: EdgeInsets.zero,
-                onTap: () => _showDetails(context, row),
-                title: Text(
-                  row['order_code'] as String? ?? 'Order',
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                subtitle: Text(
-                  '${partner['name'] ?? 'No partner'} • ${AppFormatters.date(DateTime.tryParse((row['order_date'] as String?) ?? '') ?? DateTime.now())}',
-                ),
-                trailing: Text(
-                  AppFormatters.currency(
-                    (row['total_amount'] as num?)?.toDouble() ?? 0,
+              final dateStr = row['order_date'] as String?;
+              final date =
+                  (dateStr != null ? DateTime.tryParse(dateStr) : null) ??
+                      DateTime.now();
+
+              return Column(
+                children: [
+                  if (i > 0)
+                    Divider(
+                      height: 1,
+                      thickness: 1,
+                      color: AppColors.line,
+                    ),
+                  OrderRow(
+                    orderCode: row['order_code'] as String? ?? 'Order',
+                    partnerName:
+                        partner['name'] as String? ?? 'No partner',
+                    date: date,
+                    amount:
+                        (row['total_amount'] as num?)?.toDouble() ?? 0,
+                    status: row['status'] as String? ?? 'draft',
+                    type: type,
+                    onTap: () => _showDetails(context, row),
                   ),
-                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                        color: AppColors.navy,
-                      ),
-                ),
+                ],
               );
             }),
         ],

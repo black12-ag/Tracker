@@ -3,11 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:liquid_soap_tracker/app/theme/app_colors.dart';
 import 'package:liquid_soap_tracker/core/models/app_profile.dart';
 import 'package:liquid_soap_tracker/core/providers/core_providers.dart';
+import 'package:liquid_soap_tracker/core/ui/buttons/ghost_button.dart';
 import 'package:liquid_soap_tracker/core/ui/buttons/primary_button.dart';
 import 'package:liquid_soap_tracker/core/ui/cards/app_surface_card.dart';
 import 'package:liquid_soap_tracker/core/ui/fields/app_text_field.dart';
 import 'package:liquid_soap_tracker/core/ui/layout/reference_page_scaffold.dart';
 import 'package:liquid_soap_tracker/core/utils/app_errors.dart';
+import 'package:liquid_soap_tracker/features/profile/page/profile_page.dart';
 
 class SettingsPage extends ConsumerStatefulWidget {
   const SettingsPage({
@@ -90,56 +92,38 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
     ref.invalidate(currentProfileProvider);
   }
 
+  Widget _sectionLabel(BuildContext context, String label) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 4, bottom: 8),
+      child: Text(
+        label,
+        style: Theme.of(context).textTheme.labelMedium?.copyWith(
+          letterSpacing: 0.8,
+          fontSize: 11,
+          color: AppColors.warmGray,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return ReferencePageScaffold(
       title: 'Settings',
       onMenuPressed: widget.onMenuPressed,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // ── Section 1: YOUR PROFILE ────────────────────────────────
+          _sectionLabel(context, 'YOUR PROFILE'),
           AppSurfaceCard(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Change Password',
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-                const SizedBox(height: 14),
-                AppTextField(
-                  controller: _passwordController,
-                  label: 'New password',
-                  hintText: 'Enter new password',
-                  obscureText: true,
-                ),
-                const SizedBox(height: 14),
-                AppTextField(
-                  controller: _confirmController,
-                  label: 'Confirm password',
-                  hintText: 'Repeat new password',
-                  obscureText: true,
-                ),
-                const SizedBox(height: 16),
-                PrimaryButton(
-                  label: 'Update Password',
-                  isBusy: _isSaving,
-                  onPressed: _changePassword,
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 18),
-          AppSurfaceCard(
-            color: AppColors.mintSoft,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Session', style: Theme.of(context).textTheme.titleLarge),
-                const SizedBox(height: 12),
                 Row(
                   children: [
                     CircleAvatar(
-                      radius: 22,
+                      radius: 19,
                       backgroundColor: AppColors.navy,
                       child: Text(
                         (widget.profile.displayName.isNotEmpty
@@ -163,7 +147,10 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                           ),
                           Text(
                             widget.profile.email,
-                            style: Theme.of(context).textTheme.bodySmall,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodySmall
+                                ?.copyWith(color: AppColors.warmGray),
                           ),
                           const SizedBox(height: 2),
                           Container(
@@ -190,15 +177,66 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 16),
-                OutlinedButton(
-                  onPressed: _logout,
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: AppColors.danger,
+                const SizedBox(height: 14),
+                GhostButton(
+                  label: 'Edit Profile',
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (_) => ProfilePage(
+                        profile: widget.profile,
+                        onMenuPressed: widget.onMenuPressed,
+                      ),
+                    ),
                   ),
-                  child: const Text('Logout'),
                 ),
               ],
+            ),
+          ),
+          const SizedBox(height: 18),
+
+          // ── Section 2: SECURITY ────────────────────────────────────
+          _sectionLabel(context, 'SECURITY'),
+          AppSurfaceCard(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppTextField(
+                  controller: _passwordController,
+                  label: 'New password',
+                  hintText: 'Enter new password',
+                  obscureText: true,
+                ),
+                const SizedBox(height: 14),
+                AppTextField(
+                  controller: _confirmController,
+                  label: 'Confirm password',
+                  hintText: 'Repeat new password',
+                  obscureText: true,
+                ),
+                const SizedBox(height: 16),
+                PrimaryButton(
+                  label: 'Update Password',
+                  isBusy: _isSaving,
+                  onPressed: _changePassword,
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 18),
+
+          // ── Section 3: ACCOUNT ─────────────────────────────────────
+          _sectionLabel(context, 'ACCOUNT'),
+          AppSurfaceCard(
+            child: SizedBox(
+              width: double.infinity,
+              child: OutlinedButton(
+                onPressed: _logout,
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: AppColors.danger,
+                ),
+                child: const Text('Sign out'),
+              ),
             ),
           ),
         ],

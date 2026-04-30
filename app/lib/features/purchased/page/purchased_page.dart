@@ -8,9 +8,9 @@ import 'package:liquid_soap_tracker/core/providers/core_providers.dart';
 import 'package:liquid_soap_tracker/core/ui/cards/app_surface_card.dart';
 import 'package:liquid_soap_tracker/core/ui/fields/app_text_field.dart';
 import 'package:liquid_soap_tracker/core/ui/layout/reference_page_scaffold.dart';
+import 'package:liquid_soap_tracker/core/ui/rows/order_row.dart';
 import 'package:liquid_soap_tracker/core/ui/states/reference_page_skeleton.dart';
 import 'package:liquid_soap_tracker/core/utils/app_errors.dart';
-import 'package:liquid_soap_tracker/core/utils/formatters.dart';
 import 'package:liquid_soap_tracker/features/purchased/page/purchase_order_page.dart';
 
 class PurchasedPage extends ConsumerStatefulWidget {
@@ -165,48 +165,46 @@ class _PurchasedPageState extends ConsumerState<PurchasedPage> {
           else if (_orders.isEmpty)
             Padding(
               padding: const EdgeInsets.only(top: 80),
-              child: Text(
-                'No purchase orders found.',
-                style: Theme.of(context).textTheme.bodyMedium,
+              child: Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.inbox_outlined, size: 40, color: AppColors.warmGray),
+                    const SizedBox(height: 8),
+                    Text('No orders found.', style: Theme.of(context).textTheme.bodyMedium),
+                  ],
+                ),
               ),
             )
           else
             AppSurfaceCard(
               child: Column(
-                children: _orders.map((order) {
-                  final partner = order['partners'] is Map
-                      ? Map<String, dynamic>.from(order['partners'] as Map)
-                      : const <String, dynamic>{};
-                  return ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    onTap: () => _showDetails(order),
-                    title: Text(
-                      order['order_code'] as String? ?? 'Purchase order',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    subtitle: Text(
-                      '${partner['name'] ?? 'No supplier'} • ${AppFormatters.date(DateTime.tryParse((order['order_date'] as String?) ?? '') ?? DateTime.now())}',
-                    ),
-                    trailing: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text(
-                          AppFormatters.currency(
-                            (order['total_amount'] as num?)?.toDouble() ?? 0,
-                          ),
-                          style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                                color: AppColors.navy,
-                              ),
-                        ),
-                        Text(
-                          order['status'] as String? ?? 'draft',
-                          style: Theme.of(context).textTheme.labelMedium,
-                        ),
-                      ],
-                    ),
-                  );
-                }).toList(),
+                children: () {
+                  final rows = <Widget>[];
+                  for (var i = 0; i < _orders.length; i++) {
+                    final order = _orders[i];
+                    final partner = order['partners'] is Map
+                        ? Map<String, dynamic>.from(order['partners'] as Map)
+                        : const <String, dynamic>{};
+                    rows.add(
+                      OrderRow(
+                        orderCode: order['order_code'] as String? ?? 'Purchase order',
+                        partnerName: partner['name'] as String? ?? 'No supplier',
+                        date: DateTime.tryParse((order['order_date'] as String?) ?? '') ?? DateTime.now(),
+                        amount: (order['total_amount'] as num?)?.toDouble() ?? 0,
+                        status: order['status'] as String? ?? 'draft',
+                        type: OrderRowType.purchase,
+                        onTap: () => _showDetails(order),
+                      ),
+                    );
+                    if (i < _orders.length - 1) {
+                      rows.add(
+                        const Divider(height: 1, color: AppColors.line, thickness: 0.8),
+                      );
+                    }
+                  }
+                  return rows;
+                }(),
               ),
             ),
         ],

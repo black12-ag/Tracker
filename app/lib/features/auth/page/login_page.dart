@@ -158,18 +158,11 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   Widget build(BuildContext context) {
     final isBusy = ref.watch(authSubmitLoadingProvider);
     return Scaffold(
-      body: DecoratedBox(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [AppColors.cream, AppColors.background],
-          ),
-        ),
-        child: SafeArea(
-          child: ListView(
-            padding: const EdgeInsets.fromLTRB(20, 24, 20, 32),
-            children: [
+      backgroundColor: AppColors.background,
+      body: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.fromLTRB(20, 24, 20, 32),
+          children: [
               const SizedBox(height: 28),
               Column(
                 children: [
@@ -291,24 +284,26 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         ),
                       ),
                     ],
+                    const SizedBox(height: 16),
+                    Text(
+                      'Owners: use phone number or email. Staff: use phone and password.',
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: AppColors.warmGray,
+                      ),
+                    ),
                   ],
                 ),
-              ),
-              const SizedBox(height: 24),
-              Text(
-                'The owner can use the business phone number. Staff sign in with their phone or email and password.',
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.bodyMedium,
               ),
               const SizedBox(height: 20),
               const AuthContactFooter(),
             ],
           ),
         ),
-      ),
     );
   }
 }
+
 
 class _TabButton extends StatelessWidget {
   const _TabButton({
@@ -329,19 +324,14 @@ class _TabButton extends StatelessWidget {
         duration: const Duration(milliseconds: 180),
         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
         decoration: BoxDecoration(
-          border: Border(
-            bottom: BorderSide(
-              color: isSelected ? AppColors.accentBlueDark : Colors.transparent,
-              width: 2,
-            ),
-          ),
+          color: isSelected ? AppColors.navy : Colors.transparent,
+          borderRadius: BorderRadius.circular(20),
         ),
         child: Text(
           label,
           style: Theme.of(context).textTheme.labelLarge?.copyWith(
-            color: isSelected ? AppColors.accentBlueDark : AppColors.warmGray,
-            fontWeight:
-                isSelected ? FontWeight.w700 : FontWeight.w400,
+            color: isSelected ? Colors.white : AppColors.warmGray,
+            fontWeight: isSelected ? FontWeight.w700 : FontWeight.w400,
           ),
         ),
       ),
