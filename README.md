@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="apk/tracker-v1.0.0+10.apk"><strong>Download Latest APK</strong></a>
+  <a href="apk/tracker-v1.0.0+11.apk"><strong>Download Latest APK</strong></a>
 </p>
 
 ## UI Preview
@@ -22,15 +22,16 @@ Cross-platform Tracker showcase:
 
 ## Latest Release
 
-Current tester build: `v1.0.0+10`
+Current tester build: `v1.0.0+11`
 
 Highlights in this release:
-- premium logo-first splash animation
-- smarter sales and purchase flows
-- smart customer balance tracking with due dates
-- owner/staff business workspace with reports, accounts, and inventory
-- iPhone build fixes and synced CocoaPods workspace
-- improved README and packaged tester APK in the repo
+- multi-tenant workspaces — each business owner gets an isolated workspace, staff scoped to it
+- redesigned list pages (sales, purchases, inventory, employees, accounts) — clean row layout replacing generic tiles
+- redesigned dashboard — weighted financial strip with revenue, profit, and overdue in one glance
+- expanded settings page with profile, security, and account sections
+- admin activity logs page (owner-only) — paginated feed of all workspace actions with filter chips
+- new app icon — minimalist navy and mint brand mark
+- security hardening — workspace-scoped RLS on activity logs, rate limiting, auth session guard
 
 ## Overview
 
@@ -48,21 +49,23 @@ It is designed for:
 ## Features
 
 - Premium animated splash screen
+- Multi-tenant workspaces — isolated data per business, owner + staff roles
 - Inventory items with image upload
 - Sales order and purchase order flows
 - Partners, employees, loans, expenses, receive, shipment, and reports
 - Smart customer balance tracking with due dates and reminder status
 - Revenue, account totals, overdue balances, and profit visibility for the owner
+- Admin activity logs page — paginated audit trail with event filter chips (owner-only)
 - Owner phone alias login support
 - Offline queue and auto-sync
-- Supabase backend with Auth, Postgres, and Storage
+- Supabase backend with Auth, Postgres, and Storage with row-level security
 - Local device notifications for overdue balances and pending actions
 
 ## Download
 
 The latest tester APK is in this repository:
 
-- [tracker-v1.0.0+10.apk](apk/tracker-v1.0.0+10.apk)
+- [tracker-v1.0.0+11.apk](apk/tracker-v1.0.0+11.apk)
 
 ## Tech Stack
 
@@ -97,6 +100,7 @@ flowchart TD
     I --> N["Receive / Shipment"]
     I --> O["Reports"]
     I --> P["Profile / Settings"]
+    I --> Q2["Admin Logs (owner only)"]
 
     E --> Q["Sales Orders + Customer Balances"]
     F --> R["Purchase Orders"]
