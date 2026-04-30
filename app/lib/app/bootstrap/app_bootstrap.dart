@@ -23,7 +23,7 @@ class AppBootstrap extends ConsumerWidget {
     return profileAsync.when(
       data: (profile) {
         if (profile == null) {
-          return const LoginPage();
+          return const SplashPage();
         }
 
         if (!profile.isActive) {
