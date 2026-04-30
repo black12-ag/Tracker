@@ -7,6 +7,7 @@ class AppProfile {
     required this.displayName,
     required this.role,
     required this.isActive,
+    required this.workspaceId,
     this.phone,
     this.createdByOwner,
   });
@@ -16,6 +17,7 @@ class AppProfile {
   final String displayName;
   final UserRole role;
   final bool isActive;
+  final String workspaceId;
   final String? phone;
   final String? createdByOwner;
 
@@ -30,6 +32,7 @@ class AppProfile {
       displayName: map['display_name'] as String? ?? 'User',
       role: roleValue == 'owner' ? UserRole.owner : UserRole.staff,
       isActive: map['is_active'] as bool? ?? false,
+      workspaceId: map['workspace_id'] as String? ?? '',
       phone: map['phone'] as String?,
       createdByOwner: map['created_by_owner'] as String?,
     );
@@ -42,6 +45,7 @@ class AppProfile {
       'display_name': displayName,
       'role': isOwner ? 'owner' : 'staff',
       'is_active': isActive,
+      'workspace_id': workspaceId,
       'phone': phone,
       'created_by_owner': createdByOwner,
     };
