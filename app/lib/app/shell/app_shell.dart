@@ -6,6 +6,7 @@ import 'package:liquid_soap_tracker/core/models/app_profile.dart';
 import 'package:liquid_soap_tracker/core/providers/core_providers.dart';
 import 'package:liquid_soap_tracker/core/ui/layout/tracker_bottom_navigation.dart';
 import 'package:liquid_soap_tracker/features/account/page/account_page.dart';
+import 'package:liquid_soap_tracker/features/admin_logs/page/admin_logs_page.dart';
 import 'package:liquid_soap_tracker/features/dashboard/page/dashboard_page.dart';
 import 'package:liquid_soap_tracker/features/employees/page/employees_page.dart';
 import 'package:liquid_soap_tracker/features/expenses/page/expenses_page.dart';

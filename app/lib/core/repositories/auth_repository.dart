@@ -47,6 +47,23 @@ class AuthRepository {
     }
   }
 
+  Future<void> logActivity({
+    required String eventType,
+    required String message,
+    Map<String, dynamic> metadata = const {},
+  }) async {
+    try {
+      await _client.rpc('write_activity_log', params: {
+        'log_event_type': eventType,
+        'log_message': message,
+        'log_actor_id': _client.auth.currentUser?.id,
+        'log_metadata': metadata,
+      });
+    } catch (_) {
+      // Logging must never crash the caller
+    }
+  }
+
   Future<void> signIn({
     required String identifier,
     required String password,
@@ -55,6 +72,7 @@ class AuthRepository {
       email: AppIdentity.normalizeLoginIdentifier(identifier),
       password: password,
     );
+    await logActivity(eventType: 'auth.sign_in', message: 'User signed in');
   }
 
   Future<void> signUp({
@@ -74,11 +92,13 @@ class AuthRepository {
   }
 
   Future<void> signOut() async {
+    await logActivity(eventType: 'auth.sign_out', message: 'User signed out');
     await _client.auth.signOut();
     await _localStoreService.clearAllCachedData();
   }
 
   Future<void> updatePassword(String password) async {
     await _client.auth.updateUser(UserAttributes(password: password));
+    await logActivity(eventType: 'auth.password_changed', message: 'Password updated');
   }
 }

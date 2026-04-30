@@ -13,6 +13,7 @@ class TrackerDrawer extends StatelessWidget {
     required this.onOpenPartners,
     required this.onOpenEmployees,
     required this.onOpenReports,
+    required this.onOpenAdminLogs,
     required this.onOpenProfile,
     required this.onOpenSettings,
     super.key,
@@ -27,6 +28,7 @@ class TrackerDrawer extends StatelessWidget {
   final VoidCallback onOpenPartners;
   final VoidCallback onOpenEmployees;
   final VoidCallback onOpenReports;
+  final VoidCallback onOpenAdminLogs;
   final VoidCallback onOpenProfile;
   final VoidCallback onOpenSettings;
 
@@ -153,6 +155,12 @@ class TrackerDrawer extends StatelessWidget {
                       icon: Icons.bar_chart_rounded,
                       label: 'Reports',
                       onTap: onOpenReports,
+                    ),
+                  if (profile.isOwner)
+                    _DrawerTile(
+                      icon: Icons.admin_panel_settings_outlined,
+                      label: 'Admin Logs',
+                      onTap: onOpenAdminLogs,
                     ),
                 ],
               ),

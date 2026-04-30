@@ -10,6 +10,23 @@ class TrackerRepository {
   final LocalStoreService _localStoreService;
   final String _workspaceId;
 
+  Future<void> _logActivity({
+    required String eventType,
+    required String message,
+    Map<String, dynamic> metadata = const {},
+  }) async {
+    try {
+      await _client.rpc('write_activity_log', params: {
+        'log_event_type': eventType,
+        'log_message': message,
+        'log_actor_id': _client.auth.currentUser?.id,
+        'log_metadata': metadata,
+      });
+    } catch (_) {
+      // Logging must never crash the caller
+    }
+  }
+
   Future<Map<String, dynamic>> fetchHomeBundle({
     required bool owner,
     String period = 'monthly',
@@ -530,6 +547,7 @@ class TrackerRepository {
         .select()
         .single();
 
+    await _logActivity(eventType: 'account.created', message: 'Account created: $accountName');
     return Map<String, dynamic>.from(response);
   }
 
@@ -555,6 +573,7 @@ class TrackerRepository {
         .select()
         .single();
 
+    await _logActivity(eventType: 'transfer.created', message: 'Transfer created: $amount');
     return Map<String, dynamic>.from(response);
   }
 
@@ -660,6 +679,7 @@ class TrackerRepository {
         .select()
         .single();
 
+    await _logActivity(eventType: 'loan.created', message: 'Loan record created: $direction $amount');
     return Map<String, dynamic>.from(response);
   }
 
@@ -758,6 +778,7 @@ class TrackerRepository {
       );
     }
 
+    await _logActivity(eventType: 'staff.created', message: 'Staff account created: $name');
     return Map<String, dynamic>.from(response.data as Map);
   }
 
