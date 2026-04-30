@@ -127,6 +127,9 @@ class _AppShellState extends ConsumerState<AppShell> {
                   onMenuPressed: _openSideMenu,
                 ),
               ),
+              onOpenAdminLogs: () => _pushFromMenu(
+                AdminLogsPage(onMenuPressed: _openSideMenu),
+              ),
               onOpenProfile: () => _pushFromMenu(
                 ProfilePage(
                   profile: widget.profile,
