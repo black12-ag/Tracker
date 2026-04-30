@@ -75,11 +75,12 @@ class AppTheme {
       textTheme: textTheme,
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: Colors.white,
-        indicatorColor: AppColors.navy.withValues(alpha: 0.12),
+        indicatorColor: AppColors.mint.withValues(alpha: 0.18),
         labelTextStyle: WidgetStateProperty.resolveWith(
           (states) => GoogleFonts.workSans(
-            fontSize: 12,
+            fontSize: 11,
             fontWeight: FontWeight.w700,
+            letterSpacing: 0.2,
             color: states.contains(WidgetState.selected)
                 ? AppColors.navy
                 : AppColors.warmGray,
@@ -90,6 +91,7 @@ class AppTheme {
             color: states.contains(WidgetState.selected)
                 ? AppColors.navy
                 : AppColors.warmGray,
+            size: 22,
           ),
         ),
         surfaceTintColor: Colors.transparent,
@@ -144,21 +146,27 @@ class AppTheme {
           textStyle: GoogleFonts.manrope(
             fontSize: 16,
             fontWeight: FontWeight.w800,
+            letterSpacing: 0.4,
           ),
           elevation: 0,
+          shadowColor: Colors.transparent,
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           foregroundColor: AppColors.navy,
           minimumSize: const Size.fromHeight(56),
-          side: BorderSide(color: AppColors.line.withValues(alpha: 0.7)),
+          side: BorderSide(
+            color: AppColors.navy.withValues(alpha: 0.18),
+            width: 1.2,
+          ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(28),
           ),
           textStyle: GoogleFonts.workSans(
             fontSize: 15,
             fontWeight: FontWeight.w700,
+            letterSpacing: 0.3,
           ),
         ),
       ),
