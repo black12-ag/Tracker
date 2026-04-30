@@ -11,17 +11,18 @@ class AdminLogsRepository {
     int page = 0,
     String? eventTypeFilter,
   }) async {
-    var query = _client
+    var builder = _client
         .from('activity_logs')
-        .select('id, event_type, message, metadata, created_at, profiles(display_name)')
+        .select('id, event_type, message, metadata, created_at, profiles(display_name)');
+
+    final filtered = (eventTypeFilter != null && eventTypeFilter.isNotEmpty)
+        ? builder.ilike('event_type', '$eventTypeFilter%')
+        : builder;
+
+    final rows = await filtered
         .order('created_at', ascending: false)
         .range(page * pageSize, (page + 1) * pageSize - 1);
 
-    if (eventTypeFilter != null && eventTypeFilter.isNotEmpty) {
-      query = query.ilike('event_type', '$eventTypeFilter%');
-    }
-
-    final rows = await query;
     return (rows as List)
         .map((r) => ActivityLogEntry.fromMap(Map<String, dynamic>.from(r as Map)))
         .toList();
