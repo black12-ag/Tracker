@@ -61,11 +61,15 @@ class AuthRepository {
     required String displayName,
     required String email,
     required String password,
+    required String businessName,
   }) async {
     await _client.auth.signUp(
       email: email.trim(),
       password: password,
-      data: {'display_name': displayName.trim()},
+      data: {
+        'display_name': displayName.trim(),
+        'business_name': businessName.trim(),
+      },
     );
   }
 
