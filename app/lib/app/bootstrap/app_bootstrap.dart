@@ -5,6 +5,7 @@ import 'package:liquid_soap_tracker/core/providers/core_providers.dart';
 import 'package:liquid_soap_tracker/core/ui/states/app_error_view.dart';
 import 'package:liquid_soap_tracker/features/auth/page/login_page.dart';
 import 'package:liquid_soap_tracker/features/splash/page/splash_page.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AppBootstrap extends ConsumerWidget {
   const AppBootstrap({super.key});
@@ -12,6 +13,17 @@ class AppBootstrap extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.watch(authStateChangesProvider);
+
+    // Listen for unexpected sign-out events (e.g. JWT expired, token revoked)
+    ref.listen<AsyncValue<AuthState>>(authStateChangesProvider, (_, next) {
+      next.whenData((authState) {
+        if (authState.event == AuthChangeEvent.signedOut) {
+          ref.read(localStoreServiceProvider).clearAllCachedData();
+          ref.invalidate(currentProfileProvider);
+        }
+      });
+    });
+
     final session = ref.watch(currentSessionProvider);
 
     if (session == null) {
