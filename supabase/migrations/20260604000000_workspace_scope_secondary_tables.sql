@@ -115,7 +115,8 @@ create policy "stock_movements_ws_insert" on public.stock_movements
   with check (workspace_id = public.get_my_workspace_id() and created_by = auth.uid());
 create policy "stock_movements_ws_update" on public.stock_movements
   for update to authenticated
-  using (workspace_id = public.get_my_workspace_id());
+  using (workspace_id = public.get_my_workspace_id())
+  with check (workspace_id = public.get_my_workspace_id());
 
 -- sales_order_items
 drop policy if exists "sales_order_items_select" on public.sales_order_items;
@@ -129,7 +130,8 @@ create policy "sales_order_items_ws_insert" on public.sales_order_items
   with check (workspace_id = public.get_my_workspace_id());
 create policy "sales_order_items_ws_update" on public.sales_order_items
   for update to authenticated
-  using (workspace_id = public.get_my_workspace_id());
+  using (workspace_id = public.get_my_workspace_id())
+  with check (workspace_id = public.get_my_workspace_id());
 
 -- purchase_order_items
 drop policy if exists "purchase_order_items_select" on public.purchase_order_items;
@@ -143,7 +145,8 @@ create policy "purchase_order_items_ws_insert" on public.purchase_order_items
   with check (workspace_id = public.get_my_workspace_id());
 create policy "purchase_order_items_ws_update" on public.purchase_order_items
   for update to authenticated
-  using (workspace_id = public.get_my_workspace_id());
+  using (workspace_id = public.get_my_workspace_id())
+  with check (workspace_id = public.get_my_workspace_id());
 
 -- inventory_item_images
 drop policy if exists "inventory_item_images_select" on public.inventory_item_images;
@@ -157,7 +160,8 @@ create policy "inventory_item_images_ws_insert" on public.inventory_item_images
   with check (workspace_id = public.get_my_workspace_id());
 create policy "inventory_item_images_ws_update" on public.inventory_item_images
   for update to authenticated
-  using (workspace_id = public.get_my_workspace_id());
+  using (workspace_id = public.get_my_workspace_id())
+  with check (workspace_id = public.get_my_workspace_id());
 
 -- sales_dispatches
 drop policy if exists "sales_dispatches_shared_select" on public.sales_dispatches;
@@ -171,7 +175,8 @@ create policy "sales_dispatches_ws_insert" on public.sales_dispatches
   with check (workspace_id = public.get_my_workspace_id());
 create policy "sales_dispatches_ws_update" on public.sales_dispatches
   for update to authenticated
-  using (workspace_id = public.get_my_workspace_id());
+  using (workspace_id = public.get_my_workspace_id())
+  with check (workspace_id = public.get_my_workspace_id());
 
 -- 3. FINANCIAL TABLES (owner-only, within the workspace) ---------------------
 
