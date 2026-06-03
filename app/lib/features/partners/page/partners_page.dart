@@ -9,6 +9,7 @@ import 'package:liquid_soap_tracker/core/ui/cards/app_surface_card.dart';
 import 'package:liquid_soap_tracker/core/ui/fields/app_text_field.dart';
 import 'package:liquid_soap_tracker/core/ui/layout/reference_page_scaffold.dart';
 import 'package:liquid_soap_tracker/core/ui/states/reference_page_skeleton.dart';
+import 'package:liquid_soap_tracker/core/ui/widgets/filter_chips.dart';
 import 'package:liquid_soap_tracker/core/utils/app_errors.dart';
 import 'package:liquid_soap_tracker/features/partners/widgets/partner_form_dialog.dart';
 
@@ -31,11 +32,38 @@ class _PartnersPageState extends ConsumerState<PartnersPage> {
   Timer? _debounce;
   bool _isLoading = true;
   List<Map<String, dynamic>> _partners = const [];
+  String _filter = 'all';
 
   @override
   void initState() {
     super.initState();
     _load();
+  }
+
+  bool _typeMatches(Map<String, dynamic> partner, String value) {
+    final type = (partner['partner_type'] as String? ?? '').toLowerCase();
+    if (type.contains('both')) {
+      return true;
+    }
+    return type.contains(value);
+  }
+
+  bool _matches(Map<String, dynamic> partner) {
+    if (_filter == 'all') {
+      return true;
+    }
+    return _typeMatches(partner, _filter);
+  }
+
+  List<Map<String, dynamic>> _applyFilter(List<Map<String, dynamic>> partners) {
+    return partners.where(_matches).toList();
+  }
+
+  int _countFor(String value) {
+    if (value == 'all') {
+      return _partners.length;
+    }
+    return _partners.where((p) => _typeMatches(p, value)).length;
   }
 
   @override
@@ -86,6 +114,7 @@ class _PartnersPageState extends ConsumerState<PartnersPage> {
 
   @override
   Widget build(BuildContext context) {
+    final visible = _applyFilter(_partners);
     return ReferencePageScaffold(
       title: 'Partners',
       onMenuPressed: widget.onMenuPressed,
@@ -104,10 +133,20 @@ class _PartnersPageState extends ConsumerState<PartnersPage> {
             prefixIcon: Icons.search_rounded,
             onChanged: _onSearchChanged,
           ),
+          const SizedBox(height: 8),
+          FilterChips(
+            selected: _filter,
+            onSelected: (v) => setState(() => _filter = v),
+            options: [
+              FilterChipOption('all', 'All', count: _countFor('all')),
+              FilterChipOption('customer', 'Customers', count: _countFor('customer')),
+              FilterChipOption('supplier', 'Suppliers', count: _countFor('supplier')),
+            ],
+          ),
           const SizedBox(height: 16),
           if (_isLoading)
             const ReferenceListPageSkeleton(itemCount: 5)
-          else if (_partners.isEmpty)
+          else if (visible.isEmpty)
             const Padding(
               padding: EdgeInsets.only(top: 72),
               child: _EmptyState(
@@ -121,7 +160,7 @@ class _PartnersPageState extends ConsumerState<PartnersPage> {
             AppSurfaceCard(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
               child: Column(
-                children: _partners.indexed.map((entry) {
+                children: visible.indexed.map((entry) {
                   final index = entry.$1;
                   final partner = entry.$2;
                   final subtitle = [
@@ -135,7 +174,7 @@ class _PartnersPageState extends ConsumerState<PartnersPage> {
                         name: partner['name'] as String? ?? 'Partner',
                         subtitle: subtitle,
                       ),
-                      if (index < _partners.length - 1)
+                      if (index < visible.length - 1)
                         const Divider(
                           height: 1,
                           color: AppColors.line,

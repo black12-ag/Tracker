@@ -11,6 +11,7 @@ import 'package:liquid_soap_tracker/core/ui/fields/app_text_field.dart';
 import 'package:liquid_soap_tracker/core/ui/layout/reference_page_scaffold.dart';
 import 'package:liquid_soap_tracker/core/ui/rows/order_row.dart';
 import 'package:liquid_soap_tracker/core/ui/states/reference_page_skeleton.dart';
+import 'package:liquid_soap_tracker/core/ui/widgets/filter_chips.dart';
 import 'package:liquid_soap_tracker/core/utils/app_errors.dart';
 import 'package:liquid_soap_tracker/features/purchased/page/purchase_order_page.dart';
 
@@ -33,11 +34,40 @@ class _PurchasedPageState extends ConsumerState<PurchasedPage> {
   Timer? _debounce;
   bool _isLoading = true;
   List<Map<String, dynamic>> _orders = const [];
+  String _filter = 'all';
 
   @override
   void initState() {
     super.initState();
     _load();
+  }
+
+  String _statusOf(Map<String, dynamic> row) {
+    var status = (row['status'] as String? ?? 'draft').toLowerCase();
+    if (status == 'partially_paid') {
+      status = 'partial';
+    } else if (status == 'canceled') {
+      status = 'cancelled';
+    }
+    return status;
+  }
+
+  bool _matches(Map<String, dynamic> row) {
+    if (_filter == 'all') {
+      return true;
+    }
+    return _statusOf(row) == _filter;
+  }
+
+  List<Map<String, dynamic>> _applyFilter(List<Map<String, dynamic>> orders) {
+    return orders.where(_matches).toList();
+  }
+
+  int _countFor(String value) {
+    if (value == 'all') {
+      return _orders.length;
+    }
+    return _orders.where((o) => _statusOf(o) == value).length;
   }
 
   @override
@@ -141,6 +171,7 @@ class _PurchasedPageState extends ConsumerState<PurchasedPage> {
 
   @override
   Widget build(BuildContext context) {
+    final visible = _applyFilter(_orders);
     return ReferencePageScaffold(
       title: 'Purchased',
       onMenuPressed: widget.onMenuPressed,
@@ -160,18 +191,30 @@ class _PurchasedPageState extends ConsumerState<PurchasedPage> {
             prefixIcon: Icons.search_rounded,
             onChanged: _onSearchChanged,
           ),
+          const SizedBox(height: 8),
+          FilterChips(
+            selected: _filter,
+            onSelected: (v) => setState(() => _filter = v),
+            options: [
+              FilterChipOption('all', 'All', count: _countFor('all')),
+              FilterChipOption('draft', 'Draft', count: _countFor('draft')),
+              FilterChipOption('confirmed', 'Confirmed', count: _countFor('confirmed')),
+              FilterChipOption('partial', 'Partial', count: _countFor('partial')),
+              FilterChipOption('cancelled', 'Cancelled', count: _countFor('cancelled')),
+            ],
+          ),
           const SizedBox(height: 16),
           if (_isLoading)
             const ReferenceListPageSkeleton(itemCount: 5)
-          else if (_orders.isEmpty)
+          else if (visible.isEmpty)
             const _PurchasedEmptyState()
           else
             AppSurfaceCard(
               child: Column(
                 children: () {
                   final rows = <Widget>[];
-                  for (var i = 0; i < _orders.length; i++) {
-                    final order = _orders[i];
+                  for (var i = 0; i < visible.length; i++) {
+                    final order = visible[i];
                     final partner = order['partners'] is Map
                         ? Map<String, dynamic>.from(order['partners'] as Map)
                         : const <String, dynamic>{};
@@ -189,7 +232,7 @@ class _PurchasedPageState extends ConsumerState<PurchasedPage> {
                         ),
                       ),
                     );
-                    if (i < _orders.length - 1) {
+                    if (i < visible.length - 1) {
                       rows.add(
                         const Divider(height: 1, color: AppColors.line, thickness: 0.8),
                       );

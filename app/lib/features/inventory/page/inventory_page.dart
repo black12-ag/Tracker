@@ -9,6 +9,7 @@ import 'package:liquid_soap_tracker/core/ui/fields/app_text_field.dart';
 import 'package:liquid_soap_tracker/core/ui/layout/reference_page_scaffold.dart';
 import 'package:liquid_soap_tracker/core/ui/rows/inventory_row.dart';
 import 'package:liquid_soap_tracker/core/ui/states/reference_page_skeleton.dart';
+import 'package:liquid_soap_tracker/core/ui/widgets/filter_chips.dart';
 import 'package:liquid_soap_tracker/core/utils/app_errors.dart';
 import 'package:liquid_soap_tracker/features/inventory/page/inventory_item_page.dart';
 
@@ -30,11 +31,42 @@ class _InventoryPageState extends ConsumerState<InventoryPage> {
   final TextEditingController _searchController = TextEditingController();
   bool _isLoading = true;
   List<Map<String, dynamic>> _items = const [];
+  String _filter = 'all';
 
   @override
   void initState() {
     super.initState();
     _load();
+  }
+
+  bool _matches(Map<String, dynamic> item) {
+    if (_filter == 'all') {
+      return true;
+    }
+    final stock = (item['current_stock'] as num?)?.toInt() ?? 0;
+    final threshold = (item['low_stock'] as num?)?.toInt() ?? 10;
+    switch (_filter) {
+      case 'in':
+        return stock > threshold;
+      case 'low':
+        return stock > 0 && stock <= threshold;
+      case 'out':
+        return stock <= 0;
+      default:
+        return true;
+    }
+  }
+
+  List<Map<String, dynamic>> _applyFilter(List<Map<String, dynamic>> items) {
+    return items.where(_matches).toList();
+  }
+
+  int _countFor(String value) {
+    final saved = _filter;
+    _filter = value;
+    final count = _items.where(_matches).length;
+    _filter = saved;
+    return count;
   }
 
   @override
@@ -84,6 +116,7 @@ class _InventoryPageState extends ConsumerState<InventoryPage> {
 
   @override
   Widget build(BuildContext context) {
+    final visible = _applyFilter(_items);
     return ReferencePageScaffold(
       title: 'Inventory',
       onMenuPressed: widget.onMenuPressed,
@@ -103,15 +136,26 @@ class _InventoryPageState extends ConsumerState<InventoryPage> {
             prefixIcon: Icons.search_rounded,
             onChanged: (_) => _load(),
           ),
+          const SizedBox(height: 8),
+          FilterChips(
+            selected: _filter,
+            onSelected: (v) => setState(() => _filter = v),
+            options: [
+              FilterChipOption('all', 'All', count: _countFor('all')),
+              FilterChipOption('in', 'In stock', count: _countFor('in')),
+              FilterChipOption('low', 'Low stock', count: _countFor('low')),
+              FilterChipOption('out', 'Out of stock', count: _countFor('out')),
+            ],
+          ),
           const SizedBox(height: 16),
           if (_isLoading)
             const ReferenceListPageSkeleton(itemCount: 5)
-          else if (_items.isEmpty)
+          else if (visible.isEmpty)
             const _InventoryEmptyState()
           else
             AppSurfaceCard(
               child: Column(
-                children: _items.indexed.map((entry) {
+                children: visible.indexed.map((entry) {
                   final index = entry.$1;
                   final item = entry.$2;
                   return Column(
@@ -128,7 +172,7 @@ class _InventoryPageState extends ConsumerState<InventoryPage> {
                           onTap: () => _openItem(item),
                         ),
                       ),
-                      if (index < _items.length - 1)
+                      if (index < visible.length - 1)
                         const Divider(height: 1, color: AppColors.line, thickness: 0.8),
                     ],
                   );
