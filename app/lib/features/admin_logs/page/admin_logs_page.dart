@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:liquid_soap_tracker/app/theme/app_colors.dart';
+import 'package:liquid_soap_tracker/core/providers/core_providers.dart';
 import 'package:liquid_soap_tracker/core/ui/layout/reference_page_scaffold.dart';
 import 'package:liquid_soap_tracker/core/ui/states/app_error_view.dart';
 import 'package:liquid_soap_tracker/core/ui/states/app_loading_view.dart';
@@ -49,6 +50,23 @@ class _AdminLogsPageState extends ConsumerState<AdminLogsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final profile = ref.watch(currentProfileProvider).valueOrNull;
+    if (profile?.isOwner != true) {
+      return ReferencePageScaffold(
+        title: 'Activity Logs',
+        onMenuPressed: widget.onMenuPressed,
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 32),
+            child: Text(
+              'This section is for the owner only.',
+              style: Theme.of(context).textTheme.bodyMedium,
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+      );
+    }
     final state = ref.watch(adminLogsControllerProvider);
 
     return ReferencePageScaffold(

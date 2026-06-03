@@ -257,6 +257,13 @@ class _FinancePageState extends ConsumerState<FinancePage> {
 
   @override
   Widget build(BuildContext context) {
+    if (!widget.profile.isOwner) {
+      return const AppPageScaffold(
+        title: 'Money',
+        subtitle: 'This section is for the owner only.',
+        child: SizedBox.shrink(),
+      );
+    }
     final summaryAsync = ref.watch(financeSummaryProvider);
     final recordsAsync = ref.watch(financeRecordsProvider);
     final pendingAsync = ref.watch(pendingFinanceDispatchesProvider);

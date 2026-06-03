@@ -79,6 +79,22 @@ class _ExpensesPageState extends ConsumerState<ExpensesPage> {
 
   @override
   Widget build(BuildContext context) {
+    if (!widget.profile.isOwner) {
+      return ReferencePageScaffold(
+        title: 'Expenses',
+        onMenuPressed: widget.onMenuPressed,
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 32),
+            child: Text(
+              'This section is for the owner only.',
+              style: Theme.of(context).textTheme.bodyMedium,
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+      );
+    }
     return ReferencePageScaffold(
       title: 'Expenses',
       onMenuPressed: widget.onMenuPressed,

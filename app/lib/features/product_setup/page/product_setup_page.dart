@@ -263,6 +263,13 @@ class _ProductSetupPageState extends ConsumerState<ProductSetupPage> {
 
   @override
   Widget build(BuildContext context) {
+    if (!widget.profile.isOwner) {
+      return const AppPageScaffold(
+        title: 'Product',
+        subtitle: 'This section is for the owner only.',
+        child: SizedBox.shrink(),
+      );
+    }
     final bundleAsync = ref.watch(productSetupBundleProvider);
 
     return bundleAsync.when(
