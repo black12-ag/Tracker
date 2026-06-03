@@ -120,7 +120,7 @@ class OrderRow extends StatelessWidget {
                   ),
                   const SizedBox(height: 3),
                   Text(
-                    '${partnerName}  •  ${_formatDate(date)}',
+                    '$partnerName  •  ${_formatDate(date)}',
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: AppColors.warmGray,
                     ),

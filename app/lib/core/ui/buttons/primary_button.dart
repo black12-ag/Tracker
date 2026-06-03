@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:liquid_soap_tracker/app/theme/app_colors.dart';
+import 'package:liquid_soap_tracker/app/theme/app_motion.dart';
 
+/// The app's primary call-to-action. Solid navy (no gradient, per DESIGN.md),
+/// with two layers of motion:
+///   1. tactile press-scale + spring release on every tap, and
+///   2. a slow, barely-there "breathing" shadow while idle and enabled — the
+///      premium live feel, calm enough for a finance tool.
+/// Both layers honour reduced-motion (idle breathing stops; press snaps).
 class PrimaryButton extends StatefulWidget {
   const PrimaryButton({
     required this.label,
@@ -20,51 +27,83 @@ class PrimaryButton extends StatefulWidget {
 }
 
 class _PrimaryButtonState extends State<PrimaryButton>
-    with SingleTickerProviderStateMixin {
-  late final AnimationController _ctrl;
+    with TickerProviderStateMixin {
+  late final AnimationController _press;
   late final Animation<double> _scale;
-  late final Animation<double> _shadow;
+  late final Animation<double> _pressShadow;
+  late final AnimationController _breath;
 
   @override
   void initState() {
     super.initState();
-    _ctrl = AnimationController(
+    _press = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 80),
-      reverseDuration: const Duration(milliseconds: 220),
+      duration: AppMotion.pressIn,
+      reverseDuration: AppMotion.pressOut,
     );
-    _scale = Tween<double>(begin: 1.0, end: 0.965).animate(
-      CurvedAnimation(parent: _ctrl, curve: Curves.easeOut),
+    _scale = Tween<double>(begin: 1.0, end: AppMotion.pressScale).animate(
+      CurvedAnimation(parent: _press, curve: AppMotion.pressInCurve),
     );
-    _shadow = Tween<double>(begin: 1.0, end: 0.0).animate(
-      CurvedAnimation(parent: _ctrl, curve: Curves.easeOut),
+    _pressShadow = Tween<double>(begin: 1.0, end: 0.0).animate(
+      CurvedAnimation(parent: _press, curve: AppMotion.pressInCurve),
+    );
+    _breath = AnimationController(
+      vsync: this,
+      duration: AppMotion.ctaBreath,
     );
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _syncBreathing();
+  }
+
+  @override
+  void didUpdateWidget(covariant PrimaryButton oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _syncBreathing();
+  }
+
+  void _syncBreathing() {
+    final shouldBreathe = _isActive && !AppMotion.noAnimations(context);
+    if (shouldBreathe && !_breath.isAnimating) {
+      _breath.repeat(reverse: true);
+    } else if (!shouldBreathe && _breath.isAnimating) {
+      _breath.stop();
+      _breath.value = 0;
+    }
+  }
+
+  @override
   void dispose() {
-    _ctrl.dispose();
+    _press.dispose();
+    _breath.dispose();
     super.dispose();
   }
 
   bool get _isActive => widget.onPressed != null && !widget.isBusy;
 
   void _down(TapDownDetails _) {
-    if (_isActive) _ctrl.forward();
+    if (_isActive) _press.forward();
   }
 
   void _up(TapUpDetails _) {
-    _ctrl.reverse();
+    _press.reverse();
     if (_isActive) widget.onPressed!();
   }
 
-  void _cancel() => _ctrl.reverse();
+  void _cancel() => _press.reverse();
 
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-      animation: _ctrl,
+      animation: Listenable.merge([_press, _breath]),
       builder: (context, child) {
+        // Idle breathing modulates shadow softness/lift; multiplied by the
+        // press-shadow factor so the glow recedes as the button is pressed.
+        final breath = _isActive ? _breath.value : 0.0;
+        final shadowFactor = _pressShadow.value;
         return Transform.scale(
           scale: _scale.value,
           child: GestureDetector(
@@ -75,61 +114,51 @@ class _PrimaryButtonState extends State<PrimaryButton>
               height: 56,
               width: double.infinity,
               decoration: BoxDecoration(
-                // Solid navy fill — DESIGN.md forbids gradient fills on buttons.
                 color: _isActive ? AppColors.navy : AppColors.line,
                 borderRadius: BorderRadius.circular(28),
                 boxShadow: _isActive
                     ? [
                         BoxShadow(
-                          color: AppColors.navy
-                              .withValues(alpha: 0.32 * _shadow.value),
-                          blurRadius: 20,
-                          offset: Offset(0, 7 * _shadow.value),
+                          color: AppColors.navy.withValues(
+                            alpha: (0.18 + 0.12 * breath) * shadowFactor,
+                          ),
+                          blurRadius: 16 + 10 * breath,
+                          offset: Offset(0, (6 + 3 * breath) * shadowFactor),
                         ),
                       ]
                     : null,
               ),
-              child: Center(
-                child: widget.isBusy
-                    ? const SizedBox.square(
-                        dimension: 20,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          color: Colors.white,
-                        ),
-                      )
-                    : Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          if (widget.icon != null) ...[
-                            Icon(
-                              widget.icon,
-                              size: 18,
-                              color: _isActive
-                                  ? Colors.white
-                                  : AppColors.warmGray,
-                            ),
-                            const SizedBox(width: 10),
-                          ],
-                          Text(
-                            widget.label,
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelLarge
-                                ?.copyWith(
-                                  color: _isActive
-                                      ? Colors.white
-                                      : AppColors.warmGray,
-                                  letterSpacing: 0.4,
-                                ),
-                          ),
-                        ],
-                      ),
-              ),
+              child: Center(child: _content(context)),
             ),
           ),
         );
       },
+    );
+  }
+
+  Widget _content(BuildContext context) {
+    if (widget.isBusy) {
+      return const SizedBox.square(
+        dimension: 20,
+        child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
+      );
+    }
+    final fg = _isActive ? Colors.white : AppColors.warmGray;
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        if (widget.icon != null) ...[
+          Icon(widget.icon, size: 18, color: fg),
+          const SizedBox(width: 10),
+        ],
+        Text(
+          widget.label,
+          style: Theme.of(context)
+              .textTheme
+              .labelLarge
+              ?.copyWith(color: fg, letterSpacing: 0.4),
+        ),
+      ],
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:liquid_soap_tracker/app/theme/app_colors.dart';
+import 'package:liquid_soap_tracker/core/ui/widgets/animated_count_text.dart';
 
 class AppMetricCard extends StatelessWidget {
   const AppMetricCard({
@@ -9,6 +10,8 @@ class AppMetricCard extends StatelessWidget {
     this.subtitle,
     this.accentColor,
     this.onTap,
+    this.animatedValue,
+    this.valueFormatter,
   });
 
   final String label;
@@ -16,6 +19,11 @@ class AppMetricCard extends StatelessWidget {
   final String? subtitle;
   final Color? accentColor;
   final VoidCallback? onTap;
+
+  /// When provided (with [valueFormatter]), the value rolls up from 0 to this
+  /// number on load instead of showing [value] statically.
+  final double? animatedValue;
+  final String Function(double)? valueFormatter;
 
   @override
   Widget build(BuildContext context) {
@@ -71,13 +79,25 @@ class AppMetricCard extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 10),
-                Text(
-                  value,
-                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                        color: AppColors.navy,
-                        fontWeight: FontWeight.w800,
-                        height: 1.0,
-                      ),
+                Builder(
+                  builder: (context) {
+                    final valueStyle = Theme.of(context)
+                        .textTheme
+                        .headlineMedium
+                        ?.copyWith(
+                          color: AppColors.navy,
+                          fontWeight: FontWeight.w800,
+                          height: 1.0,
+                        );
+                    if (animatedValue != null && valueFormatter != null) {
+                      return AnimatedCountText(
+                        value: animatedValue!,
+                        formatter: valueFormatter!,
+                        style: valueStyle,
+                      );
+                    }
+                    return Text(value, style: valueStyle);
+                  },
                 ),
                 if (subtitle != null) ...[
                   const SizedBox(height: 5),
