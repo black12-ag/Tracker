@@ -92,31 +92,88 @@ class _InventoryAdjustmentPageState
       child: _isLoading
           ? const ReferenceListPageSkeleton(showSearch: false, itemCount: 4)
           : _adjustments.isEmpty
-              ? Padding(
-                  padding: const EdgeInsets.only(top: 80),
-                  child: Text(
-                    'No adjustments found.',
-                    style: Theme.of(context).textTheme.bodyMedium,
+              ? const Padding(
+                  padding: EdgeInsets.only(top: 72),
+                  child: _EmptyState(
+                    icon: Icons.tune_rounded,
+                    title: 'No adjustments yet',
+                    message:
+                        'Record a stock correction to keep your inventory counts accurate.',
                   ),
                 )
               : AppSurfaceCard(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
                   child: Column(
-                    children: _adjustments.map((adjustment) {
+                    children: _adjustments.indexed.map((entry) {
+                      final index = entry.$1;
+                      final adjustment = entry.$2;
                       final item = adjustment['inventory_items'] is Map
                           ? Map<String, dynamic>.from(
                               adjustment['inventory_items'] as Map,
                             )
                           : const <String, dynamic>{};
-                      return ListTile(
-                        contentPadding: EdgeInsets.zero,
-                        title: Text(
-                          item['name'] as String? ?? 'Item',
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                        subtitle: Text(
-                          '${adjustment['movement_type'] == 'adjustment_plus' ? 'Positive' : 'Negative'} • ${AppFormatters.date(DateTime.tryParse((adjustment['movement_date'] as String?) ?? '') ?? DateTime.now())}',
-                        ),
-                        trailing: Text('${adjustment['quantity'] ?? 0}'),
+                      final isPlus =
+                          adjustment['movement_type'] == 'adjustment_plus';
+                      final qty = adjustment['quantity'] ?? 0;
+                      return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        item['name'] as String? ?? 'Item',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleMedium
+                                            ?.copyWith(
+                                              color: AppColors.charcoal,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                      ),
+                                      const SizedBox(height: 3),
+                                      Text(
+                                        '${isPlus ? 'Positive' : 'Negative'}  •  ${AppFormatters.date(DateTime.tryParse((adjustment['movement_date'] as String?) ?? '') ?? DateTime.now())}',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium
+                                            ?.copyWith(
+                                              color: AppColors.warmGray,
+                                            ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(width: 12),
+                                Text(
+                                  '${isPlus ? '+' : '-'}$qty',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleMedium
+                                      ?.copyWith(
+                                        color: isPlus
+                                            ? AppColors.navy
+                                            : AppColors.danger,
+                                        fontWeight: FontWeight.w800,
+                                      ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          if (index < _adjustments.length - 1)
+                            const Divider(
+                              height: 1,
+                              color: AppColors.line,
+                              thickness: 0.8,
+                            ),
+                        ],
                       );
                     }).toList(),
                   ),
@@ -145,6 +202,7 @@ class _AdjustmentDialogState extends ConsumerState<_AdjustmentDialog> {
   String _movementType = 'adjustment_plus';
   final DateTime _movementDate = DateTime.now();
   bool _isSaving = false;
+  String? _itemError;
 
   @override
   void initState() {
@@ -162,13 +220,14 @@ class _AdjustmentDialogState extends ConsumerState<_AdjustmentDialog> {
 
   Future<void> _save() async {
     if (_itemId == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Select an item.')),
-      );
+      setState(() => _itemError = 'Select an item');
       return;
     }
 
-    setState(() => _isSaving = true);
+    setState(() {
+      _itemError = null;
+      _isSaving = true;
+    });
     try {
       await ref.read(trackerRepositoryProvider).addInventoryAdjustment(
             createdBy: widget.profile.id,
@@ -207,14 +266,22 @@ class _AdjustmentDialogState extends ConsumerState<_AdjustmentDialog> {
           children: [
             DropdownButtonFormField<String>(
               initialValue: _itemId,
-              decoration: const InputDecoration(labelText: 'Item'),
+              decoration: InputDecoration(
+                labelText: 'Item',
+                prefixIcon: const Icon(Icons.inventory_2_outlined),
+                errorText: _itemError,
+              ),
               items: widget.items.map((item) {
                 return DropdownMenuItem<String>(
                   value: item['id'] as String,
                   child: Text(item['name'] as String? ?? 'Item'),
                 );
               }).toList(),
-              onChanged: (value) => setState(() => _itemId = value),
+              onChanged: (value) =>
+                  setState(() {
+                _itemId = value;
+                _itemError = null;
+              }),
             ),
             const SizedBox(height: 12),
             DropdownButtonFormField<String>(
@@ -267,6 +334,57 @@ class _AdjustmentDialogState extends ConsumerState<_AdjustmentDialog> {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _EmptyState extends StatelessWidget {
+  const _EmptyState({
+    required this.icon,
+    required this.title,
+    required this.message,
+  });
+
+  final IconData icon;
+  final String title;
+  final String message;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 320),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 56,
+              height: 56,
+              decoration: BoxDecoration(
+                color: AppColors.navy.withValues(alpha: 0.06),
+                borderRadius: BorderRadius.circular(18),
+              ),
+              alignment: Alignment.center,
+              child: Icon(icon, size: 26, color: AppColors.navy),
+            ),
+            const SizedBox(height: 14),
+            Text(
+              title,
+              style: Theme.of(context).textTheme.titleMedium,
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 6),
+            Text(
+              message,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium
+                  ?.copyWith(color: AppColors.warmGray),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -7,6 +7,7 @@ import 'package:liquid_soap_tracker/core/ui/buttons/primary_button.dart';
 import 'package:liquid_soap_tracker/core/ui/cards/app_surface_card.dart';
 import 'package:liquid_soap_tracker/core/ui/fields/app_text_field.dart';
 import 'package:liquid_soap_tracker/core/ui/states/reference_page_skeleton.dart';
+import 'package:liquid_soap_tracker/core/ui/widgets/animated_count_text.dart';
 import 'package:liquid_soap_tracker/core/utils/app_errors.dart';
 import 'package:liquid_soap_tracker/core/utils/formatters.dart';
 import 'package:liquid_soap_tracker/features/account/widgets/add_account_dialog.dart';
@@ -780,8 +781,9 @@ class _ItemsStep extends StatelessWidget {
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     const Spacer(),
-                    Text(
-                      AppFormatters.currency(total),
+                    AnimatedCountText(
+                      value: total,
+                      formatter: AppFormatters.currency,
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
                             color: AppColors.navy,
                           ),

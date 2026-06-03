@@ -8,6 +8,7 @@ import 'package:liquid_soap_tracker/core/ui/cards/app_surface_card.dart';
 import 'package:liquid_soap_tracker/core/ui/fields/app_text_field.dart';
 import 'package:liquid_soap_tracker/core/ui/layout/reference_page_scaffold.dart';
 import 'package:liquid_soap_tracker/core/ui/states/reference_page_skeleton.dart';
+import 'package:liquid_soap_tracker/core/ui/widgets/animated_count_text.dart';
 import 'package:liquid_soap_tracker/core/utils/app_errors.dart';
 import 'package:liquid_soap_tracker/core/utils/formatters.dart';
 
@@ -83,47 +84,145 @@ class _ExpensesPageState extends ConsumerState<ExpensesPage> {
       onMenuPressed: widget.onMenuPressed,
       floatingActionButton: FloatingActionButton(
         onPressed: _addExpense,
-        backgroundColor: AppColors.mint,
+        backgroundColor: AppColors.navy,
         foregroundColor: Colors.white,
         child: const Icon(Icons.add_rounded),
       ),
       child: _isLoading
           ? const ReferenceListPageSkeleton(
               showSearch: false,
+              showTopCard: true,
               itemCount: 5,
             )
-          : _expenses.isEmpty
-              ? Padding(
-                  padding: const EdgeInsets.only(top: 80),
-                  child: Text(
-                    'No expenses found.',
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                )
-              : AppSurfaceCard(
-                  child: Column(
-                    children: _expenses.map((expense) {
-                      final account = expense['accounts'] is Map
-                          ? Map<String, dynamic>.from(expense['accounts'] as Map)
-                          : const <String, dynamic>{};
-                      return ListTile(
-                        contentPadding: EdgeInsets.zero,
-                        title: Text(
-                          expense['category'] as String? ?? 'Expense',
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                        subtitle: Text(
-                          '${AppFormatters.date(DateTime.tryParse((expense['expense_date'] as String?) ?? '') ?? DateTime.now())} • ${account['account_name'] ?? 'No account'}',
-                        ),
-                        trailing: Text(
-                          AppFormatters.currency(
-                            (expense['amount'] as num?)?.toDouble() ?? 0,
+          : Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildTotalCard(context),
+                const SizedBox(height: 16),
+                if (_expenses.isEmpty)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 64),
+                    child: Center(
+                      child: Column(
+                        children: [
+                          const Icon(
+                            Icons.receipt_long_outlined,
+                            size: 40,
+                            color: AppColors.warmGray,
                           ),
-                        ),
-                      );
-                    }).toList(),
+                          const SizedBox(height: 12),
+                          Text(
+                            'No expenses found.',
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                else
+                  AppSurfaceCard(
+                    child: Column(
+                      children: _expenses.indexed.map((entry) {
+                        final index = entry.$1;
+                        final expense = entry.$2;
+                        final account = expense['accounts'] is Map
+                            ? Map<String, dynamic>.from(
+                                expense['accounts'] as Map)
+                            : const <String, dynamic>{};
+                        return Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            ListTile(
+                              contentPadding: EdgeInsets.zero,
+                              title: Text(
+                                expense['category'] as String? ?? 'Expense',
+                                style: Theme.of(context).textTheme.titleMedium,
+                              ),
+                              subtitle: Text(
+                                '${AppFormatters.date(DateTime.tryParse((expense['expense_date'] as String?) ?? '') ?? DateTime.now())} • ${account['account_name'] ?? 'No account'}',
+                              ),
+                              trailing: Text(
+                                AppFormatters.currency(
+                                  (expense['amount'] as num?)?.toDouble() ?? 0,
+                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium
+                                    ?.copyWith(
+                                      color: AppColors.danger,
+                                      fontWeight: FontWeight.w800,
+                                    ),
+                              ),
+                            ),
+                            if (index < _expenses.length - 1)
+                              const Divider(
+                                height: 1,
+                                color: AppColors.line,
+                                thickness: 0.8,
+                              ),
+                          ],
+                        );
+                      }).toList(),
+                    ),
                   ),
+              ],
+            ),
+    );
+  }
+
+  Widget _buildTotalCard(BuildContext context) {
+    final total = _expenses.fold<double>(
+      0,
+      (sum, expense) => sum + ((expense['amount'] as num?)?.toDouble() ?? 0),
+    );
+    return AppSurfaceCard(
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'TOTAL EXPENSES',
+                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                        fontSize: 10,
+                        letterSpacing: 0.6,
+                      ),
                 ),
+                const SizedBox(height: 6),
+                AnimatedCountText(
+                  value: total,
+                  formatter: AppFormatters.currency,
+                  style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                        color: AppColors.danger,
+                        fontWeight: FontWeight.w800,
+                      ),
+                ),
+              ],
+            ),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                'ENTRIES',
+                style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                      fontSize: 10,
+                      letterSpacing: 0.6,
+                    ),
+              ),
+              const SizedBox(height: 6),
+              Text(
+                '${_expenses.length}',
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      color: AppColors.warmGray,
+                      fontWeight: FontWeight.w800,
+                    ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

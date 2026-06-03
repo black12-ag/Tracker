@@ -149,7 +149,7 @@ class _LoanRecordsPageState extends ConsumerState<LoanRecordsPage> {
       onMenuPressed: widget.onMenuPressed,
       floatingActionButton: FloatingActionButton(
         onPressed: _addLoan,
-        backgroundColor: AppColors.mint,
+        backgroundColor: AppColors.navy,
         foregroundColor: Colors.white,
         child: const Icon(Icons.add_rounded),
       ),
@@ -291,7 +291,10 @@ class _LoanRecordsPageState extends ConsumerState<LoanRecordsPage> {
                                             .textTheme
                                             .titleLarge
                                             ?.copyWith(
-                                              color: AppColors.navy,
+                                              color: overdueLevel == 'severe' ||
+                                                      overdueLevel == 'late'
+                                                  ? AppColors.danger
+                                                  : AppColors.navy,
                                               fontWeight: FontWeight.w800,
                                             ),
                                       ),
@@ -350,24 +353,48 @@ class _LoanRecordsPageState extends ConsumerState<LoanRecordsPage> {
                 else
                   AppSurfaceCard(
                     child: Column(
-                      children: _loans.map((loan) {
+                      children: _loans.indexed.map((entry) {
+                        final index = entry.$1;
+                        final loan = entry.$2;
                         final partner = loan['partners'] is Map
                             ? Map<String, dynamic>.from(loan['partners'] as Map)
                             : const <String, dynamic>{};
-                        return ListTile(
-                          contentPadding: EdgeInsets.zero,
-                          title: Text(
-                            partner['name'] as String? ?? 'Partner',
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
-                          subtitle: Text(
-                            '${loan['direction'] == 'we_gave_them' ? 'We gave them' : 'They gave us'} • ${AppFormatters.date(DateTime.tryParse((loan['record_date'] as String?) ?? '') ?? DateTime.now())}',
-                          ),
-                          trailing: Text(
-                            AppFormatters.currency(
-                              (loan['balance_amount'] as num?)?.toDouble() ?? 0,
+                        final isMoneyIn = loan['direction'] != 'we_gave_them';
+                        return Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            ListTile(
+                              contentPadding: EdgeInsets.zero,
+                              title: Text(
+                                partner['name'] as String? ?? 'Partner',
+                                style: Theme.of(context).textTheme.titleMedium,
+                              ),
+                              subtitle: Text(
+                                '${isMoneyIn ? 'They gave us' : 'We gave them'} • ${AppFormatters.date(DateTime.tryParse((loan['record_date'] as String?) ?? '') ?? DateTime.now())}',
+                              ),
+                              trailing: Text(
+                                AppFormatters.currency(
+                                  (loan['balance_amount'] as num?)?.toDouble() ??
+                                      0,
+                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium
+                                    ?.copyWith(
+                                      color: isMoneyIn
+                                          ? AppColors.mint
+                                          : AppColors.navy,
+                                      fontWeight: FontWeight.w800,
+                                    ),
+                              ),
                             ),
-                          ),
+                            if (index < _loans.length - 1)
+                              const Divider(
+                                height: 1,
+                                color: AppColors.line,
+                                thickness: 0.8,
+                              ),
+                          ],
                         );
                       }).toList(),
                     ),

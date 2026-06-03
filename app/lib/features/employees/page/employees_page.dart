@@ -84,17 +84,13 @@ class _EmployeesPageState extends ConsumerState<EmployeesPage> {
               itemCount: 5,
             )
           : _employees.isEmpty
-              ? Padding(
-                  padding: const EdgeInsets.only(top: 80),
-                  child: Column(
-                    children: [
-                      Icon(Icons.badge_outlined, size: 40, color: AppColors.warmGray),
-                      const SizedBox(height: 12),
-                      Text(
-                        'No employees found.',
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                    ],
+              ? const Padding(
+                  padding: EdgeInsets.only(top: 72),
+                  child: _EmptyState(
+                    icon: Icons.badge_outlined,
+                    title: 'No employees yet',
+                    message:
+                        'Add a staff member to give them access and track their activity.',
                   ),
                 )
               : AppSurfaceCard(
@@ -135,6 +131,9 @@ class _AddEmployeeDialogState extends ConsumerState<_AddEmployeeDialog> {
   late final TextEditingController _phoneController;
   late final TextEditingController _passwordController;
   bool _isSaving = false;
+  String? _nameError;
+  String? _phoneError;
+  String? _passwordError;
 
   @override
   void initState() {
@@ -153,16 +152,24 @@ class _AddEmployeeDialogState extends ConsumerState<_AddEmployeeDialog> {
   }
 
   Future<void> _save() async {
-    if (_nameController.text.trim().isEmpty ||
-        _phoneController.text.trim().isEmpty ||
-        _passwordController.text.trim().isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Name, phone, and password are required.')),
-      );
+    final nameEmpty = _nameController.text.trim().isEmpty;
+    final phoneEmpty = _phoneController.text.trim().isEmpty;
+    final passwordEmpty = _passwordController.text.trim().isEmpty;
+    if (nameEmpty || phoneEmpty || passwordEmpty) {
+      setState(() {
+        _nameError = nameEmpty ? 'Name is required' : null;
+        _phoneError = phoneEmpty ? 'Phone number is required' : null;
+        _passwordError = passwordEmpty ? 'Password is required' : null;
+      });
       return;
     }
 
-    setState(() => _isSaving = true);
+    setState(() {
+      _nameError = null;
+      _phoneError = null;
+      _passwordError = null;
+      _isSaving = true;
+    });
     try {
       await ref.read(trackerRepositoryProvider).createStaff(
             name: _nameController.text,
@@ -200,20 +207,40 @@ class _AddEmployeeDialogState extends ConsumerState<_AddEmployeeDialog> {
               controller: _nameController,
               label: 'Name',
               hintText: 'Enter name',
+              prefixIcon: Icons.person_outline_rounded,
+              textInputAction: TextInputAction.next,
+              errorText: _nameError,
+              onChanged: (_) {
+                if (_nameError != null) setState(() => _nameError = null);
+              },
             ),
             const SizedBox(height: 12),
             AppTextField(
               controller: _phoneController,
               label: 'Phone Number',
               hintText: 'Enter phone number',
+              prefixIcon: Icons.phone_outlined,
               keyboardType: TextInputType.phone,
+              textInputAction: TextInputAction.next,
+              errorText: _phoneError,
+              onChanged: (_) {
+                if (_phoneError != null) setState(() => _phoneError = null);
+              },
             ),
             const SizedBox(height: 12),
             AppTextField(
               controller: _passwordController,
               label: 'Password',
               hintText: 'Enter password',
+              prefixIcon: Icons.lock_outline_rounded,
               obscureText: true,
+              textInputAction: TextInputAction.done,
+              errorText: _passwordError,
+              onChanged: (_) {
+                if (_passwordError != null) {
+                  setState(() => _passwordError = null);
+                }
+              },
             ),
           ],
         ),
@@ -232,6 +259,57 @@ class _AddEmployeeDialogState extends ConsumerState<_AddEmployeeDialog> {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _EmptyState extends StatelessWidget {
+  const _EmptyState({
+    required this.icon,
+    required this.title,
+    required this.message,
+  });
+
+  final IconData icon;
+  final String title;
+  final String message;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 320),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 56,
+              height: 56,
+              decoration: BoxDecoration(
+                color: AppColors.navy.withValues(alpha: 0.06),
+                borderRadius: BorderRadius.circular(18),
+              ),
+              alignment: Alignment.center,
+              child: Icon(icon, size: 26, color: AppColors.navy),
+            ),
+            const SizedBox(height: 14),
+            Text(
+              title,
+              style: Theme.of(context).textTheme.titleMedium,
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 6),
+            Text(
+              message,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium
+                  ?.copyWith(color: AppColors.warmGray),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:liquid_soap_tracker/app/theme/app_colors.dart';
 import 'package:liquid_soap_tracker/core/models/app_profile.dart';
 import 'package:liquid_soap_tracker/core/providers/core_providers.dart';
 import 'package:liquid_soap_tracker/core/ui/buttons/primary_button.dart';
@@ -69,6 +70,7 @@ class _ReceivePageState extends ConsumerState<ReceivePage> {
             child: const Text('Cancel'),
           ),
           FilledButton(
+            style: FilledButton.styleFrom(backgroundColor: AppColors.navy),
             onPressed: () => Navigator.of(context).pop(true),
             child: const Text('Receive'),
           ),
@@ -103,22 +105,13 @@ class _ReceivePageState extends ConsumerState<ReceivePage> {
       child: _isLoading
           ? const ReferenceListPageSkeleton(showSearch: false, itemCount: 4)
           : _orders.isEmpty
-              ? Padding(
-                  padding: const EdgeInsets.only(top: 80),
-                  child: Column(
-                    children: [
-                      Text(
-                        'No orders waiting to be received.',
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
+              ? const Padding(
+                  padding: EdgeInsets.only(top: 72),
+                  child: _EmptyState(
+                    icon: Icons.inbox_outlined,
+                    title: 'Nothing to receive',
+                    message:
                         'Create a purchase order first, then come back here to receive it.',
-                        style: Theme.of(context).textTheme.bodyMedium
-                            ?.copyWith(color: Colors.grey),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
                   ),
                 )
               : AppSurfaceCard(
@@ -157,6 +150,57 @@ class _ReceivePageState extends ConsumerState<ReceivePage> {
                     }).toList(),
                   ),
                 ),
+    );
+  }
+}
+
+class _EmptyState extends StatelessWidget {
+  const _EmptyState({
+    required this.icon,
+    required this.title,
+    required this.message,
+  });
+
+  final IconData icon;
+  final String title;
+  final String message;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 320),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 56,
+              height: 56,
+              decoration: BoxDecoration(
+                color: AppColors.navy.withValues(alpha: 0.06),
+                borderRadius: BorderRadius.circular(18),
+              ),
+              alignment: Alignment.center,
+              child: Icon(icon, size: 26, color: AppColors.navy),
+            ),
+            const SizedBox(height: 14),
+            Text(
+              title,
+              style: Theme.of(context).textTheme.titleMedium,
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 6),
+            Text(
+              message,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium
+                  ?.copyWith(color: AppColors.warmGray),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:liquid_soap_tracker/app/theme/app_colors.dart';
 import 'package:liquid_soap_tracker/core/models/app_profile.dart';
 import 'package:liquid_soap_tracker/core/providers/core_providers.dart';
 import 'package:liquid_soap_tracker/core/ui/cards/app_surface_card.dart';
@@ -161,9 +162,16 @@ class _ProductionPageState extends ConsumerState<ProductionPage> {
                     entriesAsync.when(
                       data: (entries) {
                         if (entries.isEmpty) {
-                          return Text(
-                            'No production has been recorded yet.',
-                            style: Theme.of(context).textTheme.bodyMedium,
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            child: Text(
+                              'No production has been recorded yet. '
+                              'Add your first batch above.',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.copyWith(color: AppColors.warmGray),
+                            ),
                           );
                         }
 

@@ -37,13 +37,33 @@ class ProductionFormSection extends StatelessWidget {
             subtitle: 'Write what was made today.',
           ),
           const SizedBox(height: 16),
-          ListTile(
-            contentPadding: EdgeInsets.zero,
-            title: const Text('Production date'),
-            subtitle: Text(AppFormatters.date(selectedDate)),
-            trailing: IconButton(
-              onPressed: onPickDate,
-              icon: const Icon(Icons.calendar_month_outlined),
+          InkWell(
+            onTap: onPickDate,
+            borderRadius: BorderRadius.circular(12),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Production date',
+                          style: Theme.of(context).textTheme.bodySmall,
+                        ),
+                        const SizedBox(height: 2),
+                        Text(
+                          AppFormatters.date(selectedDate),
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  const Icon(Icons.calendar_month_outlined),
+                ],
+              ),
             ),
           ),
           const SizedBox(height: 12),

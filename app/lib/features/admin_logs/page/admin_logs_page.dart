@@ -95,18 +95,41 @@ class _AdminLogsPageState extends ConsumerState<AdminLogsPage> {
                   ref.read(adminLogsControllerProvider.notifier).load(),
             )
           else if (state.logs.isEmpty)
-            Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(Icons.history_outlined, size: 40, color: AppColors.warmGray),
-                  const SizedBox(height: 8),
-                  Text('No logs found.',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyMedium
-                          ?.copyWith(color: AppColors.warmGray)),
-                ],
+            Padding(
+              padding: const EdgeInsets.only(top: 56),
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 320),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        width: 56,
+                        height: 56,
+                        decoration: BoxDecoration(
+                          color: AppColors.navy.withValues(alpha: 0.06),
+                          borderRadius: BorderRadius.circular(18),
+                        ),
+                        alignment: Alignment.center,
+                        child: const Icon(Icons.history_outlined,
+                            size: 26, color: AppColors.navy),
+                      ),
+                      const SizedBox(height: 14),
+                      Text('No activity yet',
+                          style: Theme.of(context).textTheme.titleMedium,
+                          textAlign: TextAlign.center),
+                      const SizedBox(height: 6),
+                      Text(
+                        'Actions across the app will show up here as they happen.',
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyMedium
+                            ?.copyWith(color: AppColors.warmGray),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
               ),
             )
           else
@@ -122,7 +145,16 @@ class _AdminLogsPageState extends ConsumerState<AdminLogsPage> {
                 if (index == state.logs.length) {
                   return const Padding(
                     padding: EdgeInsets.all(16),
-                    child: Center(child: CircularProgressIndicator()),
+                    child: Center(
+                      child: SizedBox(
+                        width: 22,
+                        height: 22,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2.2,
+                          color: AppColors.navy,
+                        ),
+                      ),
+                    ),
                   );
                 }
                 return _LogTile(log: state.logs[index]);
@@ -162,10 +194,15 @@ class _LogTile extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CircleAvatar(
-            radius: 16,
-            backgroundColor: AppColors.mintSoft,
-            child: Icon(_icon(), color: AppColors.navy, size: 15),
+          Container(
+            width: 32,
+            height: 32,
+            decoration: BoxDecoration(
+              color: AppColors.navy.withValues(alpha: 0.08),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            alignment: Alignment.center,
+            child: Icon(_icon(), color: AppColors.navy, size: 16),
           ),
           const SizedBox(width: 12),
           Expanded(

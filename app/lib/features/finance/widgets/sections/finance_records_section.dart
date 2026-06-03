@@ -23,9 +23,12 @@ class FinanceRecordsSection extends StatelessWidget {
           ),
           const SizedBox(height: 14),
           if (records.isEmpty)
-            Text(
-              'No finance records yet.',
-              style: Theme.of(context).textTheme.bodyMedium,
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Text(
+                'No finance records yet.',
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
             )
           else
             ...records.map(

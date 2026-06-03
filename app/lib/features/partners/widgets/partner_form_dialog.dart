@@ -25,6 +25,7 @@ class _PartnerFormDialogState extends ConsumerState<PartnerFormDialog> {
   late final TextEditingController _noteController;
   late String _partnerType;
   bool _isSaving = false;
+  String? _nameError;
 
   @override
   void initState() {
@@ -45,13 +46,14 @@ class _PartnerFormDialogState extends ConsumerState<PartnerFormDialog> {
 
   Future<void> _save() async {
     if (_nameController.text.trim().isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Partner name is required.')),
-      );
+      setState(() => _nameError = 'Partner name is required');
       return;
     }
 
-    setState(() => _isSaving = true);
+    setState(() {
+      _nameError = null;
+      _isSaving = true;
+    });
     try {
       final partner = await ref.read(trackerRepositoryProvider).createPartner(
             createdBy: widget.createdBy,
@@ -95,6 +97,11 @@ class _PartnerFormDialogState extends ConsumerState<PartnerFormDialog> {
               label: 'Name',
               hintText: 'Partner name',
               prefixIcon: Icons.person_outline_rounded,
+              textInputAction: TextInputAction.next,
+              errorText: _nameError,
+              onChanged: (_) {
+                if (_nameError != null) setState(() => _nameError = null);
+              },
             ),
             const SizedBox(height: 14),
             AppTextField(

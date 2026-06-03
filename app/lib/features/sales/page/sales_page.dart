@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:liquid_soap_tracker/app/theme/app_colors.dart';
+import 'package:liquid_soap_tracker/app/theme/app_motion.dart';
 import 'package:liquid_soap_tracker/core/models/app_profile.dart';
 import 'package:liquid_soap_tracker/core/providers/core_providers.dart';
 import 'package:liquid_soap_tracker/core/ui/cards/app_surface_card.dart';
@@ -163,19 +164,7 @@ class _SalesPageState extends ConsumerState<SalesPage> {
           if (_isLoading)
             const ReferenceListPageSkeleton(itemCount: 5)
           else if (_orders.isEmpty)
-            Padding(
-              padding: const EdgeInsets.only(top: 80),
-              child: Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.inbox_outlined, size: 40, color: AppColors.warmGray),
-                    const SizedBox(height: 8),
-                    Text('No orders found.', style: Theme.of(context).textTheme.bodyMedium),
-                  ],
-                ),
-              ),
-            )
+            const _SalesEmptyState()
           else
             AppSurfaceCard(
               child: Column(
@@ -187,14 +176,17 @@ class _SalesPageState extends ConsumerState<SalesPage> {
                         ? Map<String, dynamic>.from(order['partners'] as Map)
                         : const <String, dynamic>{};
                     rows.add(
-                      OrderRow(
-                        orderCode: order['order_code'] as String? ?? 'Sales order',
-                        partnerName: partner['name'] as String? ?? 'No customer',
-                        date: DateTime.tryParse((order['order_date'] as String?) ?? '') ?? DateTime.now(),
-                        amount: (order['total_amount'] as num?)?.toDouble() ?? 0,
-                        status: order['status'] as String? ?? 'draft',
-                        type: OrderRowType.sales,
-                        onTap: () => _showDetails(order),
+                      _StaggeredListItem(
+                        index: i,
+                        child: OrderRow(
+                          orderCode: order['order_code'] as String? ?? 'Sales order',
+                          partnerName: partner['name'] as String? ?? 'No customer',
+                          date: DateTime.tryParse((order['order_date'] as String?) ?? '') ?? DateTime.now(),
+                          amount: (order['total_amount'] as num?)?.toDouble() ?? 0,
+                          status: order['status'] as String? ?? 'draft',
+                          type: OrderRowType.sales,
+                          onTap: () => _showDetails(order),
+                        ),
                       ),
                     );
                     if (i < _orders.length - 1) {
@@ -209,6 +201,77 @@ class _SalesPageState extends ConsumerState<SalesPage> {
             ),
         ],
       ),
+    );
+  }
+}
+
+/// Consistent empty state for the sales list.
+class _SalesEmptyState extends StatelessWidget {
+  const _SalesEmptyState();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(24, 72, 24, 24),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Icon(Icons.receipt_long_outlined, size: 44, color: AppColors.warmGray),
+          const SizedBox(height: 12),
+          Text(
+            'No sales yet',
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  color: AppColors.charcoal,
+                  fontWeight: FontWeight.w700,
+                ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            'Recorded sales will appear here.',
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: AppColors.warmGray,
+                ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Subtle staggered fade + rise entrance for list rows. Honours reduced motion
+/// (renders the row instantly with no offset).
+class _StaggeredListItem extends StatelessWidget {
+  const _StaggeredListItem({required this.index, required this.child});
+
+  final int index;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    if (AppMotion.noAnimations(context)) {
+      return child;
+    }
+    final delay = AppMotion.listStaggerStep * index;
+    return TweenAnimationBuilder<double>(
+      key: ValueKey(index),
+      tween: Tween<double>(begin: 0, end: 1),
+      duration: AppMotion.listItemFade + delay,
+      curve: Interval(
+        (delay.inMilliseconds /
+                (AppMotion.listItemFade + delay).inMilliseconds)
+            .clamp(0.0, 1.0),
+        1,
+        curve: AppMotion.enter,
+      ),
+      builder: (context, t, child) => Opacity(
+        opacity: t,
+        child: Transform.translate(
+          offset: Offset(0, (1 - t) * 8),
+          child: child,
+        ),
+      ),
+      child: child,
     );
   }
 }

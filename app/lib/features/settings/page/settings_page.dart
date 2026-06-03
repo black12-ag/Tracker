@@ -8,6 +8,7 @@ import 'package:liquid_soap_tracker/core/ui/buttons/primary_button.dart';
 import 'package:liquid_soap_tracker/core/ui/cards/app_surface_card.dart';
 import 'package:liquid_soap_tracker/core/ui/fields/app_text_field.dart';
 import 'package:liquid_soap_tracker/core/ui/layout/reference_page_scaffold.dart';
+import 'package:liquid_soap_tracker/core/ui/motion/pressable_scale.dart';
 import 'package:liquid_soap_tracker/core/utils/app_errors.dart';
 import 'package:liquid_soap_tracker/features/profile/page/profile_page.dart';
 
@@ -29,6 +30,8 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
   late final TextEditingController _passwordController;
   late final TextEditingController _confirmController;
   bool _isSaving = false;
+  String? _passwordError;
+  String? _confirmError;
 
   @override
   void initState() {
@@ -47,21 +50,25 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
   Future<void> _changePassword() async {
     final password = _passwordController.text.trim();
     if (password.length < 8) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Password must be at least 8 characters long.'),
-        ),
-      );
+      setState(() {
+        _passwordError = 'Must be at least 8 characters';
+        _confirmError = null;
+      });
       return;
     }
     if (password != _confirmController.text.trim()) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Passwords do not match.')),
-      );
+      setState(() {
+        _passwordError = null;
+        _confirmError = 'Passwords do not match';
+      });
       return;
     }
 
-    setState(() => _isSaving = true);
+    setState(() {
+      _passwordError = null;
+      _confirmError = null;
+      _isSaving = true;
+    });
     try {
       await ref.read(authRepositoryProvider).updatePassword(password);
       if (!mounted) {
@@ -205,14 +212,30 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                   controller: _passwordController,
                   label: 'New password',
                   hintText: 'Enter new password',
+                  prefixIcon: Icons.lock_outline_rounded,
                   obscureText: true,
+                  textInputAction: TextInputAction.next,
+                  errorText: _passwordError,
+                  onChanged: (_) {
+                    if (_passwordError != null) {
+                      setState(() => _passwordError = null);
+                    }
+                  },
                 ),
                 const SizedBox(height: 14),
                 AppTextField(
                   controller: _confirmController,
                   label: 'Confirm password',
                   hintText: 'Repeat new password',
+                  prefixIcon: Icons.lock_outline_rounded,
                   obscureText: true,
+                  textInputAction: TextInputAction.done,
+                  errorText: _confirmError,
+                  onChanged: (_) {
+                    if (_confirmError != null) {
+                      setState(() => _confirmError = null);
+                    }
+                  },
                 ),
                 const SizedBox(height: 16),
                 PrimaryButton(
@@ -227,15 +250,35 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
 
           // ── Section 3: ACCOUNT ─────────────────────────────────────
           _sectionLabel(context, 'ACCOUNT'),
-          AppSurfaceCard(
-            child: SizedBox(
-              width: double.infinity,
-              child: OutlinedButton(
-                onPressed: _logout,
-                style: OutlinedButton.styleFrom(
-                  foregroundColor: AppColors.danger,
-                ),
-                child: const Text('Sign out'),
+          PressableScale(
+            onTap: _logout,
+            child: AppSurfaceCard(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+              child: Row(
+                children: [
+                  Container(
+                    width: 36,
+                    height: 36,
+                    decoration: BoxDecoration(
+                      color: AppColors.danger.withValues(alpha: 0.10),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    alignment: Alignment.center,
+                    child: const Icon(
+                      Icons.logout_rounded,
+                      color: AppColors.danger,
+                      size: 18,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Text(
+                    'Sign out',
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          color: AppColors.danger,
+                          fontWeight: FontWeight.w600,
+                        ),
+                  ),
+                ],
               ),
             ),
           ),

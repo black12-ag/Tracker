@@ -108,34 +108,154 @@ class _PartnersPageState extends ConsumerState<PartnersPage> {
           if (_isLoading)
             const ReferenceListPageSkeleton(itemCount: 5)
           else if (_partners.isEmpty)
-            Padding(
-              padding: const EdgeInsets.only(top: 80),
-              child: Text(
-                'No partners found.',
-                style: Theme.of(context).textTheme.bodyMedium,
+            const Padding(
+              padding: EdgeInsets.only(top: 72),
+              child: _EmptyState(
+                icon: Icons.handshake_outlined,
+                title: 'No partners yet',
+                message:
+                    'Add a customer or supplier to start tracking orders and balances.',
               ),
             )
           else
             AppSurfaceCard(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
               child: Column(
-                children: _partners.map((partner) {
-                  return ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    title: Text(
-                      partner['name'] as String? ?? 'Partner',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    subtitle: Text(
-                      [
-                        partner['phone'] as String? ?? '',
-                        partner['partner_type'] as String? ?? '',
-                      ].where((value) => value.isNotEmpty).join(' • '),
-                    ),
+                children: _partners.indexed.map((entry) {
+                  final index = entry.$1;
+                  final partner = entry.$2;
+                  final subtitle = [
+                    partner['phone'] as String? ?? '',
+                    partner['partner_type'] as String? ?? '',
+                  ].where((value) => value.isNotEmpty).join('  •  ');
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      _PartnerRow(
+                        name: partner['name'] as String? ?? 'Partner',
+                        subtitle: subtitle,
+                      ),
+                      if (index < _partners.length - 1)
+                        const Divider(
+                          height: 1,
+                          color: AppColors.line,
+                          thickness: 0.8,
+                        ),
+                    ],
                   );
                 }).toList(),
               ),
             ),
         ],
+      ),
+    );
+  }
+}
+
+class _PartnerRow extends StatelessWidget {
+  const _PartnerRow({required this.name, required this.subtitle});
+
+  final String name;
+  final String subtitle;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      child: Row(
+        children: [
+          Container(
+            width: 36,
+            height: 36,
+            decoration: BoxDecoration(
+              color: AppColors.navy.withValues(alpha: 0.08),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            alignment: Alignment.center,
+            child: const Icon(
+              Icons.handshake_outlined,
+              color: AppColors.navy,
+              size: 18,
+            ),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  name,
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: AppColors.charcoal,
+                        fontWeight: FontWeight.w600,
+                      ),
+                ),
+                if (subtitle.isNotEmpty) ...[
+                  const SizedBox(height: 3),
+                  Text(
+                    subtitle,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: AppColors.warmGray,
+                        ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _EmptyState extends StatelessWidget {
+  const _EmptyState({
+    required this.icon,
+    required this.title,
+    required this.message,
+  });
+
+  final IconData icon;
+  final String title;
+  final String message;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 320),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 56,
+              height: 56,
+              decoration: BoxDecoration(
+                color: AppColors.navy.withValues(alpha: 0.06),
+                borderRadius: BorderRadius.circular(18),
+              ),
+              alignment: Alignment.center,
+              child: Icon(icon, size: 26, color: AppColors.navy),
+            ),
+            const SizedBox(height: 14),
+            Text(
+              title,
+              style: Theme.of(context).textTheme.titleMedium,
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 6),
+            Text(
+              message,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium
+                  ?.copyWith(color: AppColors.warmGray),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
       ),
     );
   }

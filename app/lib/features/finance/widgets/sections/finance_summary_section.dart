@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:liquid_soap_tracker/app/theme/app_colors.dart';
 import 'package:liquid_soap_tracker/core/ui/cards/app_metric_card.dart';
 import 'package:liquid_soap_tracker/core/utils/formatters.dart';
 import 'package:liquid_soap_tracker/features/finance/models/finance_summary.dart';
@@ -10,18 +11,30 @@ class FinanceSummarySection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final profitIsPositive = summary.netProfit >= 0;
     final cards = [
       AppMetricCard(
         label: 'Cash in',
         value: AppFormatters.currency(summary.totalPaid),
+        animatedValue: summary.totalPaid,
+        valueFormatter: AppFormatters.currency,
+        accentColor: AppColors.mint,
       ),
       AppMetricCard(
         label: 'Customers owe',
         value: AppFormatters.currency(summary.totalBalance),
+        animatedValue: summary.totalBalance,
+        valueFormatter: AppFormatters.currency,
+        accentColor: summary.totalBalance > 0
+            ? AppColors.warning
+            : AppColors.warmGray,
       ),
       AppMetricCard(
         label: 'Profit',
         value: AppFormatters.currency(summary.netProfit),
+        animatedValue: summary.netProfit,
+        valueFormatter: AppFormatters.currency,
+        accentColor: profitIsPositive ? AppColors.mint : AppColors.danger,
         subtitle: '${summary.openLoans} balances open',
       ),
     ];

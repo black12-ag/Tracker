@@ -6,6 +6,7 @@ import 'package:liquid_soap_tracker/core/providers/core_providers.dart';
 import 'package:liquid_soap_tracker/core/ui/cards/app_surface_card.dart';
 import 'package:liquid_soap_tracker/core/ui/layout/reference_page_scaffold.dart';
 import 'package:liquid_soap_tracker/core/ui/states/reference_page_skeleton.dart';
+import 'package:liquid_soap_tracker/core/ui/widgets/animated_count_text.dart';
 import 'package:liquid_soap_tracker/core/utils/app_errors.dart';
 import 'package:liquid_soap_tracker/core/utils/formatters.dart';
 
@@ -224,6 +225,27 @@ class _SummaryTab extends StatelessWidget {
           spacing: 12,
           runSpacing: 12,
           children: data.entries.map((entry) {
+            final key = entry.key.toLowerCase();
+            final value = entry.value;
+            final isProfit =
+                key.contains('profit') || key.contains('margin');
+            final isCurrency = value is num &&
+                (key.contains('amount') ||
+                    key.contains('value') ||
+                    key.contains('profit') ||
+                    key.contains('revenue') ||
+                    key.contains('balance') ||
+                    key.contains('bank') ||
+                    key.contains('asset'));
+            final numeric = value is num ? value.toDouble() : 0.0;
+            final valueColor = isProfit
+                ? (numeric < 0 ? AppColors.danger : AppColors.mint)
+                : AppColors.navy;
+            final valueStyle =
+                Theme.of(context).textTheme.titleLarge?.copyWith(
+                      color: valueColor,
+                      fontWeight: FontWeight.w800,
+                    );
             return SizedBox(
               width: (MediaQuery.of(context).size.width - 56) / 2,
               child: AppSurfaceCard(
@@ -236,12 +258,17 @@ class _SummaryTab extends StatelessWidget {
                       style: Theme.of(context).textTheme.labelMedium,
                     ),
                     const SizedBox(height: 8),
-                    Text(
-                      _formatValue(entry.key, entry.value),
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            color: AppColors.navy,
-                          ),
-                    ),
+                    if (isCurrency)
+                      AnimatedCountText(
+                        value: numeric,
+                        formatter: AppFormatters.currency,
+                        style: valueStyle,
+                      )
+                    else
+                      Text(
+                        _formatValue(entry.key, entry.value),
+                        style: valueStyle,
+                      ),
                   ],
                 ),
               ),

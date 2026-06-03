@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:liquid_soap_tracker/app/theme/app_colors.dart';
+import 'package:liquid_soap_tracker/app/theme/app_motion.dart';
 import 'package:liquid_soap_tracker/core/models/app_profile.dart';
 import 'package:liquid_soap_tracker/core/providers/core_providers.dart';
 import 'package:liquid_soap_tracker/core/ui/cards/app_surface_card.dart';
@@ -106,19 +107,7 @@ class _InventoryPageState extends ConsumerState<InventoryPage> {
           if (_isLoading)
             const ReferenceListPageSkeleton(itemCount: 5)
           else if (_items.isEmpty)
-            Padding(
-              padding: const EdgeInsets.only(top: 80),
-              child: Column(
-                children: [
-                  Icon(Icons.inventory_2_outlined, size: 40, color: AppColors.warmGray),
-                  const SizedBox(height: 12),
-                  Text(
-                    'No inventory items found.',
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                ],
-              ),
-            )
+            const _InventoryEmptyState()
           else
             AppSurfaceCard(
               child: Column(
@@ -128,13 +117,16 @@ class _InventoryPageState extends ConsumerState<InventoryPage> {
                   return Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      InventoryRow(
-                        name: item['name'] as String? ?? '',
-                        sku: item['sku'] as String? ?? '',
-                        unitType: item['unit_type'] as String? ?? '',
-                        stockQty: (item['current_stock'] as num?)?.toInt() ?? 0,
-                        price: (item['selling_price'] as num?)?.toDouble() ?? 0,
-                        onTap: () => _openItem(item),
+                      _StaggeredListItem(
+                        index: index,
+                        child: InventoryRow(
+                          name: item['name'] as String? ?? '',
+                          sku: item['sku'] as String? ?? '',
+                          unitType: item['unit_type'] as String? ?? '',
+                          stockQty: (item['current_stock'] as num?)?.toInt() ?? 0,
+                          price: (item['selling_price'] as num?)?.toDouble() ?? 0,
+                          onTap: () => _openItem(item),
+                        ),
                       ),
                       if (index < _items.length - 1)
                         const Divider(height: 1, color: AppColors.line, thickness: 0.8),
@@ -145,6 +137,77 @@ class _InventoryPageState extends ConsumerState<InventoryPage> {
             ),
         ],
       ),
+    );
+  }
+}
+
+/// Consistent empty state for the inventory list.
+class _InventoryEmptyState extends StatelessWidget {
+  const _InventoryEmptyState();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(24, 72, 24, 24),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Icon(Icons.inventory_2_outlined, size: 44, color: AppColors.warmGray),
+          const SizedBox(height: 12),
+          Text(
+            'No items yet',
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  color: AppColors.charcoal,
+                  fontWeight: FontWeight.w700,
+                ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            'Add your first product to start tracking stock.',
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: AppColors.warmGray,
+                ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Subtle staggered fade + rise entrance for list rows. Honours reduced motion
+/// (renders the row instantly with no offset).
+class _StaggeredListItem extends StatelessWidget {
+  const _StaggeredListItem({required this.index, required this.child});
+
+  final int index;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    if (AppMotion.noAnimations(context)) {
+      return child;
+    }
+    final delay = AppMotion.listStaggerStep * index;
+    return TweenAnimationBuilder<double>(
+      key: ValueKey(index),
+      tween: Tween<double>(begin: 0, end: 1),
+      duration: AppMotion.listItemFade + delay,
+      curve: Interval(
+        (delay.inMilliseconds /
+                (AppMotion.listItemFade + delay).inMilliseconds)
+            .clamp(0.0, 1.0),
+        1,
+        curve: AppMotion.enter,
+      ),
+      builder: (context, t, child) => Opacity(
+        opacity: t,
+        child: Transform.translate(
+          offset: Offset(0, (1 - t) * 8),
+          child: child,
+        ),
+      ),
+      child: child,
     );
   }
 }

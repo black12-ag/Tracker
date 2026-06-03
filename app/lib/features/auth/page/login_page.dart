@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:liquid_soap_tracker/app/theme/app_colors.dart';
+import 'package:liquid_soap_tracker/app/theme/app_motion.dart';
 import 'package:liquid_soap_tracker/core/config/app_identity.dart';
 import 'package:liquid_soap_tracker/core/offline/services/offline_error_detector.dart';
 import 'package:liquid_soap_tracker/core/providers/core_providers.dart';
 import 'package:liquid_soap_tracker/core/ui/cards/app_surface_card.dart';
 import 'package:liquid_soap_tracker/core/ui/fields/app_text_field.dart';
+import 'package:liquid_soap_tracker/core/ui/motion/pressable_scale.dart';
 import 'package:liquid_soap_tracker/features/auth/controller/auth_controller.dart';
 import 'package:liquid_soap_tracker/features/auth/widgets/buttons/login_submit_button.dart';
 import 'package:liquid_soap_tracker/features/auth/widgets/fields/login_email_field.dart';
@@ -472,10 +474,13 @@ class _TabButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return PressableScale(
       onTap: onTap,
+      scale: AppMotion.pressScaleSubtle,
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 180),
+        duration: AppMotion.micro,
+        alignment: Alignment.center,
+        constraints: const BoxConstraints(minHeight: 44),
         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
         decoration: BoxDecoration(
           color: isSelected ? AppColors.navy : Colors.transparent,

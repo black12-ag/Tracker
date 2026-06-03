@@ -9,6 +9,7 @@ import 'package:liquid_soap_tracker/core/ui/fields/app_text_field.dart';
 import 'package:liquid_soap_tracker/core/ui/layout/reference_page_scaffold.dart';
 import 'package:liquid_soap_tracker/core/ui/rows/account_row.dart';
 import 'package:liquid_soap_tracker/core/ui/states/reference_page_skeleton.dart';
+import 'package:liquid_soap_tracker/core/ui/widgets/animated_count_text.dart';
 import 'package:liquid_soap_tracker/core/utils/app_errors.dart';
 import 'package:liquid_soap_tracker/features/account/widgets/add_account_dialog.dart';
 
@@ -176,7 +177,7 @@ class _AccountPageState extends ConsumerState<AccountPage> {
       showBottomNavigation: false,
       floatingActionButton: FloatingActionButton(
         onPressed: _showActions,
-        backgroundColor: AppColors.mint,
+        backgroundColor: AppColors.navy,
         foregroundColor: Colors.white,
         child: const Icon(Icons.menu_rounded),
       ),
@@ -197,10 +198,13 @@ class _AccountPageState extends ConsumerState<AccountPage> {
                         ),
                       ),
                       const SizedBox(height: 6),
-                      Text(
-                        _formatBalance(totalBalance),
+                      AnimatedCountText(
+                        value: totalBalance,
+                        formatter: _formatBalance,
                         style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                          color: AppColors.navy,
+                          color: totalBalance < 0
+                              ? AppColors.danger
+                              : AppColors.navy,
                           fontWeight: FontWeight.w800,
                         ),
                       ),
