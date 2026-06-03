@@ -82,7 +82,7 @@ Deno.serve(async (request) => {
 
     const { data: callerProfile, error: profileError } = await serviceClient
       .from('profiles')
-      .select('id, role, is_active')
+      .select('id, role, is_active, workspace_id')
       .eq('id', user.id)
       .maybeSingle();
 
@@ -97,6 +97,13 @@ Deno.serve(async (request) => {
       return Response.json(
         { error: 'Owner access is required.' },
         { status: 403, headers: corsHeaders },
+      );
+    }
+
+    if (!callerProfile.workspace_id) {
+      return Response.json(
+        { error: 'Your account is not linked to a workspace yet.' },
+        { status: 409, headers: corsHeaders },
       );
     }
 
@@ -143,6 +150,11 @@ Deno.serve(async (request) => {
         user_metadata: {
           display_name: name,
           phone: normalizedPhone,
+        },
+        // created_by_owner lives in app_metadata, which is writable only by
+        // the service role. The handle_new_user trigger reads it from there
+        // so a public self-signup can never forge staff status.
+        app_metadata: {
           created_by_owner: user.id,
         },
       });
@@ -162,6 +174,7 @@ Deno.serve(async (request) => {
         display_name: name,
         phone: normalizedPhone,
         created_by_owner: user.id,
+        workspace_id: callerProfile.workspace_id,
       })
       .eq('id', createdUser.user.id);
 

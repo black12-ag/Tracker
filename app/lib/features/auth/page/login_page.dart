@@ -59,6 +59,21 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     super.dispose();
   }
 
+  // Inline validation message shown inside the auth card. Null = no error.
+  String? _formError;
+
+  static final RegExp _emailPattern = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$');
+
+  void _showError(String message) {
+    setState(() => _formError = message);
+  }
+
+  void _clearError() {
+    if (_formError != null) {
+      setState(() => _formError = null);
+    }
+  }
+
   String _friendlyAuthError(Object error) {
     if (OfflineErrorDetector.isLikelyOffline(error)) {
       return 'No internet connection. Turn on Wi-Fi or mobile data and try again.';
@@ -80,13 +95,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     final password = _passwordController.text.trim();
 
     if (identifier.isEmpty || password.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Login details and password are required.'),
-        ),
-      );
+      _showError('Enter your email or phone number and password.');
       return;
     }
+    _clearError();
 
     ref.read(authSubmitLoadingProvider.notifier).state = true;
     try {
@@ -119,18 +131,25 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         email.isEmpty ||
         password.isEmpty ||
         confirmPassword.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('All fields are required.')),
-      );
+      _showError('Please fill in all fields to create your account.');
+      return;
+    }
+
+    if (!_emailPattern.hasMatch(email)) {
+      _showError('Enter a valid email address, e.g. name@company.com.');
+      return;
+    }
+
+    if (password.length < 8) {
+      _showError('Use a password with at least 8 characters.');
       return;
     }
 
     if (password != confirmPassword) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Passwords do not match.')),
-      );
+      _showError('The two passwords do not match.');
       return;
     }
+    _clearError();
 
     ref.read(authSubmitLoadingProvider.notifier).state = true;
     try {
@@ -151,6 +170,69 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       ).showSnackBar(SnackBar(content: Text(_friendlyAuthError(error))));
     } finally {
       ref.read(authSubmitLoadingProvider.notifier).state = false;
+    }
+  }
+
+  Future<void> _forgotPassword() async {
+    final controller = TextEditingController(text: _emailController.text.trim());
+    final email = await showDialog<String>(
+      context: context,
+      builder: (dialogContext) {
+        return AlertDialog(
+          title: const Text('Reset password'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                'Enter the email on your account and we will send you a '
+                'link to set a new password.',
+              ),
+              const SizedBox(height: 16),
+              AppTextField(
+                controller: controller,
+                label: 'Email',
+                hintText: 'name@company.com',
+                prefixIcon: Icons.mail_outline,
+                keyboardType: TextInputType.emailAddress,
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(dialogContext).pop(),
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () =>
+                  Navigator.of(dialogContext).pop(controller.text.trim()),
+              child: const Text('Send link'),
+            ),
+          ],
+        );
+      },
+    );
+    controller.dispose();
+
+    if (email == null || email.isEmpty) {
+      return;
+    }
+    if (!_emailPattern.hasMatch(email)) {
+      _showError('Enter a valid email to receive a reset link.');
+      return;
+    }
+
+    try {
+      await ref.read(authRepositoryProvider).resetPassword(email);
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Check your email for a password reset link.'),
+        ),
+      );
+    } catch (error) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(_friendlyAuthError(error))));
     }
   }
 
@@ -212,81 +294,118 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         _TabButton(
                           label: 'Login',
                           isSelected: !_isSignUp,
-                          onTap: () => setState(() => _isSignUp = false),
+                          onTap: () => setState(() {
+                            _isSignUp = false;
+                            _formError = null;
+                          }),
                         ),
                         const SizedBox(width: 8),
                         _TabButton(
                           label: 'Sign Up',
                           isSelected: _isSignUp,
-                          onTap: () => setState(() => _isSignUp = true),
+                          onTap: () => setState(() {
+                            _isSignUp = true;
+                            _formError = null;
+                          }),
                         ),
                       ],
                     ),
                     const SizedBox(height: 20),
-                    if (!_isSignUp) ...[
-                      AutofillGroup(
-                        child: Column(
-                          children: [
-                            LoginEmailField(
-                              controller: _emailController,
-                              label: 'Email or phone number',
-                              hintText: 'name@company.com or 092 2380260',
-                            ),
-                            const SizedBox(height: 16),
-                            LoginPasswordField(controller: _passwordController),
-                            const SizedBox(height: 24),
-                            LoginSubmitButton(
-                              onPressed: _submit,
-                              isBusy: isBusy,
-                              label: 'Login',
-                              icon: Icons.arrow_forward,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ] else ...[
-                      AutofillGroup(
-                        child: Column(
-                          children: [
-                            SignupDisplayNameField(
-                              controller: _signupDisplayNameController,
-                            ),
-                            const SizedBox(height: 16),
-                            AppTextField(
-                              controller: _signupBusinessNameController,
-                              label: 'Business name',
-                              hintText: 'Your shop or company name',
-                              prefixIcon: Icons.store_outlined,
-                              textInputAction: TextInputAction.next,
-                            ),
-                            const SizedBox(height: 16),
-                            LoginEmailField(
-                              controller: _signupEmailController,
-                              label: 'Email',
-                              hintText: 'name@company.com',
-                            ),
-                            const SizedBox(height: 16),
-                            LoginPasswordField(
-                              controller: _signupPasswordController,
-                            ),
-                            const SizedBox(height: 16),
-                            SignupConfirmPasswordField(
-                              controller: _signupConfirmPasswordController,
-                            ),
-                            const SizedBox(height: 24),
-                            LoginSubmitButton(
-                              onPressed: _signUp,
-                              isBusy: isBusy,
-                              label: 'Create Account',
-                              icon: Icons.check,
-                            ),
-                          ],
-                        ),
-                      ),
+                    if (_formError != null) ...[
+                      _ErrorBanner(message: _formError!),
+                      const SizedBox(height: 16),
                     ],
+                    // Fields lock while a request is in flight to prevent
+                    // double-submits and mid-flight edits.
+                    AbsorbPointer(
+                      absorbing: isBusy,
+                      child: Opacity(
+                        opacity: isBusy ? 0.6 : 1,
+                        child: !_isSignUp
+                            ? AutofillGroup(
+                                child: Column(
+                                  children: [
+                                    LoginEmailField(
+                                      controller: _emailController,
+                                      label: 'Email or phone number',
+                                      hintText:
+                                          'name@company.com or 092 2380260',
+                                    ),
+                                    const SizedBox(height: 16),
+                                    LoginPasswordField(
+                                      controller: _passwordController,
+                                    ),
+                                    Align(
+                                      alignment: Alignment.centerRight,
+                                      child: TextButton(
+                                        onPressed: _forgotPassword,
+                                        style: TextButton.styleFrom(
+                                          minimumSize: const Size(48, 48),
+                                          foregroundColor:
+                                              AppColors.accentBlueDark,
+                                        ),
+                                        child: const Text('Forgot password?'),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 8),
+                                    LoginSubmitButton(
+                                      onPressed: _submit,
+                                      isBusy: isBusy,
+                                      label: 'Login',
+                                      icon: Icons.arrow_forward,
+                                    ),
+                                  ],
+                                ),
+                              )
+                            : AutofillGroup(
+                                child: Column(
+                                  children: [
+                                    SignupDisplayNameField(
+                                      controller: _signupDisplayNameController,
+                                    ),
+                                    const SizedBox(height: 16),
+                                    AppTextField(
+                                      controller: _signupBusinessNameController,
+                                      label: 'Business name',
+                                      hintText:
+                                          "The name customers see, e.g. Mary's Shop",
+                                      prefixIcon: Icons.store_outlined,
+                                      textInputAction: TextInputAction.next,
+                                    ),
+                                    const SizedBox(height: 16),
+                                    LoginEmailField(
+                                      controller: _signupEmailController,
+                                      label: 'Email',
+                                      hintText: 'name@company.com',
+                                    ),
+                                    const SizedBox(height: 16),
+                                    LoginPasswordField(
+                                      controller: _signupPasswordController,
+                                    ),
+                                    const SizedBox(height: 16),
+                                    SignupConfirmPasswordField(
+                                      controller:
+                                          _signupConfirmPasswordController,
+                                    ),
+                                    const SizedBox(height: 24),
+                                    LoginSubmitButton(
+                                      onPressed: _signUp,
+                                      isBusy: isBusy,
+                                      label: 'Create my business',
+                                      icon: Icons.check,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                      ),
+                    ),
                     const SizedBox(height: 16),
                     Text(
-                      'Owners: use phone number or email. Staff: use phone and password.',
+                      _isSignUp
+                          ? 'Free to start. You become the owner of your own '
+                              'workspace and can add staff later.'
+                          : 'Owners sign in with email or phone. Staff sign in '
+                              'with the phone and password their owner set.',
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: AppColors.warmGray,
@@ -304,6 +423,41 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   }
 }
 
+
+class _ErrorBanner extends StatelessWidget {
+  const _ErrorBanner({required this.message});
+
+  final String message;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+      decoration: BoxDecoration(
+        color: AppColors.danger.withValues(alpha: 0.08),
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: AppColors.danger.withValues(alpha: 0.30)),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Icon(Icons.error_outline, size: 18, color: AppColors.danger),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              message,
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: AppColors.danger,
+                    fontWeight: FontWeight.w600,
+                  ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
 
 class _TabButton extends StatelessWidget {
   const _TabButton({

@@ -75,14 +75,8 @@ class _PrimaryButtonState extends State<PrimaryButton>
               height: 56,
               width: double.infinity,
               decoration: BoxDecoration(
-                gradient: _isActive
-                    ? const LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [Color(0xFF1D5BA6), AppColors.navy],
-                      )
-                    : null,
-                color: _isActive ? null : AppColors.line,
+                // Solid navy fill — DESIGN.md forbids gradient fills on buttons.
+                color: _isActive ? AppColors.navy : AppColors.line,
                 borderRadius: BorderRadius.circular(28),
                 boxShadow: _isActive
                     ? [

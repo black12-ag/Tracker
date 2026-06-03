@@ -91,6 +91,14 @@ class AuthRepository {
     );
   }
 
+  Future<void> resetPassword(String email) async {
+    await _client.auth.resetPasswordForEmail(email.trim());
+    await logActivity(
+      eventType: 'auth.password_reset_requested',
+      message: 'Password reset email requested',
+    );
+  }
+
   Future<void> signOut() async {
     await logActivity(eventType: 'auth.sign_out', message: 'User signed out');
     await _client.auth.signOut();

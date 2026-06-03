@@ -98,6 +98,19 @@ class LocalStoreService {
     return items.length;
   }
 
+  // Per-user "has seen the welcome onboarding" flag. Deliberately kept out
+  // of clearAllCachedData() so it survives sign-out and is not shown twice.
+  static String onboardingSeenKey(String userId) => 'onboarding_seen_$userId';
+
+  Future<bool> hasSeenOnboarding(String userId) async {
+    final raw = await _storage.read(key: onboardingSeenKey(userId));
+    return raw == 'true';
+  }
+
+  Future<void> markOnboardingSeen(String userId) async {
+    await _safeWrite(key: onboardingSeenKey(userId), value: 'true');
+  }
+
   Future<void> setLastSyncAt(DateTime value) async {
     await _safeWrite(key: lastSyncKey, value: value.toIso8601String());
   }

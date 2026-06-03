@@ -75,10 +75,10 @@ class AppTheme {
       textTheme: textTheme,
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: Colors.white,
-        indicatorColor: AppColors.mint.withValues(alpha: 0.18),
+        indicatorColor: AppColors.navy.withValues(alpha: 0.12),
         labelTextStyle: WidgetStateProperty.resolveWith(
           (states) => GoogleFonts.workSans(
-            fontSize: 11,
+            fontSize: 12,
             fontWeight: FontWeight.w700,
             letterSpacing: 0.2,
             color: states.contains(WidgetState.selected)
