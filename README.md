@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="apk/tracker-v1.0.0+11.apk"><strong>Download Latest APK</strong></a>
+  <a href="apk/tracker-v1.0.0+12.apk"><strong>Download Latest APK</strong></a>
 </p>
 
 ## UI Preview
@@ -22,7 +22,7 @@ Cross-platform Tracker showcase:
 
 ## Latest Release
 
-Current tester build: `v1.0.0+11`
+Current tester build: `v1.0.0+12`
 
 Highlights in this release:
 - multi-tenant workspaces — each business owner gets an isolated workspace, staff scoped to it
@@ -65,7 +65,7 @@ It is designed for:
 
 The latest tester APK is in this repository:
 
-- [tracker-v1.0.0+11.apk](apk/tracker-v1.0.0+11.apk)
+- [tracker-v1.0.0+12.apk](apk/tracker-v1.0.0+12.apk)
 
 ## Tech Stack
 
