@@ -1,11 +1,11 @@
 {
-    "name": "liquid_soap_tracker",
-    "short_name": "liquid_soap_tracker",
+    "name": "Tracker",
+    "short_name": "Tracker",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#F4F7FF",
+    "theme_color": "#123D79",
+    "description": "Professional business tracker for inventory, sales, accounts, loans, and profit.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
