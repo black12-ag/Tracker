@@ -28,7 +28,6 @@ class LoanRecordsPage extends ConsumerStatefulWidget {
 
 class _LoanRecordsPageState extends ConsumerState<LoanRecordsPage> {
   bool _isLoading = true;
-  bool _isSettling = false;
   List<Map<String, dynamic>> _alerts = const [];
   List<Map<String, dynamic>> _loans = const [];
   List<Map<String, dynamic>> _partners = const [];

@@ -37,11 +37,9 @@ final authRepositoryProvider = Provider<AuthRepository>(
 );
 
 final productRepositoryProvider = Provider<ProductRepository>((ref) {
-  final profile = ref.watch(currentProfileProvider).valueOrNull;
   return ProductRepository(
     ref.watch(supabaseClientProvider),
     ref.watch(localStoreServiceProvider),
-    profile?.workspaceId ?? '',
   );
 });
 

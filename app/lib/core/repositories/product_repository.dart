@@ -8,11 +8,10 @@ import 'package:liquid_soap_tracker/features/product_setup/models/product_setup_
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ProductRepository {
-  ProductRepository(this._client, this._localStoreService, this._workspaceId);
+  ProductRepository(this._client, this._localStoreService);
 
   final SupabaseClient _client;
   final LocalStoreService _localStoreService;
-  final String _workspaceId;
 
   double _asDouble(Object? value) => (value as num?)?.toDouble() ?? 0;
 

@@ -157,7 +157,7 @@ class _AdminLogsPageState extends ConsumerState<AdminLogsPage> {
               physics: const NeverScrollableScrollPhysics(),
               itemCount:
                   state.logs.length + (state.isLoadingMore ? 1 : 0),
-              separatorBuilder: (_, __) =>
+              separatorBuilder: (_, _) =>
                   Divider(height: 1, color: AppColors.line, thickness: 0.8),
               itemBuilder: (context, index) {
                 if (index == state.logs.length) {

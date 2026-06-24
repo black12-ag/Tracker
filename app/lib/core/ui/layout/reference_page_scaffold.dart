@@ -29,6 +29,7 @@ class ReferencePageScaffold extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isOnline = ref.watch(isOnlineProvider).valueOrNull ?? true;
     final pendingSyncCount = ref.watch(pendingSyncCountProvider);
+    final failedSyncCount = ref.watch(failedSyncCountProvider);
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -103,6 +104,40 @@ class ReferencePageScaffold extends ConsumerWidget {
                             : '$pendingSyncCount change${pendingSyncCount == 1 ? '' : 's'} waiting to sync.',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               color: AppColors.warmGray,
+                            ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 16),
+            ],
+            if (failedSyncCount > 0) ...[
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 14,
+                  vertical: 12,
+                ),
+                decoration: BoxDecoration(
+                  color: AppColors.danger.withValues(alpha: 0.10),
+                  borderRadius: BorderRadius.circular(18),
+                  border: Border.all(
+                    color: AppColors.danger.withValues(alpha: 0.35),
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.error_outline_rounded,
+                      color: AppColors.danger,
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Text(
+                        '$failedSyncCount change${failedSyncCount == 1 ? '' : 's'} could not be saved to the server. Open it again to retry.',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: AppColors.danger,
+                              fontWeight: FontWeight.w600,
                             ),
                       ),
                     ),
