@@ -199,6 +199,42 @@ def ping_postgrest() -> bool:
 
 
 # ---------------------------------------------------------------------------
+# Step 3 — Real database WRITE via the Management API
+# ---------------------------------------------------------------------------
+# A read ping is too lightweight to reliably count as activity (that's why the
+# project still paused). Running an actual SQL write through the Management API
+# generates genuine database compute + write activity, which is the strongest
+# signal to reset the free-tier inactivity timer.
+
+KEEP_ALIVE_SQL = (
+    "create table if not exists public.keep_alive_heartbeat "
+    "(id int primary key, last_seen timestamptz not null); "
+    "insert into public.keep_alive_heartbeat (id, last_seen) "
+    "values (1, now()) on conflict (id) do update set last_seen = now();"
+)
+
+
+def run_db_activity() -> bool:
+    """Execute a real SQL write on the project DB via the Management API."""
+    if not ACCESS_TOKEN:
+        log("⚠ No access token — skipping DB write (anon ping only).")
+        return False
+
+    payload = json.dumps({"query": KEEP_ALIVE_SQL}).encode("utf-8")
+    result = api_request(
+        f"{MANAGEMENT_API}/projects/{PROJECT_REF}/database/query",
+        method="POST",
+        data=payload,
+    )
+    if result["status"] in (200, 201):
+        log("💓 DB write OK — heartbeat row updated (real activity).")
+        return True
+
+    log(f"❌ DB write failed (HTTP {result['status']}): {result.get('data', {})}")
+    return False
+
+
+# ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 
@@ -210,9 +246,10 @@ def main() -> None:
     active = ensure_project_active()
 
     if active:
+        run_db_activity()
         ping_postgrest()
     else:
-        log("⚠ Project is not active — skipping ping.")
+        log("⚠ Project is not active — skipping activity.")
 
     log("Done.")
     log("=" * 60)
