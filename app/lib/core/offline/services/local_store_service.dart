@@ -23,6 +23,7 @@ class LocalStoreService {
   static const String employeesKey = 'cached_employees';
   static const String reportsKey = 'cached_reports';
   static const String queueKey = 'offline_sync_queue';
+  static const String deadLetterKey = 'offline_sync_dead_letter';
   static const String lastSyncKey = 'last_sync_at';
 
   static String productBundleKey(bool owner) =>
@@ -98,6 +99,30 @@ class LocalStoreService {
     return items.length;
   }
 
+  /// Actions that exhausted their retries or hit a non-recoverable error.
+  /// Kept so the failure is visible/recoverable instead of silently dropped.
+  Future<List<OfflineSyncAction>> readDeadLetter() async {
+    final items = await readList(deadLetterKey);
+    return items.map(OfflineSyncAction.fromMap).toList();
+  }
+
+  Future<void> appendDeadLetter(OfflineSyncAction action) async {
+    final items = await readDeadLetter();
+    await writeList(
+      deadLetterKey,
+      [...items, action].map((item) => item.toMap()).toList(),
+    );
+  }
+
+  Future<int> deadLetterCount() async {
+    final items = await readDeadLetter();
+    return items.length;
+  }
+
+  Future<void> clearDeadLetter() async {
+    await _storage.delete(key: deadLetterKey);
+  }
+
   // Per-user "has seen the welcome onboarding" flag. Deliberately kept out
   // of clearAllCachedData() so it survives sign-out and is not shown twice.
   static String onboardingSeenKey(String userId) => 'onboarding_seen_$userId';
@@ -140,6 +165,7 @@ class LocalStoreService {
       employeesKey,
       reportsKey,
       queueKey,
+      deadLetterKey,
       lastSyncKey,
       productBundleKey(true),
       productBundleKey(false),

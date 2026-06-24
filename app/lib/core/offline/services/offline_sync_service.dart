@@ -11,7 +11,15 @@ import 'package:liquid_soap_tracker/core/repositories/sales_repository.dart';
 
 final pendingSyncCountProvider = StateProvider<int>((ref) => 0);
 
+/// Count of actions that failed to sync and were moved to the dead-letter
+/// queue. Surfaced in the UI so a sync failure is never silent.
+final failedSyncCountProvider = StateProvider<int>((ref) => 0);
+
 class OfflineSyncService {
+  /// Give up retrying a single action after this many failed attempts so a
+  /// poison message can't block the queue forever.
+  static const int _maxAttempts = 5;
+
   OfflineSyncService({
     required this.ref,
     required this.connectivityService,
@@ -33,6 +41,8 @@ class OfflineSyncService {
   Future<void> refreshPendingCount() async {
     ref.read(pendingSyncCountProvider.notifier).state = await localStoreService
         .pendingQueueCount();
+    ref.read(failedSyncCountProvider.notifier).state = await localStoreService
+        .deadLetterCount();
   }
 
   Future<SyncWriteResult> enqueue({
@@ -186,8 +196,22 @@ class OfflineSyncService {
         }
         syncedCount += 1;
       } catch (e) {
+        final failed = action.copyWith(
+          attempts: action.attempts + 1,
+          lastError: e.toString(),
+        );
         if (OfflineErrorDetector.isLikelyOffline(e)) {
-          remaining.add(action);
+          // Recoverable: keep retrying until the attempt cap, then dead-letter
+          // so a permanently-offline-looking poison message can't loop forever.
+          if (failed.attempts >= _maxAttempts) {
+            await localStoreService.appendDeadLetter(failed);
+          } else {
+            remaining.add(failed);
+          }
+        } else {
+          // Non-recoverable (validation, RLS, malformed payload): never drop
+          // it silently — move to the dead-letter queue so it stays visible.
+          await localStoreService.appendDeadLetter(failed);
         }
       }
     }
