@@ -12,7 +12,6 @@ class AppColors {
   static const Color cream = Color(0xFFEAF2FF);
   static const Color creamSoft = Color(0xFFFFFFFF);
   static const Color paleGold = Color(0xFFE8F0FF);
-  static const Color warmYellow = Color(0xFFDCE6F8);
   static const Color charcoal = Color(0xFF101828);
   static const Color warmGray = Color(0xFF667085);
   static const Color line = Color(0xFFDCE6F8);
