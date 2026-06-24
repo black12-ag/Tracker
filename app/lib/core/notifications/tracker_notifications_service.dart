@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:liquid_soap_tracker/core/models/app_profile.dart';
 import 'package:liquid_soap_tracker/core/repositories/tracker_repository.dart';
@@ -19,6 +18,14 @@ class TrackerNotificationsService {
       return;
     }
 
+    // flutter_local_notifications has no web implementation. Mark the service
+    // as initialized and no-op so the rest of the app behaves normally in a
+    // browser; native (Android/iOS/macOS) behavior is unchanged.
+    if (kIsWeb) {
+      _initialized = true;
+      return;
+    }
+
     const initializationSettings = InitializationSettings(
       android: AndroidInitializationSettings('@mipmap/ic_launcher'),
       iOS: DarwinInitializationSettings(),
@@ -31,14 +38,15 @@ class TrackerNotificationsService {
       },
     );
 
-    if (Platform.isIOS || Platform.isMacOS) {
+    if (defaultTargetPlatform == TargetPlatform.iOS ||
+        defaultTargetPlatform == TargetPlatform.macOS) {
       await _plugin
           .resolvePlatformSpecificImplementation<
               IOSFlutterLocalNotificationsPlugin>()
           ?.requestPermissions(alert: true, badge: true, sound: true);
     }
 
-    if (Platform.isAndroid) {
+    if (defaultTargetPlatform == TargetPlatform.android) {
       await _plugin
           .resolvePlatformSpecificImplementation<
               AndroidFlutterLocalNotificationsPlugin>()
@@ -60,6 +68,9 @@ class TrackerNotificationsService {
     required TrackerRepository repository,
   }) async {
     if (!profile.isOwner) {
+      return;
+    }
+    if (kIsWeb) {
       return;
     }
 
