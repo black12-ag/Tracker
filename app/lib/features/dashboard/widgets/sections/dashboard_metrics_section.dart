@@ -128,6 +128,17 @@ class DashboardMetricsSection extends StatelessWidget {
                           height: 1.1,
                         ),
                       ),
+                      const SizedBox(height: 2),
+                      Text(
+                        '${bundle.profitMargin.toStringAsFixed(0)}% margin',
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelMedium
+                            ?.copyWith(
+                              color: AppColors.warmGray,
+                              fontWeight: FontWeight.w600,
+                            ),
+                      ),
                     ],
                   ),
                 ),

@@ -110,59 +110,8 @@ class TrackerDrawer extends StatelessWidget {
             ),
             Expanded(
               child: ListView(
-                padding: const EdgeInsets.fromLTRB(10, 10, 10, 12),
-                children: [
-                  if (profile.isOwner) ...[
-                    _DrawerTile(
-                      icon: Icons.account_balance_wallet_outlined,
-                      label: 'Loan Records',
-                      onTap: onOpenLoanRecords,
-                    ),
-                    _DrawerTile(
-                      icon: Icons.receipt_long_outlined,
-                      label: 'Expenses',
-                      onTap: onOpenExpenses,
-                    ),
-                    _DrawerTile(
-                      icon: Icons.tune_rounded,
-                      label: 'Inventory Adjustment',
-                      onTap: onOpenInventoryAdjustment,
-                    ),
-                  ],
-                  _DrawerTile(
-                    icon: Icons.move_to_inbox_outlined,
-                    label: 'Receive',
-                    onTap: onOpenReceive,
-                  ),
-                  _DrawerTile(
-                    icon: Icons.local_shipping_outlined,
-                    label: 'Shipment',
-                    onTap: onOpenShipment,
-                  ),
-                  _DrawerTile(
-                    icon: Icons.people_outline_rounded,
-                    label: 'Partners',
-                    onTap: onOpenPartners,
-                  ),
-                  if (profile.isOwner)
-                    _DrawerTile(
-                      icon: Icons.badge_outlined,
-                      label: 'Employees',
-                      onTap: onOpenEmployees,
-                    ),
-                  if (profile.isOwner)
-                    _DrawerTile(
-                      icon: Icons.bar_chart_rounded,
-                      label: 'Reports',
-                      onTap: onOpenReports,
-                    ),
-                  if (profile.isOwner)
-                    _DrawerTile(
-                      icon: Icons.admin_panel_settings_outlined,
-                      label: 'Admin Logs',
-                      onTap: onOpenAdminLogs,
-                    ),
-                ],
+                padding: const EdgeInsets.fromLTRB(10, 12, 10, 12),
+                children: _buildMenuItems(context),
               ),
             ),
             const Divider(height: 1),
@@ -190,6 +139,87 @@ class TrackerDrawer extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  List<Widget> _buildMenuItems(BuildContext context) {
+    final isOwner = profile.isOwner;
+    final sections = <_DrawerSection>[
+      _DrawerSection('Money', [
+        if (isOwner)
+          _DrawerItem(Icons.account_balance_wallet_outlined, 'Loan Records',
+              onOpenLoanRecords),
+        if (isOwner)
+          _DrawerItem(Icons.receipt_long_outlined, 'Expenses', onOpenExpenses),
+        if (isOwner)
+          _DrawerItem(Icons.bar_chart_rounded, 'Reports', onOpenReports),
+      ]),
+      _DrawerSection('Operations', [
+        _DrawerItem(Icons.move_to_inbox_outlined, 'Receive', onOpenReceive),
+        _DrawerItem(Icons.local_shipping_outlined, 'Shipment', onOpenShipment),
+        if (isOwner)
+          _DrawerItem(Icons.tune_rounded, 'Inventory Adjustment',
+              onOpenInventoryAdjustment),
+      ]),
+      _DrawerSection('People', [
+        _DrawerItem(Icons.people_outline_rounded, 'Partners', onOpenPartners),
+        if (isOwner)
+          _DrawerItem(Icons.badge_outlined, 'Employees', onOpenEmployees),
+      ]),
+      _DrawerSection('System', [
+        if (isOwner)
+          _DrawerItem(Icons.admin_panel_settings_outlined, 'Admin Logs',
+              onOpenAdminLogs),
+      ]),
+    ];
+
+    final children = <Widget>[];
+    for (final section in sections) {
+      if (section.items.isEmpty) {
+        continue;
+      }
+      children.add(_DrawerSectionHeader(label: section.title));
+      for (final item in section.items) {
+        children.add(
+          _DrawerTile(icon: item.icon, label: item.label, onTap: item.onTap),
+        );
+      }
+      children.add(const SizedBox(height: 8));
+    }
+    return children;
+  }
+}
+
+class _DrawerSection {
+  const _DrawerSection(this.title, this.items);
+  final String title;
+  final List<_DrawerItem> items;
+}
+
+class _DrawerItem {
+  const _DrawerItem(this.icon, this.label, this.onTap);
+  final IconData icon;
+  final String label;
+  final VoidCallback onTap;
+}
+
+class _DrawerSectionHeader extends StatelessWidget {
+  const _DrawerSectionHeader({required this.label});
+
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(12, 10, 12, 6),
+      child: Text(
+        label.toUpperCase(),
+        style: Theme.of(context).textTheme.labelMedium?.copyWith(
+              color: AppColors.warmGray,
+              fontWeight: FontWeight.w700,
+              letterSpacing: 0.8,
+            ),
       ),
     );
   }
