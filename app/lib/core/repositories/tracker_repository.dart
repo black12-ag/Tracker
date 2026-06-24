@@ -1,6 +1,6 @@
 import 'package:image_picker/image_picker.dart';
-import 'package:liquid_soap_tracker/core/offline/services/local_store_service.dart';
-import 'package:liquid_soap_tracker/core/offline/services/offline_error_detector.dart';
+import 'package:tracker/core/offline/services/local_store_service.dart';
+import 'package:tracker/core/offline/services/offline_error_detector.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class TrackerRepository {

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:liquid_soap_tracker/app/theme/app_colors.dart';
-import 'package:liquid_soap_tracker/core/providers/core_providers.dart';
-import 'package:liquid_soap_tracker/core/ui/layout/reference_page_scaffold.dart';
-import 'package:liquid_soap_tracker/core/ui/states/app_error_view.dart';
-import 'package:liquid_soap_tracker/core/ui/states/app_loading_view.dart';
-import 'package:liquid_soap_tracker/features/admin_logs/controller/admin_logs_controller.dart';
-import 'package:liquid_soap_tracker/features/admin_logs/models/activity_log_entry.dart';
+import 'package:tracker/app/theme/app_colors.dart';
+import 'package:tracker/core/providers/core_providers.dart';
+import 'package:tracker/core/ui/layout/reference_page_scaffold.dart';
+import 'package:tracker/core/ui/states/app_error_view.dart';
+import 'package:tracker/core/ui/states/app_loading_view.dart';
+import 'package:tracker/features/admin_logs/controller/admin_logs_controller.dart';
+import 'package:tracker/features/admin_logs/models/activity_log_entry.dart';
 
 class AdminLogsPage extends ConsumerStatefulWidget {
   const AdminLogsPage({required this.onMenuPressed, super.key});

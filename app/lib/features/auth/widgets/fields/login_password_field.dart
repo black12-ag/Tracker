@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:liquid_soap_tracker/core/ui/fields/app_text_field.dart';
-import 'package:liquid_soap_tracker/features/auth/widgets/buttons/password_visibility_toggle_button.dart';
+import 'package:tracker/core/ui/fields/app_text_field.dart';
+import 'package:tracker/features/auth/widgets/buttons/password_visibility_toggle_button.dart';
 
 class LoginPasswordField extends StatefulWidget {
   const LoginPasswordField({required this.controller, super.key});

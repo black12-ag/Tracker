@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:liquid_soap_tracker/app/theme/app_theme.dart';
-import 'package:liquid_soap_tracker/core/config/app_identity.dart';
-import 'package:liquid_soap_tracker/features/auth/page/login_page.dart';
-import 'package:liquid_soap_tracker/features/splash/page/animated_splash_screen.dart';
+import 'package:tracker/app/theme/app_theme.dart';
+import 'package:tracker/core/config/app_identity.dart';
+import 'package:tracker/features/auth/page/login_page.dart';
+import 'package:tracker/features/splash/page/animated_splash_screen.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();

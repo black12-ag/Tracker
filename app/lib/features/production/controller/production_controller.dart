@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:liquid_soap_tracker/core/providers/core_providers.dart';
-import 'package:liquid_soap_tracker/features/production/models/production_entry_model.dart';
+import 'package:tracker/core/providers/core_providers.dart';
+import 'package:tracker/features/production/models/production_entry_model.dart';
 
 final productionEntriesProvider = FutureProvider<List<ProductionEntryModel>>((
   ref,

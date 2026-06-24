@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:liquid_soap_tracker/core/providers/core_providers.dart';
+import 'package:tracker/core/providers/core_providers.dart';
 
 class TrackerBottomNavigation extends ConsumerWidget {
   const TrackerBottomNavigation({

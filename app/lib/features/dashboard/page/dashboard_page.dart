@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:liquid_soap_tracker/core/models/app_profile.dart';
-import 'package:liquid_soap_tracker/core/utils/app_errors.dart';
-import 'package:liquid_soap_tracker/core/ui/layout/reference_page_scaffold.dart';
-import 'package:liquid_soap_tracker/core/ui/states/app_error_view.dart';
-import 'package:liquid_soap_tracker/core/ui/states/reference_page_skeleton.dart';
-import 'package:liquid_soap_tracker/features/dashboard/controller/dashboard_controller.dart';
-import 'package:liquid_soap_tracker/features/dashboard/widgets/sections/dashboard_activity_section.dart';
-import 'package:liquid_soap_tracker/features/dashboard/widgets/sections/dashboard_metrics_section.dart';
+import 'package:tracker/core/models/app_profile.dart';
+import 'package:tracker/core/utils/app_errors.dart';
+import 'package:tracker/core/ui/layout/reference_page_scaffold.dart';
+import 'package:tracker/core/ui/states/app_error_view.dart';
+import 'package:tracker/core/ui/states/reference_page_skeleton.dart';
+import 'package:tracker/features/dashboard/controller/dashboard_controller.dart';
+import 'package:tracker/features/dashboard/widgets/sections/dashboard_activity_section.dart';
+import 'package:tracker/features/dashboard/widgets/sections/dashboard_metrics_section.dart';
 
 class DashboardPage extends ConsumerWidget {
   const DashboardPage({

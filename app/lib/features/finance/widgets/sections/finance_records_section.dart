@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:liquid_soap_tracker/core/ui/cards/app_surface_card.dart';
-import 'package:liquid_soap_tracker/core/ui/widgets/app_section_title.dart';
-import 'package:liquid_soap_tracker/core/utils/display_cleaner.dart';
-import 'package:liquid_soap_tracker/core/utils/formatters.dart';
-import 'package:liquid_soap_tracker/features/finance/models/finance_record.dart';
-import 'package:liquid_soap_tracker/features/finance/widgets/sheets/finance_record_detail_sheet.dart';
+import 'package:tracker/core/ui/cards/app_surface_card.dart';
+import 'package:tracker/core/ui/widgets/app_section_title.dart';
+import 'package:tracker/core/utils/display_cleaner.dart';
+import 'package:tracker/core/utils/formatters.dart';
+import 'package:tracker/features/finance/models/finance_record.dart';
+import 'package:tracker/features/finance/widgets/sheets/finance_record_detail_sheet.dart';
 
 class FinanceRecordsSection extends StatelessWidget {
   const FinanceRecordsSection({required this.records, super.key});

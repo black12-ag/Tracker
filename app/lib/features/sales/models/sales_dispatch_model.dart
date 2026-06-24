@@ -1,4 +1,4 @@
-import 'package:liquid_soap_tracker/features/sales/models/customer_model.dart';
+import 'package:tracker/features/sales/models/customer_model.dart';
 
 class SalesDispatchModel {
   const SalesDispatchModel({

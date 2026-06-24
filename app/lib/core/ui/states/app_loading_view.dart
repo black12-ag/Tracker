@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:liquid_soap_tracker/app/theme/app_colors.dart';
-import 'package:liquid_soap_tracker/core/config/app_identity.dart';
-import 'package:liquid_soap_tracker/core/ui/cards/app_surface_card.dart';
+import 'package:tracker/app/theme/app_colors.dart';
+import 'package:tracker/core/config/app_identity.dart';
+import 'package:tracker/core/ui/cards/app_surface_card.dart';
 
 class AppLoadingView extends StatelessWidget {
   const AppLoadingView({super.key, this.message = 'Loading...'});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:liquid_soap_tracker/core/utils/display_cleaner.dart';
-import 'package:liquid_soap_tracker/core/utils/formatters.dart';
-import 'package:liquid_soap_tracker/features/sales/models/sales_dispatch_model.dart';
+import 'package:tracker/core/utils/display_cleaner.dart';
+import 'package:tracker/core/utils/formatters.dart';
+import 'package:tracker/features/sales/models/sales_dispatch_model.dart';
 
 class SalesDispatchDetailSheet extends StatelessWidget {
   const SalesDispatchDetailSheet({

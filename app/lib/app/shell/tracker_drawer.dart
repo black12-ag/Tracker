@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:liquid_soap_tracker/app/theme/app_colors.dart';
-import 'package:liquid_soap_tracker/core/models/app_profile.dart';
+import 'package:tracker/app/theme/app_colors.dart';
+import 'package:tracker/core/models/app_profile.dart';
 
 class TrackerDrawer extends StatelessWidget {
   const TrackerDrawer({

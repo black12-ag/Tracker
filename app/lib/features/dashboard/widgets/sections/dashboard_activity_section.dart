@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:liquid_soap_tracker/app/theme/app_colors.dart';
-import 'package:liquid_soap_tracker/core/ui/cards/app_surface_card.dart';
-import 'package:liquid_soap_tracker/core/ui/rows/order_row.dart';
-import 'package:liquid_soap_tracker/core/utils/formatters.dart';
+import 'package:tracker/app/theme/app_colors.dart';
+import 'package:tracker/core/ui/cards/app_surface_card.dart';
+import 'package:tracker/core/ui/rows/order_row.dart';
+import 'package:tracker/core/utils/formatters.dart';
 
 class DashboardActivitySection extends StatelessWidget {
   const DashboardActivitySection({

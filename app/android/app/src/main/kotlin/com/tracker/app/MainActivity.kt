@@ -1,4 +1,4 @@
-package com.tracker.liquid_soap_tracker
+package com.tracker.app
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:liquid_soap_tracker/app/bootstrap/app_bootstrap.dart';
-import 'package:liquid_soap_tracker/app/bootstrap/app_sync_bootstrap.dart';
-import 'package:liquid_soap_tracker/app/theme/app_theme.dart';
-import 'package:liquid_soap_tracker/core/config/app_identity.dart';
-import 'package:liquid_soap_tracker/features/splash/page/animated_splash_screen.dart';
+import 'package:tracker/app/bootstrap/app_bootstrap.dart';
+import 'package:tracker/app/bootstrap/app_sync_bootstrap.dart';
+import 'package:tracker/app/theme/app_theme.dart';
+import 'package:tracker/core/config/app_identity.dart';
+import 'package:tracker/features/splash/page/animated_splash_screen.dart';
 
 class LiquidSoapTrackerApp extends StatelessWidget {
   const LiquidSoapTrackerApp({super.key});

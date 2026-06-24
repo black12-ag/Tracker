@@ -2,12 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:liquid_soap_tracker/core/providers/core_providers.dart';
-import 'package:liquid_soap_tracker/features/dashboard/controller/dashboard_controller.dart';
-import 'package:liquid_soap_tracker/features/finance/controller/finance_controller.dart';
-import 'package:liquid_soap_tracker/features/product_setup/controller/product_setup_controller.dart';
-import 'package:liquid_soap_tracker/features/production/controller/production_controller.dart';
-import 'package:liquid_soap_tracker/features/sales/controller/sales_controller.dart';
+import 'package:tracker/core/providers/core_providers.dart';
+import 'package:tracker/features/dashboard/controller/dashboard_controller.dart';
+import 'package:tracker/features/finance/controller/finance_controller.dart';
+import 'package:tracker/features/product_setup/controller/product_setup_controller.dart';
+import 'package:tracker/features/production/controller/production_controller.dart';
+import 'package:tracker/features/sales/controller/sales_controller.dart';
 
 class AppSyncBootstrap extends ConsumerStatefulWidget {
   const AppSyncBootstrap({required this.child, super.key});

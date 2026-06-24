@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:liquid_soap_tracker/core/providers/core_providers.dart';
-import 'package:liquid_soap_tracker/features/sales/models/customer_model.dart';
-import 'package:liquid_soap_tracker/features/sales/models/sales_dispatch_model.dart';
+import 'package:tracker/core/providers/core_providers.dart';
+import 'package:tracker/features/sales/models/customer_model.dart';
+import 'package:tracker/features/sales/models/sales_dispatch_model.dart';
 
 final salesDispatchesProvider = FutureProvider<List<SalesDispatchModel>>((
   ref,

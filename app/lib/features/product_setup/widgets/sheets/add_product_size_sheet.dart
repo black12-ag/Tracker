@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:liquid_soap_tracker/core/ui/cards/app_surface_card.dart';
-import 'package:liquid_soap_tracker/core/ui/widgets/app_section_title.dart';
-import 'package:liquid_soap_tracker/features/product_setup/models/product_setup_bundle.dart';
-import 'package:liquid_soap_tracker/features/product_setup/widgets/buttons/save_product_size_button.dart';
-import 'package:liquid_soap_tracker/features/product_setup/widgets/fields/custom_size_label_field.dart';
-import 'package:liquid_soap_tracker/features/product_setup/widgets/fields/custom_size_liters_field.dart';
-import 'package:liquid_soap_tracker/features/product_setup/widgets/fields/custom_size_low_stock_field.dart';
-import 'package:liquid_soap_tracker/features/product_setup/widgets/fields/custom_size_unit_price_field.dart';
+import 'package:tracker/core/ui/cards/app_surface_card.dart';
+import 'package:tracker/core/ui/widgets/app_section_title.dart';
+import 'package:tracker/features/product_setup/models/product_setup_bundle.dart';
+import 'package:tracker/features/product_setup/widgets/buttons/save_product_size_button.dart';
+import 'package:tracker/features/product_setup/widgets/fields/custom_size_label_field.dart';
+import 'package:tracker/features/product_setup/widgets/fields/custom_size_liters_field.dart';
+import 'package:tracker/features/product_setup/widgets/fields/custom_size_low_stock_field.dart';
+import 'package:tracker/features/product_setup/widgets/fields/custom_size_unit_price_field.dart';
 
 class AddProductSizeDraft {
   const AddProductSizeDraft({

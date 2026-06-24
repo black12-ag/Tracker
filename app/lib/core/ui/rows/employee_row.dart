@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:liquid_soap_tracker/app/theme/app_colors.dart';
-import 'package:liquid_soap_tracker/core/ui/rows/order_row.dart';
+import 'package:tracker/app/theme/app_colors.dart';
+import 'package:tracker/core/ui/rows/order_row.dart';
 
 class EmployeeRow extends StatelessWidget {
   const EmployeeRow({

@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:liquid_soap_tracker/core/providers/core_providers.dart';
-import 'package:liquid_soap_tracker/features/dashboard/models/dashboard_bundle.dart';
+import 'package:tracker/core/providers/core_providers.dart';
+import 'package:tracker/features/dashboard/models/dashboard_bundle.dart';
 
 final dashboardBundleProvider = FutureProvider<DashboardBundle>((ref) async {
   final profile = await ref.watch(currentProfileProvider.future);

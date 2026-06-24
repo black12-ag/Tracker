@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:liquid_soap_tracker/app/theme/app_colors.dart';
-import 'package:liquid_soap_tracker/app/theme/app_motion.dart';
-import 'package:liquid_soap_tracker/core/config/app_identity.dart';
-import 'package:liquid_soap_tracker/core/offline/services/offline_error_detector.dart';
-import 'package:liquid_soap_tracker/core/providers/core_providers.dart';
-import 'package:liquid_soap_tracker/core/ui/cards/app_surface_card.dart';
-import 'package:liquid_soap_tracker/core/ui/fields/app_text_field.dart';
-import 'package:liquid_soap_tracker/core/ui/motion/pressable_scale.dart';
-import 'package:liquid_soap_tracker/features/auth/controller/auth_controller.dart';
-import 'package:liquid_soap_tracker/features/auth/widgets/buttons/login_submit_button.dart';
-import 'package:liquid_soap_tracker/features/auth/widgets/fields/login_email_field.dart';
-import 'package:liquid_soap_tracker/features/auth/widgets/fields/login_password_field.dart';
-import 'package:liquid_soap_tracker/features/auth/widgets/fields/signup_confirm_password_field.dart';
-import 'package:liquid_soap_tracker/features/auth/widgets/fields/signup_display_name_field.dart';
-import 'package:liquid_soap_tracker/features/auth/widgets/sections/auth_contact_footer.dart';
+import 'package:tracker/app/theme/app_colors.dart';
+import 'package:tracker/app/theme/app_motion.dart';
+import 'package:tracker/core/config/app_identity.dart';
+import 'package:tracker/core/offline/services/offline_error_detector.dart';
+import 'package:tracker/core/providers/core_providers.dart';
+import 'package:tracker/core/ui/cards/app_surface_card.dart';
+import 'package:tracker/core/ui/fields/app_text_field.dart';
+import 'package:tracker/core/ui/motion/pressable_scale.dart';
+import 'package:tracker/features/auth/controller/auth_controller.dart';
+import 'package:tracker/features/auth/widgets/buttons/login_submit_button.dart';
+import 'package:tracker/features/auth/widgets/fields/login_email_field.dart';
+import 'package:tracker/features/auth/widgets/fields/login_password_field.dart';
+import 'package:tracker/features/auth/widgets/fields/signup_confirm_password_field.dart';
+import 'package:tracker/features/auth/widgets/fields/signup_display_name_field.dart';
+import 'package:tracker/features/auth/widgets/sections/auth_contact_footer.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});

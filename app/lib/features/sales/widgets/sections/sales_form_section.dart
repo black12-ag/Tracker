@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:liquid_soap_tracker/core/ui/cards/app_surface_card.dart';
-import 'package:liquid_soap_tracker/core/ui/widgets/app_section_title.dart';
-import 'package:liquid_soap_tracker/core/utils/formatters.dart';
-import 'package:liquid_soap_tracker/features/product_setup/models/product_setup_bundle.dart';
-import 'package:liquid_soap_tracker/features/sales/widgets/fields/customer_name_field.dart';
-import 'package:liquid_soap_tracker/features/sales/widgets/fields/customer_phone_field.dart';
-import 'package:liquid_soap_tracker/features/sales/widgets/fields/sales_amount_paid_field.dart';
-import 'package:liquid_soap_tracker/features/sales/widgets/fields/sales_loan_label_field.dart';
-import 'package:liquid_soap_tracker/features/sales/widgets/fields/sales_notes_field.dart';
-import 'package:liquid_soap_tracker/features/sales/widgets/fields/sales_quantity_field.dart';
-import 'package:liquid_soap_tracker/features/sales/widgets/fields/sales_unit_price_field.dart';
+import 'package:tracker/core/ui/cards/app_surface_card.dart';
+import 'package:tracker/core/ui/widgets/app_section_title.dart';
+import 'package:tracker/core/utils/formatters.dart';
+import 'package:tracker/features/product_setup/models/product_setup_bundle.dart';
+import 'package:tracker/features/sales/widgets/fields/customer_name_field.dart';
+import 'package:tracker/features/sales/widgets/fields/customer_phone_field.dart';
+import 'package:tracker/features/sales/widgets/fields/sales_amount_paid_field.dart';
+import 'package:tracker/features/sales/widgets/fields/sales_loan_label_field.dart';
+import 'package:tracker/features/sales/widgets/fields/sales_notes_field.dart';
+import 'package:tracker/features/sales/widgets/fields/sales_quantity_field.dart';
+import 'package:tracker/features/sales/widgets/fields/sales_unit_price_field.dart';
 
 class SalesFormSection extends StatelessWidget {
   const SalesFormSection({

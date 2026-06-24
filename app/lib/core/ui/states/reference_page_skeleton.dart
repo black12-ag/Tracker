@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:liquid_soap_tracker/app/theme/app_colors.dart';
+import 'package:tracker/app/theme/app_colors.dart';
 
 class SkeletonBox extends StatelessWidget {
   const SkeletonBox({

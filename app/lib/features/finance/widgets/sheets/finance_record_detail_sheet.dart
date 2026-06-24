@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:liquid_soap_tracker/core/utils/display_cleaner.dart';
-import 'package:liquid_soap_tracker/core/utils/formatters.dart';
-import 'package:liquid_soap_tracker/features/finance/models/finance_record.dart';
+import 'package:tracker/core/utils/display_cleaner.dart';
+import 'package:tracker/core/utils/formatters.dart';
+import 'package:tracker/features/finance/models/finance_record.dart';
 
 class FinanceRecordDetailSheet extends StatelessWidget {
   const FinanceRecordDetailSheet({required this.record, super.key});

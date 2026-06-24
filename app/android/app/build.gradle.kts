@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.tracker.liquid_soap_tracker"
+    namespace = "com.tracker.app"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -22,7 +22,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.tracker.liquid_soap_tracker"
+        applicationId = "com.tracker.app"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion

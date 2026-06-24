@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:liquid_soap_tracker/core/models/app_profile.dart';
-import 'package:liquid_soap_tracker/core/repositories/tracker_repository.dart';
+import 'package:tracker/core/models/app_profile.dart';
+import 'package:tracker/core/repositories/tracker_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class TrackerNotificationsService {

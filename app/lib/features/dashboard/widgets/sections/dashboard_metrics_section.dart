@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:liquid_soap_tracker/app/theme/app_colors.dart';
-import 'package:liquid_soap_tracker/core/ui/cards/app_metric_card.dart';
-import 'package:liquid_soap_tracker/core/ui/cards/app_surface_card.dart';
-import 'package:liquid_soap_tracker/core/ui/widgets/animated_count_text.dart';
-import 'package:liquid_soap_tracker/core/utils/formatters.dart';
-import 'package:liquid_soap_tracker/features/dashboard/models/dashboard_bundle.dart';
+import 'package:tracker/app/theme/app_colors.dart';
+import 'package:tracker/core/ui/cards/app_metric_card.dart';
+import 'package:tracker/core/ui/cards/app_surface_card.dart';
+import 'package:tracker/core/ui/widgets/animated_count_text.dart';
+import 'package:tracker/core/utils/formatters.dart';
+import 'package:tracker/features/dashboard/models/dashboard_bundle.dart';
 
 class DashboardMetricsSection extends StatelessWidget {
   const DashboardMetricsSection({

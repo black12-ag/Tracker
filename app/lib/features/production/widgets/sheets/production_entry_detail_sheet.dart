@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:liquid_soap_tracker/core/utils/display_cleaner.dart';
-import 'package:liquid_soap_tracker/core/utils/formatters.dart';
-import 'package:liquid_soap_tracker/features/production/models/production_entry_model.dart';
+import 'package:tracker/core/utils/display_cleaner.dart';
+import 'package:tracker/core/utils/formatters.dart';
+import 'package:tracker/features/production/models/production_entry_model.dart';
 
 class ProductionEntryDetailSheet extends StatelessWidget {
   const ProductionEntryDetailSheet({required this.entry, super.key});

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:liquid_soap_tracker/core/ui/cards/app_surface_card.dart';
-import 'package:liquid_soap_tracker/core/ui/widgets/app_section_title.dart';
-import 'package:liquid_soap_tracker/core/utils/formatters.dart';
-import 'package:liquid_soap_tracker/features/finance/widgets/fields/expense_amount_field.dart';
-import 'package:liquid_soap_tracker/features/finance/widgets/fields/expense_category_field.dart';
-import 'package:liquid_soap_tracker/features/finance/widgets/fields/expense_note_field.dart';
+import 'package:tracker/core/ui/cards/app_surface_card.dart';
+import 'package:tracker/core/ui/widgets/app_section_title.dart';
+import 'package:tracker/core/utils/formatters.dart';
+import 'package:tracker/features/finance/widgets/fields/expense_amount_field.dart';
+import 'package:tracker/features/finance/widgets/fields/expense_category_field.dart';
+import 'package:tracker/features/finance/widgets/fields/expense_note_field.dart';
 
 class ExpenseFormSection extends StatelessWidget {
   const ExpenseFormSection({

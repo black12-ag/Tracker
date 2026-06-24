@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:liquid_soap_tracker/app/theme/app_colors.dart';
+import 'package:tracker/app/theme/app_colors.dart';
 
 /// A single horizontally-scrolling row of mutually-exclusive filter chips,
 /// styled to the app brand (navy selected, line border unselected). Used above

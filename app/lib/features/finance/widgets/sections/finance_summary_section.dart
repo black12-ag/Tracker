@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:liquid_soap_tracker/app/theme/app_colors.dart';
-import 'package:liquid_soap_tracker/core/ui/cards/app_metric_card.dart';
-import 'package:liquid_soap_tracker/core/utils/formatters.dart';
-import 'package:liquid_soap_tracker/features/finance/models/finance_summary.dart';
+import 'package:tracker/app/theme/app_colors.dart';
+import 'package:tracker/core/ui/cards/app_metric_card.dart';
+import 'package:tracker/core/utils/formatters.dart';
+import 'package:tracker/features/finance/models/finance_summary.dart';
 
 class FinanceSummarySection extends StatelessWidget {
   const FinanceSummarySection({required this.summary, super.key});

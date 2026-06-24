@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:liquid_soap_tracker/app/theme/app_colors.dart';
-import 'package:liquid_soap_tracker/core/ui/motion/pressable_scale.dart';
+import 'package:tracker/app/theme/app_colors.dart';
+import 'package:tracker/core/ui/motion/pressable_scale.dart';
 
 /// Secondary action. Tonal fill, navy text, same height/radius as the primary
 /// button, with the shared press-scale feedback (the stock FilledButton gave

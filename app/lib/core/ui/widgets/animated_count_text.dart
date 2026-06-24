@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:liquid_soap_tracker/app/theme/app_motion.dart';
+import 'package:tracker/app/theme/app_motion.dart';
 
 /// Rolls a numeric value up to its target on first build and whenever the
 /// value changes — the premium "numbers are the product" feel on dashboard,

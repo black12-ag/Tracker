@@ -1,4 +1,4 @@
-import 'package:liquid_soap_tracker/features/admin_logs/models/activity_log_entry.dart';
+import 'package:tracker/features/admin_logs/models/activity_log_entry.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AdminLogsRepository {

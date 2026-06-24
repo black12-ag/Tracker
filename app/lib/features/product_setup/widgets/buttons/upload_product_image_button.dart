@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:liquid_soap_tracker/core/ui/buttons/secondary_button.dart';
+import 'package:tracker/core/ui/buttons/secondary_button.dart';
 
 class UploadProductImageButton extends StatelessWidget {
   const UploadProductImageButton({

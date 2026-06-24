@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:liquid_soap_tracker/app/theme/app_colors.dart';
-import 'package:liquid_soap_tracker/app/theme/app_motion.dart';
+import 'package:tracker/app/theme/app_colors.dart';
+import 'package:tracker/app/theme/app_motion.dart';
 
 /// The app's primary call-to-action. Solid navy (no gradient, per DESIGN.md),
 /// with two layers of motion:

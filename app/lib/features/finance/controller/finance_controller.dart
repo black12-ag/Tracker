@@ -1,9 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:liquid_soap_tracker/core/providers/core_providers.dart';
-import 'package:liquid_soap_tracker/features/finance/models/expense_entry.dart';
-import 'package:liquid_soap_tracker/features/finance/models/finance_record.dart';
-import 'package:liquid_soap_tracker/features/finance/models/finance_summary.dart';
-import 'package:liquid_soap_tracker/features/sales/models/sales_dispatch_model.dart';
+import 'package:tracker/core/providers/core_providers.dart';
+import 'package:tracker/features/finance/models/expense_entry.dart';
+import 'package:tracker/features/finance/models/finance_record.dart';
+import 'package:tracker/features/finance/models/finance_summary.dart';
+import 'package:tracker/features/sales/models/sales_dispatch_model.dart';
 
 final financeSummaryProvider = FutureProvider<FinanceSummary>((ref) async {
   return ref.watch(financeRepositoryProvider).fetchSummary();

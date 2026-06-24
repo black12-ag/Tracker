@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:liquid_soap_tracker/core/providers/core_providers.dart';
-import 'package:liquid_soap_tracker/core/utils/app_errors.dart';
-import 'package:liquid_soap_tracker/features/admin_logs/models/activity_log_entry.dart';
-import 'package:liquid_soap_tracker/features/admin_logs/repository/admin_logs_repository.dart';
+import 'package:tracker/core/providers/core_providers.dart';
+import 'package:tracker/core/utils/app_errors.dart';
+import 'package:tracker/features/admin_logs/models/activity_log_entry.dart';
+import 'package:tracker/features/admin_logs/repository/admin_logs_repository.dart';
 
 class AdminLogsState {
   const AdminLogsState({

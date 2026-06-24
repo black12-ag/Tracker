@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
-import 'package:liquid_soap_tracker/core/offline/models/offline_sync_action.dart';
+import 'package:tracker/core/offline/models/offline_sync_action.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class LocalStoreService {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:liquid_soap_tracker/core/config/app_identity.dart';
+import 'package:tracker/core/config/app_identity.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AuthContactFooter extends StatelessWidget {

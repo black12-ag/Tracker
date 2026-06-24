@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:liquid_soap_tracker/app/theme/app_colors.dart';
-import 'package:liquid_soap_tracker/core/models/app_profile.dart';
-import 'package:liquid_soap_tracker/core/providers/core_providers.dart';
-import 'package:liquid_soap_tracker/core/utils/app_errors.dart';
-import 'package:liquid_soap_tracker/core/ui/buttons/primary_button.dart';
-import 'package:liquid_soap_tracker/core/ui/cards/app_surface_card.dart';
-import 'package:liquid_soap_tracker/core/ui/fields/app_text_field.dart';
+import 'package:tracker/app/theme/app_colors.dart';
+import 'package:tracker/core/models/app_profile.dart';
+import 'package:tracker/core/providers/core_providers.dart';
+import 'package:tracker/core/utils/app_errors.dart';
+import 'package:tracker/core/ui/buttons/primary_button.dart';
+import 'package:tracker/core/ui/cards/app_surface_card.dart';
+import 'package:tracker/core/ui/fields/app_text_field.dart';
 
 class InventoryItemPage extends ConsumerStatefulWidget {
   const InventoryItemPage({

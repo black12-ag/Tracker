@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:liquid_soap_tracker/app/theme/app_motion.dart';
+import 'package:tracker/app/theme/app_motion.dart';
 
 /// Wraps any widget with the app's unified press-scale feedback: a quick
 /// scale-down on touch and a spring-back release. This is the single source

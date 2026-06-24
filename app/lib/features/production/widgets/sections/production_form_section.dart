@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:liquid_soap_tracker/core/ui/cards/app_surface_card.dart';
-import 'package:liquid_soap_tracker/core/ui/widgets/app_section_title.dart';
-import 'package:liquid_soap_tracker/core/utils/formatters.dart';
-import 'package:liquid_soap_tracker/features/product_setup/models/product_setup_bundle.dart';
-import 'package:liquid_soap_tracker/features/production/widgets/fields/production_notes_field.dart';
-import 'package:liquid_soap_tracker/features/production/widgets/fields/production_quantity_field.dart';
+import 'package:tracker/core/ui/cards/app_surface_card.dart';
+import 'package:tracker/core/ui/widgets/app_section_title.dart';
+import 'package:tracker/core/utils/formatters.dart';
+import 'package:tracker/features/product_setup/models/product_setup_bundle.dart';
+import 'package:tracker/features/production/widgets/fields/production_notes_field.dart';
+import 'package:tracker/features/production/widgets/fields/production_quantity_field.dart';
 
 class ProductionFormSection extends StatelessWidget {
   const ProductionFormSection({

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:liquid_soap_tracker/core/ui/fields/app_text_field.dart';
+import 'package:tracker/core/ui/fields/app_text_field.dart';
 
 class FinanceInitialPaidField extends StatelessWidget {
   const FinanceInitialPaidField({required this.controller, super.key});

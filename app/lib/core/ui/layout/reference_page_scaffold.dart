@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:liquid_soap_tracker/app/theme/app_colors.dart';
-import 'package:liquid_soap_tracker/core/offline/services/offline_sync_service.dart';
-import 'package:liquid_soap_tracker/core/providers/core_providers.dart';
-import 'package:liquid_soap_tracker/core/ui/layout/tracker_bottom_navigation.dart';
+import 'package:tracker/app/theme/app_colors.dart';
+import 'package:tracker/core/offline/services/offline_sync_service.dart';
+import 'package:tracker/core/providers/core_providers.dart';
+import 'package:tracker/core/ui/layout/tracker_bottom_navigation.dart';
 
 class ReferencePageScaffold extends ConsumerWidget {
   const ReferencePageScaffold({

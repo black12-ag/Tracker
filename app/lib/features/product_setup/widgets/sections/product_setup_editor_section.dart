@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:liquid_soap_tracker/core/ui/cards/app_surface_card.dart';
-import 'package:liquid_soap_tracker/core/ui/widgets/app_section_title.dart';
-import 'package:liquid_soap_tracker/core/utils/formatters.dart';
-import 'package:liquid_soap_tracker/features/product_setup/models/product_setup_bundle.dart';
-import 'package:liquid_soap_tracker/features/product_setup/widgets/buttons/add_product_size_button.dart';
-import 'package:liquid_soap_tracker/features/product_setup/widgets/buttons/upload_product_image_button.dart';
-import 'package:liquid_soap_tracker/features/product_setup/widgets/fields/default_cost_field.dart';
-import 'package:liquid_soap_tracker/features/product_setup/widgets/fields/low_stock_field.dart';
-import 'package:liquid_soap_tracker/features/product_setup/widgets/fields/product_name_field.dart';
-import 'package:liquid_soap_tracker/features/product_setup/widgets/fields/size_price_field.dart';
+import 'package:tracker/core/ui/cards/app_surface_card.dart';
+import 'package:tracker/core/ui/widgets/app_section_title.dart';
+import 'package:tracker/core/utils/formatters.dart';
+import 'package:tracker/features/product_setup/models/product_setup_bundle.dart';
+import 'package:tracker/features/product_setup/widgets/buttons/add_product_size_button.dart';
+import 'package:tracker/features/product_setup/widgets/buttons/upload_product_image_button.dart';
+import 'package:tracker/features/product_setup/widgets/fields/default_cost_field.dart';
+import 'package:tracker/features/product_setup/widgets/fields/low_stock_field.dart';
+import 'package:tracker/features/product_setup/widgets/fields/product_name_field.dart';
+import 'package:tracker/features/product_setup/widgets/fields/size_price_field.dart';
 
 class ProductSetupEditorSection extends StatelessWidget {
   const ProductSetupEditorSection({

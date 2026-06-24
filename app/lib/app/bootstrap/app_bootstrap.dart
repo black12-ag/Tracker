@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:liquid_soap_tracker/app/shell/app_shell.dart';
-import 'package:liquid_soap_tracker/core/providers/core_providers.dart';
-import 'package:liquid_soap_tracker/core/models/app_profile.dart';
-import 'package:liquid_soap_tracker/core/ui/states/app_error_view.dart';
-import 'package:liquid_soap_tracker/features/auth/page/login_page.dart';
-import 'package:liquid_soap_tracker/features/onboarding/page/welcome_onboarding_page.dart';
-import 'package:liquid_soap_tracker/features/splash/page/splash_page.dart';
+import 'package:tracker/app/shell/app_shell.dart';
+import 'package:tracker/core/providers/core_providers.dart';
+import 'package:tracker/core/models/app_profile.dart';
+import 'package:tracker/core/ui/states/app_error_view.dart';
+import 'package:tracker/features/auth/page/login_page.dart';
+import 'package:tracker/features/onboarding/page/welcome_onboarding_page.dart';
+import 'package:tracker/features/splash/page/splash_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AppBootstrap extends ConsumerWidget {

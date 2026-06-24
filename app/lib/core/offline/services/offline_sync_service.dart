@@ -1,13 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:liquid_soap_tracker/core/offline/services/offline_error_detector.dart';
-import 'package:liquid_soap_tracker/core/models/sync_write_result.dart';
-import 'package:liquid_soap_tracker/core/offline/models/offline_sync_action.dart';
-import 'package:liquid_soap_tracker/core/offline/services/connectivity_service.dart';
-import 'package:liquid_soap_tracker/core/offline/services/local_store_service.dart';
-import 'package:liquid_soap_tracker/core/repositories/finance_repository.dart';
-import 'package:liquid_soap_tracker/core/repositories/product_repository.dart';
-import 'package:liquid_soap_tracker/core/repositories/production_repository.dart';
-import 'package:liquid_soap_tracker/core/repositories/sales_repository.dart';
+import 'package:tracker/core/offline/services/offline_error_detector.dart';
+import 'package:tracker/core/models/sync_write_result.dart';
+import 'package:tracker/core/offline/models/offline_sync_action.dart';
+import 'package:tracker/core/offline/services/connectivity_service.dart';
+import 'package:tracker/core/offline/services/local_store_service.dart';
+import 'package:tracker/core/repositories/finance_repository.dart';
+import 'package:tracker/core/repositories/product_repository.dart';
+import 'package:tracker/core/repositories/production_repository.dart';
+import 'package:tracker/core/repositories/sales_repository.dart';
 
 final pendingSyncCountProvider = StateProvider<int>((ref) => 0);
 

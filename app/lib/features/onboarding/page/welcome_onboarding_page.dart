@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:liquid_soap_tracker/app/theme/app_colors.dart';
-import 'package:liquid_soap_tracker/core/models/app_profile.dart';
-import 'package:liquid_soap_tracker/core/ui/buttons/primary_button.dart';
+import 'package:tracker/app/theme/app_colors.dart';
+import 'package:tracker/core/models/app_profile.dart';
+import 'package:tracker/core/ui/buttons/primary_button.dart';
 
 /// One-time welcome shown the first time a freshly registered owner opens
 /// the app. Sets expectations for a brand-new, empty workspace so the user

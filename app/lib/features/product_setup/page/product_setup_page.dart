@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:liquid_soap_tracker/core/models/app_profile.dart';
-import 'package:liquid_soap_tracker/core/providers/core_providers.dart';
-import 'package:liquid_soap_tracker/core/ui/layout/app_page_scaffold.dart';
-import 'package:liquid_soap_tracker/core/ui/states/app_error_view.dart';
-import 'package:liquid_soap_tracker/core/ui/states/app_loading_view.dart';
-import 'package:liquid_soap_tracker/core/utils/app_errors.dart';
-import 'package:liquid_soap_tracker/core/utils/app_uuid.dart';
-import 'package:liquid_soap_tracker/features/dashboard/controller/dashboard_controller.dart';
-import 'package:liquid_soap_tracker/features/product_setup/controller/product_setup_controller.dart';
-import 'package:liquid_soap_tracker/features/product_setup/models/product_setup_bundle.dart';
-import 'package:liquid_soap_tracker/features/product_setup/widgets/buttons/save_product_setup_button.dart';
-import 'package:liquid_soap_tracker/features/product_setup/widgets/sections/product_setup_editor_section.dart';
-import 'package:liquid_soap_tracker/features/product_setup/widgets/sheets/add_product_size_sheet.dart';
+import 'package:tracker/core/models/app_profile.dart';
+import 'package:tracker/core/providers/core_providers.dart';
+import 'package:tracker/core/ui/layout/app_page_scaffold.dart';
+import 'package:tracker/core/ui/states/app_error_view.dart';
+import 'package:tracker/core/ui/states/app_loading_view.dart';
+import 'package:tracker/core/utils/app_errors.dart';
+import 'package:tracker/core/utils/app_uuid.dart';
+import 'package:tracker/features/dashboard/controller/dashboard_controller.dart';
+import 'package:tracker/features/product_setup/controller/product_setup_controller.dart';
+import 'package:tracker/features/product_setup/models/product_setup_bundle.dart';
+import 'package:tracker/features/product_setup/widgets/buttons/save_product_setup_button.dart';
+import 'package:tracker/features/product_setup/widgets/sections/product_setup_editor_section.dart';
+import 'package:tracker/features/product_setup/widgets/sheets/add_product_size_sheet.dart';
 
 class ProductSetupPage extends ConsumerStatefulWidget {
   const ProductSetupPage({required this.profile, super.key});

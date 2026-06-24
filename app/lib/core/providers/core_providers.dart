@@ -1,15 +1,15 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:liquid_soap_tracker/core/models/app_profile.dart';
-import 'package:liquid_soap_tracker/core/notifications/tracker_notifications_service.dart';
-import 'package:liquid_soap_tracker/core/offline/services/connectivity_service.dart';
-import 'package:liquid_soap_tracker/core/offline/services/local_store_service.dart';
-import 'package:liquid_soap_tracker/core/offline/services/offline_sync_service.dart';
-import 'package:liquid_soap_tracker/core/repositories/auth_repository.dart';
-import 'package:liquid_soap_tracker/core/repositories/finance_repository.dart';
-import 'package:liquid_soap_tracker/core/repositories/product_repository.dart';
-import 'package:liquid_soap_tracker/core/repositories/production_repository.dart';
-import 'package:liquid_soap_tracker/core/repositories/sales_repository.dart';
-import 'package:liquid_soap_tracker/core/repositories/tracker_repository.dart';
+import 'package:tracker/core/models/app_profile.dart';
+import 'package:tracker/core/notifications/tracker_notifications_service.dart';
+import 'package:tracker/core/offline/services/connectivity_service.dart';
+import 'package:tracker/core/offline/services/local_store_service.dart';
+import 'package:tracker/core/offline/services/offline_sync_service.dart';
+import 'package:tracker/core/repositories/auth_repository.dart';
+import 'package:tracker/core/repositories/finance_repository.dart';
+import 'package:tracker/core/repositories/product_repository.dart';
+import 'package:tracker/core/repositories/production_repository.dart';
+import 'package:tracker/core/repositories/sales_repository.dart';
+import 'package:tracker/core/repositories/tracker_repository.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 final supabaseClientProvider = Provider<SupabaseClient>(
