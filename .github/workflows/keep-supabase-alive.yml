@@ -2,14 +2,13 @@ name: Keep Supabase Alive
 
 on:
   schedule:
-    # Run every 3 days at 08:00 UTC
-    - cron: "0 8 */3 * *"
+    # Run every 5 days at 08:00 UTC (free projects pause after 7 days idle)
+    - cron: "0 8 */5 * *"
   workflow_dispatch: # Allow manual trigger from GitHub UI
 
 jobs:
   keep-alive:
     runs-on: ubuntu-latest
-    environment: production
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4

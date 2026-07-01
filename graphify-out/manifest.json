@@ -1,0 +1,1090 @@
+{
+  "/Users/munir/Desktop/Tracker/app/macos/RunnerTests/RunnerTests.swift": {
+    "mtime": 1780432329.6015549,
+    "hash": "97d3a20fd20a063c192e886d1822b4a8"
+  },
+  "/Users/munir/Desktop/Tracker/app/macos/Runner/MainFlutterWindow.swift": {
+    "mtime": 1780432329.601319,
+    "hash": "4a747b1f256d62a2bbb79bd976891eb5"
+  },
+  "/Users/munir/Desktop/Tracker/app/macos/Runner/AppDelegate.swift": {
+    "mtime": 1780432329.5976272,
+    "hash": "2a7411ae3e7c6715525b94b6f8d2e80b"
+  },
+  "/Users/munir/Desktop/Tracker/app/macos/Flutter/GeneratedPluginRegistrant.swift": {
+    "mtime": 1780432329.5963178,
+    "hash": "86180f05523a35d57515b3a27d7b2dfc"
+  },
+  "/Users/munir/Desktop/Tracker/app/test/widget_test.dart": {
+    "mtime": 1780432329.6019676,
+    "hash": "7c1f987cfdb952622476f3353d295ff9"
+  },
+  "/Users/munir/Desktop/Tracker/app/ios/RunnerTests/RunnerTests.swift": {
+    "mtime": 1780432329.5706525,
+    "hash": "a225a382d14d7b16b6f602a5c1d49331"
+  },
+  "/Users/munir/Desktop/Tracker/app/ios/Runner/Runner-Bridging-Header.h": {
+    "mtime": 1780432329.570412,
+    "hash": "e07862ac930ed4d8479185d52c6cc66d"
+  },
+  "/Users/munir/Desktop/Tracker/app/ios/Runner/GeneratedPluginRegistrant.h": {
+    "mtime": 1780432572.6461985,
+    "hash": "decb9041b5e91a07e66f4664e5dac408"
+  },
+  "/Users/munir/Desktop/Tracker/app/ios/Runner/AppDelegate.swift": {
+    "mtime": 1780432329.5656407,
+    "hash": "2bd8469f2a4b701ff582f6574e58b13c"
+  },
+  "/Users/munir/Desktop/Tracker/app/ios/Runner/GeneratedPluginRegistrant.m": {
+    "mtime": 1780432572.6470678,
+    "hash": "6f2cbe4079ff1ce77a4f5c62315bfd96"
+  },
+  "/Users/munir/Desktop/Tracker/app/ios/Runner/SceneDelegate.swift": {
+    "mtime": 1780432329.570505,
+    "hash": "1ca4280e77d929d0ab2f636785ccda04"
+  },
+  "/Users/munir/Desktop/Tracker/app/ios/Flutter/ephemeral/flutter_lldb_helper.py": {
+    "mtime": 1780432572.2043176,
+    "hash": "98fc75412162af387e2e3461e4e58094"
+  },
+  "/Users/munir/Desktop/Tracker/app/linux/runner/main.cc": {
+    "mtime": 1780432329.5917945,
+    "hash": "0643b8609698e96b3abd63c210361a87"
+  },
+  "/Users/munir/Desktop/Tracker/app/linux/runner/my_application.h": {
+    "mtime": 1780432329.5921667,
+    "hash": "326a85d68857137fdfe8698a0c071baf"
+  },
+  "/Users/munir/Desktop/Tracker/app/linux/runner/my_application.cc": {
+    "mtime": 1780432329.5920546,
+    "hash": "868e3812da93752b87226316ca1ba2dc"
+  },
+  "/Users/munir/Desktop/Tracker/app/linux/flutter/generated_plugin_registrant.cc": {
+    "mtime": 1780432329.590998,
+    "hash": "2a1786cccd9ae1a0edb4d4dab4ded277"
+  },
+  "/Users/munir/Desktop/Tracker/app/linux/flutter/generated_plugin_registrant.h": {
+    "mtime": 1780432329.5911,
+    "hash": "d295462c9da9f7fef22dc86c34492318"
+  },
+  "/Users/munir/Desktop/Tracker/app/android/build.gradle.kts": {
+    "mtime": 1780432329.5601735,
+    "hash": "f11f360aed44d4f6871b398346af14f0"
+  },
+  "/Users/munir/Desktop/Tracker/app/android/settings.gradle.kts": {
+    "mtime": 1780432329.5607448,
+    "hash": "094e3cafe85d4dbf756dfe0bd754c6cb"
+  },
+  "/Users/munir/Desktop/Tracker/app/android/app/build.gradle.kts": {
+    "mtime": 1780432329.557731,
+    "hash": "1be2f8f49c14eff278969b44bbf2292c"
+  },
+  "/Users/munir/Desktop/Tracker/app/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java": {
+    "mtime": 1780432572.6363223,
+    "hash": "682c179e2063055d239044d834ecd658"
+  },
+  "/Users/munir/Desktop/Tracker/app/android/app/src/main/kotlin/com/tracker/liquid_soap_tracker/MainActivity.kt": {
+    "mtime": 1780432329.5583718,
+    "hash": "82903b764f11a2462f44b8c0686a769b"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/main.dart": {
+    "mtime": 1780432329.5904398,
+    "hash": "21fbee307e96dcc9929266ce7488b04c"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/core/ui/buttons/primary_button.dart": {
+    "mtime": 1780517806.9950843,
+    "hash": "47bce579b3d4021cf5cacc31bd3f780b"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/core/ui/buttons/secondary_button.dart": {
+    "mtime": 1780432329.5741415,
+    "hash": "3d308481c3828e335f8592c2dba3016a"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/core/ui/buttons/ghost_button.dart": {
+    "mtime": 1780432329.573941,
+    "hash": "bd37639bbd2ff2756c1fafbd7787239b"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/core/ui/layout/tracker_bottom_navigation.dart": {
+    "mtime": 1780432329.5748472,
+    "hash": "f01b43eeb37e46e51e94d02b1a408b37"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/core/ui/layout/app_page_scaffold.dart": {
+    "mtime": 1780432329.57465,
+    "hash": "9fe7637e27fabfce868da505e82cfaea"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/core/ui/layout/reference_page_scaffold.dart": {
+    "mtime": 1780432329.574765,
+    "hash": "6edd43242935281ed7e3669838956405"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/core/ui/cards/app_metric_card.dart": {
+    "mtime": 1780432329.5742826,
+    "hash": "5008bef85ea95d75101b129b1efae601"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/core/ui/cards/app_surface_card.dart": {
+    "mtime": 1780432329.5743706,
+    "hash": "ceaacbfab04c72bb1651f1d52ed90a23"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/core/ui/rows/inventory_row.dart": {
+    "mtime": 1780432329.5751595,
+    "hash": "a3ec0954e50d8e598288d715e9e69e49"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/core/ui/rows/employee_row.dart": {
+    "mtime": 1780432329.575087,
+    "hash": "c4f506099fdff4d33ded1121ba782af6"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/core/ui/rows/account_row.dart": {
+    "mtime": 1780432329.574991,
+    "hash": "8edbbcb08d20332a78d60c21b215ea7b"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/core/ui/rows/order_row.dart": {
+    "mtime": 1780432329.5752747,
+    "hash": "fd617f742edca60ecb55e23749506f92"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/core/ui/states/app_loading_view.dart": {
+    "mtime": 1780432329.5755253,
+    "hash": "97f08041cfb4bc8fd9d20471abbaf915"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/core/ui/states/app_error_view.dart": {
+    "mtime": 1780432329.5753996,
+    "hash": "8cc6e715b5c8b5f8f5775032ee3f3790"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/core/ui/states/reference_page_skeleton.dart": {
+    "mtime": 1780432329.5756364,
+    "hash": "51ac852495815d4384cfa23e976c5083"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/core/ui/fields/app_text_field.dart": {
+    "mtime": 1780432329.5745034,
+    "hash": "fb189ef9e852df4209d51ac54bee32ed"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/core/ui/widgets/app_section_title.dart": {
+    "mtime": 1780432329.575776,
+    "hash": "60f020fcd3386999245589a9fe919d10"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/core/config/supabase_config.dart": {
+    "mtime": 1780432329.5718486,
+    "hash": "ed3f1960ca56e55b282c08c3d8d51a00"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/core/config/app_identity.dart": {
+    "mtime": 1780432329.571768,
+    "hash": "2750f959b32052ce1d17225d297057b9"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/core/providers/core_providers.dart": {
+    "mtime": 1780432329.5729866,
+    "hash": "0fc57dc94ebd3ede780a56a70af3355a"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/core/utils/display_cleaner.dart": {
+    "mtime": 1780432329.5760643,
+    "hash": "6df64c2c660d1e50d6e7f400b18edea8"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/core/utils/app_errors.dart": {
+    "mtime": 1780432329.5759084,
+    "hash": "ecf9b7fd3213d9cd0f47ec6e24772dbd"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/core/utils/formatters.dart": {
+    "mtime": 1780432329.5761445,
+    "hash": "8cda2e1889e1faf405dc0d17ae2bd3fc"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/core/utils/app_uuid.dart": {
+    "mtime": 1780432329.575989,
+    "hash": "e0c6621f162b9ac5413d4c3ac46b0c5d"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/core/repositories/sales_repository.dart": {
+    "mtime": 1780432329.5736125,
+    "hash": "9689888549d0c3b063b7c560a69ac5cf"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/core/repositories/production_repository.dart": {
+    "mtime": 1780432329.573522,
+    "hash": "48ea24b177af87caa2832f8fefc17a5e"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/core/repositories/auth_repository.dart": {
+    "mtime": 1780517855.4001682,
+    "hash": "698ddc387c408499d02d1ce4efaa1a21"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/core/repositories/finance_repository.dart": {
+    "mtime": 1780432329.5732312,
+    "hash": "432992e76eecd881341fb07ad74063b7"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/core/repositories/product_repository.dart": {
+    "mtime": 1780432329.5733612,
+    "hash": "2b7c2439a809dadf6d238f92ac8bca59"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/core/repositories/tracker_repository.dart": {
+    "mtime": 1780432329.5737357,
+    "hash": "545e4d8e35661fb02a57ceff07890e04"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/core/models/sync_write_result.dart": {
+    "mtime": 1780432329.572064,
+    "hash": "e307ba4bcc6484a9309df14f5ad00ed3"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/core/models/app_profile.dart": {
+    "mtime": 1780432329.5719838,
+    "hash": "9cb2689d531378d01a60bd3b7d0ea2e5"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/core/notifications/tracker_notifications_service.dart": {
+    "mtime": 1780432329.5722287,
+    "hash": "83dd29dda08088cc11288ade0e0d5f38"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/core/offline/models/offline_sync_action.dart": {
+    "mtime": 1780432329.5724032,
+    "hash": "8520a6f0fd697514d236ea5672a3261c"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/core/offline/services/offline_error_detector.dart": {
+    "mtime": 1780432329.5727324,
+    "hash": "ae24a080b0ba6c4abf96f95b534e46a8"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/core/offline/services/local_store_service.dart": {
+    "mtime": 1780518078.0914962,
+    "hash": "fe87c963e85e0f440dcde5c4ba302065"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/core/offline/services/offline_sync_service.dart": {
+    "mtime": 1780432329.572829,
+    "hash": "2625c86d1693c41cf27fdba2afffadea"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/core/offline/services/connectivity_service.dart": {
+    "mtime": 1780432329.5725284,
+    "hash": "6ac0a009e199657cc28a91d2db6474af"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/app/app.dart": {
+    "mtime": 1780432329.570852,
+    "hash": "d4e8848cd866f036fc9c748c3af3b815"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/app/bootstrap/app_sync_bootstrap.dart": {
+    "mtime": 1780432329.5710857,
+    "hash": "3da615170a3ea18e7dd52127417f3652"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/app/bootstrap/app_bootstrap.dart": {
+    "mtime": 1780518191.2364712,
+    "hash": "e0142ee64595a0c7ff0e9d407683a370"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/app/shell/app_shell.dart": {
+    "mtime": 1780432329.5712337,
+    "hash": "2be08d93746a9448f3bb680eee0d2112"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/app/shell/tracker_drawer.dart": {
+    "mtime": 1780432329.5713265,
+    "hash": "997d8903517c97e807b8bddffb6b3bf8"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/app/theme/app_theme.dart": {
+    "mtime": 1780517791.8479335,
+    "hash": "a4dd5742140125b9283a6cd6aa3cf565"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/app/theme/app_colors.dart": {
+    "mtime": 1780432329.5714552,
+    "hash": "6d06060341cb30c6e3cc0b4404311685"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/inventory_adjustment/page/inventory_adjustment_page.dart": {
+    "mtime": 1780432329.5828307,
+    "hash": "a3044f2c06047bc3e3ffed8bf41a2391"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/loans/page/loan_records_page.dart": {
+    "mtime": 1780432329.583019,
+    "hash": "b7f6dca80489235cbc9c4a8a71fd1859"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/settings/page/settings_page.dart": {
+    "mtime": 1780432329.589683,
+    "hash": "81be373ab6c84c7e8c72ea7feb7178ac"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/splash/page/animated_splash_screen.dart": {
+    "mtime": 1780432329.59022,
+    "hash": "493266c7e9a8a6e0825940484e1fb438"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/splash/page/splash_page.dart": {
+    "mtime": 1780517836.7006173,
+    "hash": "918fe50f6f85a2adf2f81eff185f766b"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/sales/page/sales_order_page.dart": {
+    "mtime": 1780432329.5883052,
+    "hash": "77b9cf5de170be6b07535fb82a43a2c5"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/sales/page/sales_page.dart": {
+    "mtime": 1780432329.5884423,
+    "hash": "6a0e53ab2423a9e719048d5cbff979f0"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/sales/models/sales_dispatch_model.dart": {
+    "mtime": 1780432329.5881653,
+    "hash": "18b8cc182b8c61d86c5b44c8e6223bee"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/sales/models/customer_model.dart": {
+    "mtime": 1780432329.588086,
+    "hash": "82a96773f72a9d1a289ed6e220e3ec6c"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/sales/controller/sales_controller.dart": {
+    "mtime": 1780432329.5879538,
+    "hash": "89435e7ca77e17641761b4a6003132c7"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/sales/widgets/sections/sales_form_section.dart": {
+    "mtime": 1780432329.5893443,
+    "hash": "e0534bcdcc483dc29de083e0e429249e"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/sales/widgets/sheets/sales_dispatch_detail_sheet.dart": {
+    "mtime": 1780432329.5894718,
+    "hash": "36aecc2a98050c4de0f44639b32f1e90"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/sales/widgets/buttons/save_sale_button.dart": {
+    "mtime": 1780432329.5886202,
+    "hash": "7f86a7c3f2af82d3db8333d33afcbed5"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/sales/widgets/fields/customer_phone_field.dart": {
+    "mtime": 1780432329.588822,
+    "hash": "9ffa4f5bd9016dbf7c5af3a428071547"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/sales/widgets/fields/sales_notes_field.dart": {
+    "mtime": 1780432329.5890555,
+    "hash": "4246f236024c2922f18f2e2e1c479133"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/sales/widgets/fields/sales_unit_price_field.dart": {
+    "mtime": 1780432329.5892138,
+    "hash": "afbdbfcd919b2e122f808f8b74cab62d"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/sales/widgets/fields/sales_amount_paid_field.dart": {
+    "mtime": 1780432329.5889027,
+    "hash": "762b7fc31117b7ce3a70e5fabb1f420b"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/sales/widgets/fields/sales_loan_label_field.dart": {
+    "mtime": 1780432329.5889826,
+    "hash": "3942680b54f03c3073f22467fd22480f"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/sales/widgets/fields/customer_name_field.dart": {
+    "mtime": 1780432329.588746,
+    "hash": "5cf25f87c5788ce541ae84dc862aeed8"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/sales/widgets/fields/sales_quantity_field.dart": {
+    "mtime": 1780432329.589132,
+    "hash": "93712d9361b301616f2bfd77b914a401"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/auth/page/login_page.dart": {
+    "mtime": 1780518296.1698828,
+    "hash": "6e95f073de6ee6e7f5a7f61b81623746"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/auth/controller/auth_controller.dart": {
+    "mtime": 1780432329.5775876,
+    "hash": "ff6736ff37aead68e177503a3894f954"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/auth/widgets/sections/auth_contact_footer.dart": {
+    "mtime": 1780432329.5786986,
+    "hash": "102246a72fbe159fc3c2091e3ffcb26d"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/auth/widgets/buttons/login_submit_button.dart": {
+    "mtime": 1780432329.5779743,
+    "hash": "15ccb397abb54a8d148c3bf7c3e86f95"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/auth/widgets/buttons/password_visibility_toggle_button.dart": {
+    "mtime": 1780432329.578068,
+    "hash": "d79edf3538750f16dccd6ee4075081de"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/auth/widgets/fields/login_password_field.dart": {
+    "mtime": 1780432329.5782895,
+    "hash": "d9b6ac11709e53aeeed6cd30bfd9d19a"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/auth/widgets/fields/login_email_field.dart": {
+    "mtime": 1780432329.5781999,
+    "hash": "b3977c65ea68f616fffd93589d1c3dcb"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/auth/widgets/fields/signup_confirm_password_field.dart": {
+    "mtime": 1780432329.5784402,
+    "hash": "580bb63719ec1dabbe3a99662fc549b5"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/auth/widgets/fields/signup_display_name_field.dart": {
+    "mtime": 1780432329.578547,
+    "hash": "1f6807132d02a7a8b4a6444f31811c64"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/expenses/page/expenses_page.dart": {
+    "mtime": 1780432329.5799866,
+    "hash": "6d2eb71fd85638becac5e954b76b5707"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/receive/page/receive_page.dart": {
+    "mtime": 1780432329.5875623,
+    "hash": "6a86372c5e96b536c74416fc1d4e2f57"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/dashboard/page/dashboard_page.dart": {
+    "mtime": 1780432329.579175,
+    "hash": "364b846c3f30c4dbae62c1ff87ac8797"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/dashboard/models/dashboard_bundle.dart": {
+    "mtime": 1780432329.5790355,
+    "hash": "34906fb50934dab223dde83ffe95a256"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/dashboard/controller/dashboard_controller.dart": {
+    "mtime": 1780432329.5788996,
+    "hash": "fc550b1a7a24659c782708f455553567"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/dashboard/widgets/sections/dashboard_metrics_section.dart": {
+    "mtime": 1780432329.579521,
+    "hash": "1d6b3463e5f086c270248947d46d7e52"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/dashboard/widgets/sections/dashboard_activity_section.dart": {
+    "mtime": 1780432329.5793986,
+    "hash": "efa38dc59f7bfee41e46fb842b0d36ca"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/purchased/page/purchase_order_page.dart": {
+    "mtime": 1780432329.5871878,
+    "hash": "0357399262e426aed0a97b1eeb6db6c1"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/purchased/page/purchased_page.dart": {
+    "mtime": 1780432329.5873427,
+    "hash": "4e2239cc013889ae01ce06706aab4655"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/profile/page/profile_page.dart": {
+    "mtime": 1780432329.5869732,
+    "hash": "745ea8a03d12770e67361280a592867f"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/partners/page/partners_page.dart": {
+    "mtime": 1780432329.583234,
+    "hash": "fd6f222988cb14a8b28a66a0977e56e4"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/partners/widgets/partner_form_dialog.dart": {
+    "mtime": 1780432329.5834033,
+    "hash": "30077ef593d4e2dd31929c77a6898893"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/inventory/page/inventory_page.dart": {
+    "mtime": 1780432329.582634,
+    "hash": "d0900d6e6fa96d2e9f41258dd2620c0b"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/inventory/page/inventory_item_page.dart": {
+    "mtime": 1780432329.5825093,
+    "hash": "016a3711b0ee04f2f5603bbcbf8a878a"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/production/page/production_page.dart": {
+    "mtime": 1780432329.5859997,
+    "hash": "9d3b3ca3ade940f01982a95b453195ba"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/production/models/production_entry_model.dart": {
+    "mtime": 1780432329.585831,
+    "hash": "8585f884afb49743e5755e2bd8864025"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/production/controller/production_controller.dart": {
+    "mtime": 1780432329.585697,
+    "hash": "0e7fc99d31e2ff8b90c4cac47b20e416"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/production/widgets/sections/production_form_section.dart": {
+    "mtime": 1780432329.5865676,
+    "hash": "61827ee57412c0b3353b51c1fafd37e1"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/production/widgets/sheets/production_entry_detail_sheet.dart": {
+    "mtime": 1780432329.5866976,
+    "hash": "969af14ba90f7eaf5d8505c25b1ed1ee"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/production/widgets/buttons/save_production_button.dart": {
+    "mtime": 1780432329.586227,
+    "hash": "27a62f4c6f615beaae1e65de544018ce"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/production/widgets/fields/production_quantity_field.dart": {
+    "mtime": 1780432329.5864391,
+    "hash": "67b20b849d954c463e7dbb7c7e301835"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/production/widgets/fields/production_notes_field.dart": {
+    "mtime": 1780432329.5863607,
+    "hash": "e8b3248f26b28ed4b5c8d83a602dc332"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/admin_logs/repository/admin_logs_repository.dart": {
+    "mtime": 1780432329.5773907,
+    "hash": "2b8188e268d2c3e569e4415de1ddfe81"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/admin_logs/page/admin_logs_page.dart": {
+    "mtime": 1780432329.5771909,
+    "hash": "a31a07f5e68d1e70e641bfa9d6c314e2"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/admin_logs/models/activity_log_entry.dart": {
+    "mtime": 1780432329.577022,
+    "hash": "3ee0f3f34bb0a3da48cb3d0a7d530115"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/admin_logs/controller/admin_logs_controller.dart": {
+    "mtime": 1780432329.5768921,
+    "hash": "12d1acdf6c1ca5722a89ee9d4597de5c"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/finance/page/finance_page.dart": {
+    "mtime": 1780432329.5806243,
+    "hash": "578c3927c9228a82664ee8bdae534eff"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/finance/models/expense_entry.dart": {
+    "mtime": 1780432329.5802953,
+    "hash": "d812f272eb5e983c7647f29a3359f599"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/finance/models/finance_summary.dart": {
+    "mtime": 1780432329.5804732,
+    "hash": "bc57cb98bdbab803f1ee13934c6d3412"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/finance/models/finance_record.dart": {
+    "mtime": 1780432329.5803916,
+    "hash": "cefecdb968ccca00df54f7fba86fed77"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/finance/controller/finance_controller.dart": {
+    "mtime": 1780432329.5801628,
+    "hash": "008f42452a2ce6c12f29b80446aefc65"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/finance/widgets/sections/expense_form_section.dart": {
+    "mtime": 1780432329.5817976,
+    "hash": "c1e2e0016213960e70509a68233c2e31"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/finance/widgets/sections/expense_records_section.dart": {
+    "mtime": 1780432329.5819223,
+    "hash": "f76cf6d32094ff0b16ad21643a550f8c"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/finance/widgets/sections/finance_summary_section.dart": {
+    "mtime": 1780432329.5820928,
+    "hash": "5d1aec97f121c97da431d6001f46403e"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/finance/widgets/sections/finance_records_section.dart": {
+    "mtime": 1780432329.5820146,
+    "hash": "5e09f892aa376e43c10f8c2e60f2d41b"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/finance/widgets/sheets/finance_record_detail_sheet.dart": {
+    "mtime": 1780432329.582229,
+    "hash": "d1de9db7926f7c27c55f67eb04f47a5e"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/finance/widgets/buttons/record_payment_button.dart": {
+    "mtime": 1780432329.5808885,
+    "hash": "b1d56f8a560f5c2478e3d8db5cae8232"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/finance/widgets/buttons/save_expense_button.dart": {
+    "mtime": 1780432329.5809765,
+    "hash": "53567b0ce9e7c644cd94a79f7d880a30"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/finance/widgets/buttons/attach_finance_button.dart": {
+    "mtime": 1780432329.580808,
+    "hash": "9997f4b5e4f465c57a9bfcaa15a9591c"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/finance/widgets/fields/finance_loan_label_field.dart": {
+    "mtime": 1780432329.5814142,
+    "hash": "59142a5d6cd2eae444bbf531822bfd9e"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/finance/widgets/fields/expense_amount_field.dart": {
+    "mtime": 1780432329.581103,
+    "hash": "dcce62cf403b72b1bff3ab0a537f6f29"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/finance/widgets/fields/expense_category_field.dart": {
+    "mtime": 1780432329.5811732,
+    "hash": "a936f73f0512b8684e6b184c3ff093d9"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/finance/widgets/fields/finance_initial_paid_field.dart": {
+    "mtime": 1780432329.5813272,
+    "hash": "2c9b8ae49b19c2d2810c28880b574127"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/finance/widgets/fields/finance_unit_price_field.dart": {
+    "mtime": 1780432329.5814843,
+    "hash": "78f503bec4f15477c3f1704a7a9f2dc7"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/finance/widgets/fields/payment_note_field.dart": {
+    "mtime": 1780432329.5816343,
+    "hash": "c10b19877a92357f242eda8e6792f10b"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/finance/widgets/fields/payment_amount_field.dart": {
+    "mtime": 1780432329.581559,
+    "hash": "e9cf50c5b74a6f442c8393c18b3e3920"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/finance/widgets/fields/expense_note_field.dart": {
+    "mtime": 1780432329.5812466,
+    "hash": "950d0023e4b05d196c0cffccf081d2b6"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/account/page/account_page.dart": {
+    "mtime": 1780432329.5763872,
+    "hash": "74f45ca3d63b2498c501df0fa8dc34b8"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/account/widgets/add_account_dialog.dart": {
+    "mtime": 1780432329.5766714,
+    "hash": "fe59d6590aea51a404e1e8fa6f84ba5a"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/shipment/page/shipment_page.dart": {
+    "mtime": 1780432329.589966,
+    "hash": "bb3e7a4e1d6867ac98f24f6dca25f08c"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/product_setup/page/product_setup_page.dart": {
+    "mtime": 1780432329.5838473,
+    "hash": "57d1170a4489cf1c457674a9d498b269"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/product_setup/models/product_setup_bundle.dart": {
+    "mtime": 1780432329.5837047,
+    "hash": "77057cbe18ec5ec1e7320afeba8c5969"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/product_setup/controller/product_setup_controller.dart": {
+    "mtime": 1780432329.5835788,
+    "hash": "cf44b4b63828445892df78210a555934"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/product_setup/widgets/sections/product_setup_editor_section.dart": {
+    "mtime": 1780432329.5852978,
+    "hash": "4b67fe0db23445a4d860883031568b35"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/product_setup/widgets/sheets/add_product_size_sheet.dart": {
+    "mtime": 1780432329.5854633,
+    "hash": "4ce19152d934c94bdcfd742ce60da1b7"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/product_setup/widgets/buttons/save_product_setup_button.dart": {
+    "mtime": 1780432329.584091,
+    "hash": "f7f3c1a281975ddc04624af5233d6344"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/product_setup/widgets/buttons/save_product_size_button.dart": {
+    "mtime": 1780432329.5841615,
+    "hash": "869d7774473f2dc8a60ba5f94943e159"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/product_setup/widgets/buttons/upload_product_image_button.dart": {
+    "mtime": 1780432329.5842369,
+    "hash": "decd7a7dcb47f81248bb6ca0bbf85157"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/product_setup/widgets/buttons/add_product_size_button.dart": {
+    "mtime": 1780432329.5840163,
+    "hash": "3380c1811922bec42c6c01ac178df2e0"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/product_setup/widgets/fields/custom_size_low_stock_field.dart": {
+    "mtime": 1780432329.5847304,
+    "hash": "55fb7081e09b483a8350468292c33e67"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/product_setup/widgets/fields/low_stock_field.dart": {
+    "mtime": 1780432329.5849884,
+    "hash": "b57cf5b33823984b953db624975d512f"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/product_setup/widgets/fields/product_name_field.dart": {
+    "mtime": 1780432329.5850616,
+    "hash": "8a5431e1013755d30df545a41df96ff1"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/product_setup/widgets/fields/default_cost_field.dart": {
+    "mtime": 1780432329.5849087,
+    "hash": "d6d0ed9fa2cb9b03839a427bd4e0fb3e"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/product_setup/widgets/fields/custom_size_label_field.dart": {
+    "mtime": 1780432329.5845215,
+    "hash": "0765980e459b368a9f78b111bd8255c2"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/product_setup/widgets/fields/custom_size_liters_field.dart": {
+    "mtime": 1780432329.584632,
+    "hash": "45d2c668586ee4ab045b8cfdf897070e"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/product_setup/widgets/fields/custom_size_unit_price_field.dart": {
+    "mtime": 1780432329.5848148,
+    "hash": "1995872cddc06da6b1a2f4fe906ed5d8"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/product_setup/widgets/fields/size_price_field.dart": {
+    "mtime": 1780432329.5851374,
+    "hash": "972dee05ec9533ce916f3bfaced63193"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/onboarding/page/welcome_onboarding_page.dart": {
+    "mtime": 1780518307.3313205,
+    "hash": "90f884aafcc26579394659dd6ad9ed74"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/reports/page/reports_page.dart": {
+    "mtime": 1780432329.5877726,
+    "hash": "d0108e6452ee9a105281ca007a2fbf5e"
+  },
+  "/Users/munir/Desktop/Tracker/app/lib/features/employees/page/employees_page.dart": {
+    "mtime": 1780432329.5797558,
+    "hash": "93deb1899a61239efba0d44d1f9e99c9"
+  },
+  "/Users/munir/Desktop/Tracker/app/windows/runner/flutter_window.cpp": {
+    "mtime": 1780432329.6046758,
+    "hash": "9b92b95a9eecce25e3e9d356688d0cb6"
+  },
+  "/Users/munir/Desktop/Tracker/app/windows/runner/utils.h": {
+    "mtime": 1780432329.606027,
+    "hash": "c741fb9cddbf3a62f4688b6cca39ddcc"
+  },
+  "/Users/munir/Desktop/Tracker/app/windows/runner/utils.cpp": {
+    "mtime": 1780432329.6059332,
+    "hash": "9b5697b276c8ad67a02ec12ad2c09851"
+  },
+  "/Users/munir/Desktop/Tracker/app/windows/runner/win32_window.h": {
+    "mtime": 1780432329.6062334,
+    "hash": "5a4cf051798d7e6931ee0405a4523c8f"
+  },
+  "/Users/munir/Desktop/Tracker/app/windows/runner/win32_window.cpp": {
+    "mtime": 1780432329.6061375,
+    "hash": "928e86a2be27eca688669dce6c9177d9"
+  },
+  "/Users/munir/Desktop/Tracker/app/windows/runner/resource.h": {
+    "mtime": 1780432329.6049252,
+    "hash": "c8f809a4f8d3f2f625e358fd90f72fee"
+  },
+  "/Users/munir/Desktop/Tracker/app/windows/runner/main.cpp": {
+    "mtime": 1780432329.604836,
+    "hash": "daed1a3e2f7af0fe32201c961a3e4db4"
+  },
+  "/Users/munir/Desktop/Tracker/app/windows/runner/flutter_window.h": {
+    "mtime": 1780432329.604758,
+    "hash": "79bea736711adda00c49419a39a4a0b4"
+  },
+  "/Users/munir/Desktop/Tracker/app/windows/flutter/generated_plugin_registrant.cc": {
+    "mtime": 1780432329.6041644,
+    "hash": "83440a4fa64cf162528c721bb66b53c0"
+  },
+  "/Users/munir/Desktop/Tracker/app/windows/flutter/generated_plugin_registrant.h": {
+    "mtime": 1780432329.6042502,
+    "hash": "0ea33875f9f8e118f9c2ded03e2e2835"
+  },
+  "/Users/munir/Desktop/Tracker/supabase/seed.sql": {
+    "mtime": 1780432329.63744,
+    "hash": "a57e680e2b64a5de6eafcf93be8a1402"
+  },
+  "/Users/munir/Desktop/Tracker/supabase/migrations/20260324203000_business_extensions.sql": {
+    "mtime": 1780432329.6361678,
+    "hash": "d91dc862b70060f022aabec8ed15485c"
+  },
+  "/Users/munir/Desktop/Tracker/supabase/migrations/20260326201000_smart_sales_balances.sql": {
+    "mtime": 1780432329.6370008,
+    "hash": "0d0d8e9671b559697c733774b76c005e"
+  },
+  "/Users/munir/Desktop/Tracker/supabase/migrations/20260430000000_workspaces.sql": {
+    "mtime": 1780432329.637143,
+    "hash": "fab004bb7b16778b4ff4630f57d1deb4"
+  },
+  "/Users/munir/Desktop/Tracker/supabase/migrations/20260323210638_init_schema.sql": {
+    "mtime": 1780432329.635763,
+    "hash": "83f55319bc4ecf760d69566184a149d5"
+  },
+  "/Users/munir/Desktop/Tracker/supabase/migrations/20260325113000_reference_business_upgrade.sql": {
+    "mtime": 1780432329.636523,
+    "hash": "dd5b7f6dc7e3b692b017abdc33ce2e2f"
+  },
+  "/Users/munir/Desktop/Tracker/supabase/migrations/20260324223500_cleanup_verification_data.sql": {
+    "mtime": 1780432329.636384,
+    "hash": "4708ff55c7d56a9329e98b138c3be5c9"
+  },
+  "/Users/munir/Desktop/Tracker/supabase/migrations/20260324214500_remove_demo_account_coupling.sql": {
+    "mtime": 1780432329.636296,
+    "hash": "3b455a988dcb4ae1f5c9ddd2d170905c"
+  },
+  "/Users/munir/Desktop/Tracker/supabase/migrations/20260324174500_access_hardening.sql": {
+    "mtime": 1780432329.6360734,
+    "hash": "6ec9ab2a58f0c59609a52f2d29d76845"
+  },
+  "/Users/munir/Desktop/Tracker/supabase/migrations/20260325150500_lock_public_signup_to_inactive.sql": {
+    "mtime": 1780432329.636694,
+    "hash": "ed2d441d1a11d7c17932d1125cfabb05"
+  },
+  "/Users/munir/Desktop/Tracker/supabase/migrations/20260603000000_open_public_registration.sql": {
+    "mtime": 1780517662.9774978,
+    "hash": "0c2c46e1d25b63dc9b31b0bb9eada889"
+  },
+  "/Users/munir/Desktop/Tracker/supabase/migrations/20260430020000_rate_limits.sql": {
+    "mtime": 1780432329.6373498,
+    "hash": "a2dd4b8ff5713b599d92f34637433a73"
+  },
+  "/Users/munir/Desktop/Tracker/supabase/migrations/20260430010000_activity_logs_rls.sql": {
+    "mtime": 1780432329.6372478,
+    "hash": "996bf8c48ab8db7e6331f0793257ae98"
+  },
+  "/Users/munir/Desktop/Tracker/supabase/migrations/20260324131000_finance_guardrails.sql": {
+    "mtime": 1780432329.6359885,
+    "hash": "4fa02fa2ab81c7e2a014859e3f5479cd"
+  },
+  "/Users/munir/Desktop/Tracker/supabase/functions/create-staff/index.ts": {
+    "mtime": 1780517740.5265136,
+    "hash": "f6936d1afb40549e5b2a7e9e5830eb38"
+  },
+  "/Users/munir/Desktop/Tracker/scripts/verify_end_to_end.py": {
+    "mtime": 1780432329.6349688,
+    "hash": "e3fdb16a7afdd8d2b1722e741e6597ac"
+  },
+  "/Users/munir/Desktop/Tracker/scripts/build_versioned_apk.py": {
+    "mtime": 1780432329.6347122,
+    "hash": "d77f67f46d792edae8de90b5317866f1"
+  },
+  "/Users/munir/Desktop/Tracker/scripts/wake_supabase.py": {
+    "mtime": 1780432329.6351235,
+    "hash": "cab33bd1c0881ab66549794dcf0a478c"
+  },
+  "/Users/munir/Desktop/Tracker/PRODUCT.md": {
+    "mtime": 1780432329.1132874,
+    "hash": "52d6b1b9336bb9f11608a4b326538d3b"
+  },
+  "/Users/munir/Desktop/Tracker/README.md": {
+    "mtime": 1780432329.1134338,
+    "hash": "741003e4047e81899dd1b4ac647c405a"
+  },
+  "/Users/munir/Desktop/Tracker/fesaj_tracker_spec.md": {
+    "mtime": 1780432329.6102169,
+    "hash": "ea80e32cf857e0f1bee8a2995a932efe"
+  },
+  "/Users/munir/Desktop/Tracker/DESIGN.md": {
+    "mtime": 1780432329.1131113,
+    "hash": "c5d4c855467f4183106f4c3830bb7c94"
+  },
+  "/Users/munir/Desktop/Tracker/ui/design_system/DESIGN.md": {
+    "mtime": 1780432329.6413236,
+    "hash": "9f677ea1ed53b65a91d0b6eb03f1f7d4"
+  },
+  "/Users/munir/Desktop/Tracker/app/README.md": {
+    "mtime": 1780432329.557352,
+    "hash": "82ce694d2787f7d23b83d23a5f006ebc"
+  },
+  "/Users/munir/Desktop/Tracker/app/pubspec.yaml": {
+    "mtime": 1780432329.601808,
+    "hash": "3f59e6f4e2dfc20a1701ccc5f7b1fcd3"
+  },
+  "/Users/munir/Desktop/Tracker/app/analysis_options.yaml": {
+    "mtime": 1780432329.5574455,
+    "hash": "66d03d7647c8e438164feaf5b922d44a"
+  },
+  "/Users/munir/Desktop/Tracker/app/web/index.html": {
+    "mtime": 1780432329.6035519,
+    "hash": "9bbd6e435ef85de6f787cde286fde84d"
+  },
+  "/Users/munir/Desktop/Tracker/app/ios/Runner/Assets.xcassets/LaunchImage.imageset/README.md": {
+    "mtime": 1780432329.569923,
+    "hash": "e175e436acacf76c814d83532d0b662c"
+  },
+  "/Users/munir/Desktop/Tracker/app/linux/CMakeLists.txt": {
+    "mtime": 1780432329.5907304,
+    "hash": "fd48768716f8fd32108265055cc580f7"
+  },
+  "/Users/munir/Desktop/Tracker/app/linux/runner/CMakeLists.txt": {
+    "mtime": 1780432329.5913537,
+    "hash": "6d75431dc21756981b53a7494c836311"
+  },
+  "/Users/munir/Desktop/Tracker/app/linux/flutter/CMakeLists.txt": {
+    "mtime": 1780432329.590903,
+    "hash": "46690fb8ffaf7d227d8bc4713f31140d"
+  },
+  "/Users/munir/Desktop/Tracker/app/windows/CMakeLists.txt": {
+    "mtime": 1780432329.6039193,
+    "hash": "7a8a320146a98df2a757c488137ad647"
+  },
+  "/Users/munir/Desktop/Tracker/app/windows/runner/CMakeLists.txt": {
+    "mtime": 1780432329.6044781,
+    "hash": "e99a99b5cc82a168fc557eb23b8d5a96"
+  },
+  "/Users/munir/Desktop/Tracker/app/windows/flutter/CMakeLists.txt": {
+    "mtime": 1780432329.604064,
+    "hash": "0c500410e3259a9a053797dc1c28070e"
+  },
+  "/Users/munir/Desktop/Tracker/docs/superpowers/plans/2026-04-30-multi-tenant.md": {
+    "mtime": 1780432329.6100504,
+    "hash": "4b463934dae1db15aaeb5bcd30b090ca"
+  },
+  "/Users/munir/Desktop/Tracker/ui/customers/screen.png": {
+    "mtime": 1780432329.6404393,
+    "hash": "bf9fbaac5dc748398ab87b825e019805"
+  },
+  "/Users/munir/Desktop/Tracker/ui/dashboard_summary/screen.png": {
+    "mtime": 1780432329.6410923,
+    "hash": "4f9c663b0fae2d9b8ed43e543361c2fc"
+  },
+  "/Users/munir/Desktop/Tracker/ui/add_edit_product/screen.png": {
+    "mtime": 1780432329.6381736,
+    "hash": "b7810c2dfe1b7f9a9556a2ba9874cf0c"
+  },
+  "/Users/munir/Desktop/Tracker/ui/production_records/screen.png": {
+    "mtime": 1780432329.6473846,
+    "hash": "ebefc3f17a79e5be752e31f69a1bdbf6"
+  },
+  "/Users/munir/Desktop/Tracker/ui/expenses/screen.png": {
+    "mtime": 1780432329.6421485,
+    "hash": "2937e53a536cc22307011a013587a232"
+  },
+  "/Users/munir/Desktop/Tracker/ui/add_sale/screen.png": {
+    "mtime": 1780432329.6396573,
+    "hash": "8ca008c1cbfade80dd93997207749c18"
+  },
+  "/Users/munir/Desktop/Tracker/ui/add_material_purchase/screen.png": {
+    "mtime": 1780432329.6390748,
+    "hash": "52762236ebabe28ac8659e9007d2b13e"
+  },
+  "/Users/munir/Desktop/Tracker/ui/login_screen/screen.png": {
+    "mtime": 1780432329.6428344,
+    "hash": "f3f3bf731e7957c276aa9e830aa22f48"
+  },
+  "/Users/munir/Desktop/Tracker/ui/product_management/screen.png": {
+    "mtime": 1780432329.6467948,
+    "hash": "2f00eda0b2e0e9478f9c284828e99694"
+  },
+  "/Users/munir/Desktop/Tracker/ui/splash_screen/screen.png": {
+    "mtime": 1780432329.6496313,
+    "hash": "4c94e3bbab1c812fb6c94bc9635a866d"
+  },
+  "/Users/munir/Desktop/Tracker/ui/payments_debt/screen.png": {
+    "mtime": 1780432329.6458986,
+    "hash": "b9dff3d3ede874bd39ac28e371a35ffd"
+  },
+  "/Users/munir/Desktop/Tracker/ui/new_production_batch/screen.png": {
+    "mtime": 1780432329.6440809,
+    "hash": "8c1805347e28238bc5b2c8a959a317f0"
+  },
+  "/Users/munir/Desktop/Tracker/ui/sales_list/screen.png": {
+    "mtime": 1780432329.6490695,
+    "hash": "ae38a47adb7207c71fcc4f0f50af4aee"
+  },
+  "/Users/munir/Desktop/Tracker/ui/materials_list/screen.png": {
+    "mtime": 1780432329.6434026,
+    "hash": "57eacf48b8f19637a210229c20d7e04a"
+  },
+  "/Users/munir/Desktop/Tracker/ui/reports_profit_analysis/screen.png": {
+    "mtime": 1780432329.6484153,
+    "hash": "9066772c5b5b33acc5b873906804597f"
+  },
+  "/Users/munir/Desktop/Tracker/app/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_16.png": {
+    "mtime": 1780432329.59936,
+    "hash": "8bf511604bc6ed0a6aeb380c5113fdcf"
+  },
+  "/Users/munir/Desktop/Tracker/app/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_1024.png": {
+    "mtime": 1780432329.5989559,
+    "hash": "c9becc9105f8cabce934d20c7bfb6aac"
+  },
+  "/Users/munir/Desktop/Tracker/app/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_256.png": {
+    "mtime": 1780432329.5995314,
+    "hash": "dfe2c93d1536ae02f085cc63faa3430e"
+  },
+  "/Users/munir/Desktop/Tracker/app/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_64.png": {
+    "mtime": 1780432329.6001966,
+    "hash": "04e7b6ef05346c70b663ca1d97de3ad5"
+  },
+  "/Users/munir/Desktop/Tracker/app/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_512.png": {
+    "mtime": 1780432329.6000745,
+    "hash": "0ad44039155424738917502c69667699"
+  },
+  "/Users/munir/Desktop/Tracker/app/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_128.png": {
+    "mtime": 1780432329.5992448,
+    "hash": "3ded30823804caaa5ccc944067c54a36"
+  },
+  "/Users/munir/Desktop/Tracker/app/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_32.png": {
+    "mtime": 1780432329.59963,
+    "hash": "8e0ae58e362a6636bdfccbc04da2c58c"
+  },
+  "/Users/munir/Desktop/Tracker/app/web/favicon.png": {
+    "mtime": 1780432329.6021194,
+    "hash": "5dcef449791fa27946b3d35ad8803796"
+  },
+  "/Users/munir/Desktop/Tracker/app/web/icons/Icon-192.png": {
+    "mtime": 1780432329.6023054,
+    "hash": "ac9a721a12bbc803b44f645561ecb1e1"
+  },
+  "/Users/munir/Desktop/Tracker/app/web/icons/Icon-maskable-192.png": {
+    "mtime": 1780432329.6032245,
+    "hash": "c457ef57daa1d16f64b27b786ec2ea3c"
+  },
+  "/Users/munir/Desktop/Tracker/app/web/icons/Icon-maskable-512.png": {
+    "mtime": 1780432329.6034412,
+    "hash": "301a7604d45b3e739efc881eb04896ea"
+  },
+  "/Users/munir/Desktop/Tracker/app/web/icons/Icon-512.png": {
+    "mtime": 1780432329.6024685,
+    "hash": "96e752610906ba2a93c65f8abe1645f1"
+  },
+  "/Users/munir/Desktop/Tracker/app/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@2x.png": {
+    "mtime": 1780432329.5697548,
+    "hash": "978c1bee49d7ad5fc1a4d81099b13e18"
+  },
+  "/Users/munir/Desktop/Tracker/app/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@3x.png": {
+    "mtime": 1780432329.5698361,
+    "hash": "978c1bee49d7ad5fc1a4d81099b13e18"
+  },
+  "/Users/munir/Desktop/Tracker/app/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage.png": {
+    "mtime": 1780432329.5696645,
+    "hash": "978c1bee49d7ad5fc1a4d81099b13e18"
+  },
+  "/Users/munir/Desktop/Tracker/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-57x57@1x.png": {
+    "mtime": 1780432329.5681608,
+    "hash": "2fe2a6c39de38567d50e55f8bb1fb418"
+  },
+  "/Users/munir/Desktop/Tracker/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@2x.png": {
+    "mtime": 1780432329.569211,
+    "hash": "a1b96d2089d084801a4c879750cfaed4"
+  },
+  "/Users/munir/Desktop/Tracker/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@1x.png": {
+    "mtime": 1780432329.5673177,
+    "hash": "45f98c47cc146d8778c382b76e722e62"
+  },
+  "/Users/munir/Desktop/Tracker/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@1x.png": {
+    "mtime": 1780432329.5676153,
+    "hash": "5d26fa145608aeebc6d1f80e05693c55"
+  },
+  "/Users/munir/Desktop/Tracker/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-72x72@1x.png": {
+    "mtime": 1780432329.5686429,
+    "hash": "9d95e178634d53d532a5d931a9085576"
+  },
+  "/Users/munir/Desktop/Tracker/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@1x.png": {
+    "mtime": 1780432329.567041,
+    "hash": "920c98ef11e045bfc33e9eb2dc1bc5c9"
+  },
+  "/Users/munir/Desktop/Tracker/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-50x50@2x.png": {
+    "mtime": 1780432329.5680614,
+    "hash": "41182de06d36376b726d3001456e8f36"
+  },
+  "/Users/munir/Desktop/Tracker/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png": {
+    "mtime": 1780432329.5668762,
+    "hash": "bb7096db0838b1ea25951978ebd84e39"
+  },
+  "/Users/munir/Desktop/Tracker/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-83.5x83.5@2x.png": {
+    "mtime": 1780432329.5694013,
+    "hash": "8c5fa9c4fe355effe62f5096f99c06f0"
+  },
+  "/Users/munir/Desktop/Tracker/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@3x.png": {
+    "mtime": 1780432329.567224,
+    "hash": "06c7ad247d50c94205cc9b2e34cd2233"
+  },
+  "/Users/munir/Desktop/Tracker/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-50x50@1x.png": {
+    "mtime": 1780432329.5679364,
+    "hash": "60514a84c047e2bd9a493a7055e56c0a"
+  },
+  "/Users/munir/Desktop/Tracker/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@2x.png": {
+    "mtime": 1780432329.567134,
+    "hash": "5d26fa145608aeebc6d1f80e05693c55"
+  },
+  "/Users/munir/Desktop/Tracker/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@3x.png": {
+    "mtime": 1780432329.56753,
+    "hash": "6d0c25eab4f853a6daa6e1aa623bb25c"
+  },
+  "/Users/munir/Desktop/Tracker/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@2x.png": {
+    "mtime": 1780432329.567729,
+    "hash": "975e435f0be397989bbbc3bb5d4404f0"
+  },
+  "/Users/munir/Desktop/Tracker/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-72x72@2x.png": {
+    "mtime": 1780432329.5687895,
+    "hash": "39da35fe281693bc25059724b0ee2e1b"
+  },
+  "/Users/munir/Desktop/Tracker/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@3x.png": {
+    "mtime": 1780432329.5685196,
+    "hash": "2671c3026ff32856c05ebc37fc0b0418"
+  },
+  "/Users/munir/Desktop/Tracker/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@2x.png": {
+    "mtime": 1780432329.568377,
+    "hash": "9d47fb51d158ffda97c1c99ba98a92e0"
+  },
+  "/Users/munir/Desktop/Tracker/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-57x57@2x.png": {
+    "mtime": 1780432329.5682645,
+    "hash": "9b55f07ff01e83a9aca4cb3c539f7e02"
+  },
+  "/Users/munir/Desktop/Tracker/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@1x.png": {
+    "mtime": 1780432329.5689225,
+    "hash": "cf00513f9270bb9257c16cbc84b3dcc9"
+  },
+  "/Users/munir/Desktop/Tracker/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@3x.png": {
+    "mtime": 1780432329.5678403,
+    "hash": "9d47fb51d158ffda97c1c99ba98a92e0"
+  },
+  "/Users/munir/Desktop/Tracker/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@2x.png": {
+    "mtime": 1780432329.567407,
+    "hash": "ed09afc30d6441c0fdbbbd3f29491dc0"
+  },
+  "/Users/munir/Desktop/Tracker/app/android/app/src/main/res/mipmap-mdpi/ic_launcher.png": {
+    "mtime": 1780432329.5590198,
+    "hash": "6085b08f80b745ee87e9fb74db64526b"
+  },
+  "/Users/munir/Desktop/Tracker/app/android/app/src/main/res/mipmap-hdpi/ic_launcher.png": {
+    "mtime": 1780432329.5588741,
+    "hash": "f460a94eb2e2f12de1660f1f0762012d"
+  },
+  "/Users/munir/Desktop/Tracker/app/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png": {
+    "mtime": 1780432329.5595775,
+    "hash": "69a15ce7d8ccba19cad80f54acec6436"
+  },
+  "/Users/munir/Desktop/Tracker/app/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png": {
+    "mtime": 1780432329.5593925,
+    "hash": "affbd281de6cd4389193ece03b17e8fb"
+  },
+  "/Users/munir/Desktop/Tracker/app/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png": {
+    "mtime": 1780432329.559205,
+    "hash": "c5c385d8851b93fa56e9547203d58eda"
+  },
+  "/Users/munir/Desktop/Tracker/app/assets/images/app_icon.png": {
+    "mtime": 1780432329.5622163,
+    "hash": "26c9849e37c7d7b8949e72a84be5d73d"
+  },
+  "/Users/munir/Desktop/Tracker/docs/screenshots/opening-screen-reference.png": {
+    "mtime": 1780432329.607606,
+    "hash": "f3ebe8b15cb74f2bc36b673ecf40f341"
+  },
+  "/Users/munir/Desktop/Tracker/docs/screenshots/tracker-ui-showcase.png": {
+    "mtime": 1780432329.6097238,
+    "hash": "7d0dd991d6d00542aa9e527647b0c676"
+  },
+  "/Users/munir/Desktop/Tracker/app/assets/videos/splash_video.mp4": {
+    "mtime": 1780432329.5636032,
+    "hash": "942a6d81f77ea2c7083d7248b9baff59"
+  }
+}
